@@ -1,7 +1,7 @@
 // Copyright (c) 2017 Relativty
 
 //=============================================================================
-// i2cdevlib is needed: https://github.com/jrowberg/i2cdevlib
+// i2cdevlib and MPU6050 are needed: https://github.com/jrowberg/i2cdevlib
 // Big thanks to the amazing Jeff Rowberg <3, go check his repo to learn more MPU6050.
 //=============================================================================
 
@@ -98,11 +98,6 @@ void setup() {
     }
 }
 
-
-
-// ================================================================
-// ===                    MAIN PROGRAM LOOP                     ===
-// ================================================================
 
 void loop() {
     // Do nothing if DMP isn't initialize correctly
