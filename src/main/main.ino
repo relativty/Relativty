@@ -36,12 +36,15 @@ uint8_t fifoBuffer[64];
 
 
 Quaternion q;           // [w, x, y, z]
+Relativ Relativ("NATIVE");    // "NATIVE" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
+//                               wich is recommended.
+// Relativ Relativ("OTHER");  // "OTHER" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
+                              // Those are significatively slower.
 
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
 void dmpDataReady() {
     mpuInterrupt = true;
 }
-
 
 void setup() {
   
@@ -52,19 +55,8 @@ void setup() {
         Fastwire::setup(400, true);
     #endif
 
-    //Relativ Relativ("NATIVE");
-    // Relativ Relativ("OTHER");
-
-    SerialUSB.begin(250000);
-    while (!SerialUSB); // wait for Leonardo enumeration, others continue immediately
-
-    int i = 0;
-    while (i < 1000) {
-      SerialUSB.println("13092001MCPC");
-      SerialUSB.flush();
-      i++;
-    }
-    
+    Relativ.start(); 
+   
     mpu.initialize();
     pinMode(INTERRUPT_PIN, INPUT);
 
@@ -105,7 +97,7 @@ void loop() {
 
     // wait for MPU interrupt or extra packet(s) available
     while (!mpuInterrupt && fifoCount < packetSize) {
-      //...
+       Relativ.updateOrientation(q.x, q.y, q.z, q.w, 4);
     }
 
     // reset interrupt flag and get INT_STATUS byte
@@ -122,15 +114,6 @@ void loop() {
       fifoCount -= packetSize;
         
       mpu.dmpGetQuaternion(&q, fifoBuffer);
-      SerialUSB.print(q.x, 4);
-      SerialUSB.print(",");
-      SerialUSB.print(q.y, 4);
-      SerialUSB.print(",");
-      SerialUSB.print(q.z, 4);
-      SerialUSB.print(",");
-      SerialUSB.println(q.w, 4);
-      //SerialUSB.println(String(q.x) +"," +String(q.y) +"," +String(q.z)+","+String(q.w));
-    
     }
 }
 

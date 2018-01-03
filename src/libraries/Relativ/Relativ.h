@@ -11,6 +11,12 @@
 
 class Relativ
 {
+  public:
+    Relativ(String controller);
+    void start();
+    void updateOrientation(float x, float y, float z, float w, int accuracy);
+  private:
+    String _controller;
 };
 
 #endif

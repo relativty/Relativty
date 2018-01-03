@@ -6,3 +6,26 @@
 
 #include "Arduino.h"
 #include "Relativ.h"
+
+Relativ::Relativ(String controller) {
+  _controller = controller;
+}
+
+void Relativ::start() {
+  if (_controller == "NATIVE") {
+    SerialUSB.begin(1); // BaudRate is irrevelant for Native USB.
+  }
+  else if (_controller == "OTHER"){
+    Serial.begin(250000);
+  }
+}
+
+void Relativ::updateOrientation(float x, float y, float z, float w, int accuracy) {
+  SerialUSB.print(x, accuracy);
+  SerialUSB.print(",");
+  SerialUSB.print(y, accuracy);
+  SerialUSB.print(",");
+  SerialUSB.print(z, accuracy);
+  SerialUSB.print(",");
+  SerialUSB.println(w, accuracy);
+}
