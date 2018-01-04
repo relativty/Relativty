@@ -21,11 +21,22 @@ void Relativ::start() {
 }
 
 void Relativ::updateOrientation(float x, float y, float z, float w, int accuracy) {
-  SerialUSB.print(x, accuracy);
-  SerialUSB.print(",");
-  SerialUSB.print(y, accuracy);
-  SerialUSB.print(",");
-  SerialUSB.print(z, accuracy);
-  SerialUSB.print(",");
-  SerialUSB.println(w, accuracy);
+  if (_controller == "NATIVE") {
+    SerialUSB.print(x, accuracy);
+    SerialUSB.print(",");
+    SerialUSB.print(y, accuracy);
+    SerialUSB.print(",");
+    SerialUSB.print(z, accuracy);
+    SerialUSB.print(",");
+    SerialUSB.println(w, accuracy);
+  }
+  else if (_controller == "OTHER"){
+    Serial.print(x, accuracy);
+    Serial.print(",");
+    Serial.print(y, accuracy);
+    Serial.print(",");
+    Serial.print(z, accuracy);
+    Serial.print(",");
+    Serial.println(w, accuracy);
+  }
 }
