@@ -21,7 +21,7 @@
 MPU6050 mpu;
 //Relativ relativ("NATIVE"); // "NATIVE" For arduino Due and other 32-bit ARM core with native USB
 
-//Relativ relativ("OTHER"); // "OTHER" For arduino UNO, mega, ... (Significatively slower than NATIVE)
+//Relativ relativ("OTHER"); // "OTHER" For arduino UNO, mega, ... (significantly slower than NATIVE)
 
 
 #define INTERRUPT_PIN 2
@@ -37,9 +37,9 @@ uint8_t fifoBuffer[64];
 
 Quaternion q;           // [w, x, y, z]
 Relativ Relativ("NATIVE");    // "NATIVE" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
-//                               wich is recommended.
+//                               which is recommended.
 // Relativ Relativ("OTHER");  // "OTHER" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
-                              // Those are significatively slower.
+                              // Those are significantly slower.
 
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
 void dmpDataReady() {
@@ -92,10 +92,10 @@ void setup() {
 
 
 void loop() {
-    // Do nothing if DMP isn't initialize correctly
+    // Do nothing if DMP doesn't initialize correctly
     if (!dmpReady) return;
 
-    // wait for MPU interrupt or extra packet(s) available
+    // wait for MPU interrupt or extra packet(s) to be available
     while (!mpuInterrupt && fifoCount < packetSize) {
        Relativ.updateOrientation(q.x, q.y, q.z, q.w, 4);
     }
