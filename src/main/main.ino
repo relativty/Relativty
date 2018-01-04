@@ -19,8 +19,11 @@
 #endif
 
 MPU6050 mpu;
-//Relativ relativ("NATIVE"); // "NATIVE" For arduino Due and other 32-bit ARM core with native USB
+Relativ relativ("NATIVE"); // "NATIVE" For arduino Due and other 32-bit ARM core with native USB
 
+//=============================================================================
+// Uncomment the following line if you're not using an Arduino Due
+//=============================================================================
 //Relativ relativ("OTHER"); // "OTHER" For arduino UNO, mega, ... (significantly slower than NATIVE)
 
 
