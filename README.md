@@ -21,8 +21,7 @@
 <p> My name is <a href="https://twitter.com/maxcoutte">Maxime Coutté</a>. I’m 16 years old, I live in a small village in France where I’m the only teenager. With my best friends, <a href="https://medium.com/@jonasceccon">Jonas Ceccon</a> and <a href="https://medium.com/@gabrielcombe">Gabriel Combe</a>, and my math teacher (we call him Sensei) we
 built our own VR headset for 100$. </p>
 
-<p> I started programming when I was 13, thanks to Sensei and by creating from scratch my own 8-bit OS. Because of an anime called SAO, I fell in love with
-VR, but the problem was that the Oculus Rift was way too expensive for me. I talked about this to Gabriel and we both agree that we should build our own VR headset. That got us into the
+<p> I started programming when I was 13, thanks to Sensei, he created a robotic club. The first day we were 12 students, the next week we were 3, you guess the two other were Gabriel and Jonas. Because of an anime called SAO, I fell in love with VR, but the problem was that the Oculus Rift was way too expensive for me. I talked about this to Gabriel and we both agree that we should build our own VR headset. That got us into the
 math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapper component we could and we re invent VR. Now using <a href="https://github.com/relativty/fastVR-sdk">FastVR</a> and Relativ you can
 build your VR headset too. </p>
 
@@ -48,9 +47,44 @@ build your VR headset too. </p>
 
 ## What you'll need
 
-## Building the hardware
+### what component ?
+<p> First will need to the following componant:
+* Arduino Due, 34$ for the offical one and 10$ for a Chinese clone
+* GY-521 MPU-6050, 1$
+* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, from 45$ on Alie Express (recommended) ⚠️ Price may vary a lot
+* Fresnel lens Focal Length 50mm (recommended)
+</p>
 
-## Building the software
+<img src="/img/component.JPG" width="100%">
+
+### How to Install ?
+
+you can either install it using [Git](https://git-scm.com/) or direct [Download](https://github.com/relativty/Relativ/archive/master.zip). Or from the <strong>command line</strong>:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/relativty/Relativ
+```
+Copy all folders in **Relativ/src/libraries** and past them in your Arduino Librairies folder: **Documents\Arduino\libraries**. You're now good to Build the headset !
+
+# Building the hardware
+
+Now what you need is to 3D print the hardware, if needed you can change any models with the Source Files provided. You will need to print the following:
+* Relativ_headset_structure.STL x1
+* box_Arduino_DUE.stl x1
+* box_lens_1.STL x2 ⚠️
+* box_lens_2.STL x2 ⚠️
+* box_mpu6050.STL x1
+* box_screen_adaptor.STL x1
+* box_screen_controller.STL x1
+* box_screen_spherical.STL x1 OR box_screen.STL x1 ⚠️
+* support_lens.STL x1
+
+# Building the software
+
+Make sure you have all the librairies needed installed and upload to the Arduino the following program:
+#### Path: Relativ/src/main/main.ino
+<img src="/img/arduino-upload.gif">
 
 # Play some demos
 
