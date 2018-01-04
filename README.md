@@ -26,16 +26,20 @@ VR, but the problem was that the Oculus Rift was way too expensive for me. I tal
 math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapper component we could and we re invent VR. Now using fastVR and Relativ you can
 build your VR headset too. </p>
 
-<p align="center"> <img src="/img/gabriel.png">
-<p align="center"> **Gabriel:** I work on optics for FastVR, 3D conception with Maxime and cheap tracking for the next big update. </p>
-<p align="center"> <img src="/img/maxime.png">
-<p align="center"> **Maxime:** I created WRMHL and with Gabriel we created FastVR. I'm also behind the code of the hardware. </p>
-<p align="center"> <img src="/img/jonas.png"> </p>
-<p align="center"> **Jonas:** I conviced chinese factory to sell us component with premium prices and I'm working on a Master Guide for Relativ. </p>
-<p align="center"> <img src="/img/sensei.png"> </p>
-<p align="center"> **Sensei:** I'm the theorician of the team, I teach them math and I help them solving algorithme issues </p>
+## Who we are ?
 
-## Why open source ?
+<p align="center"> <img src="/img/gabriel.png" width="370"> </p>
+<p align="center"> <strong> Gabriel: </strong>I work on optics for FastVR, 3D conception with Maxime and cheap tracking for the next big update. </p>
 
-<p> Thanks to this project I have had the incredible chance to meet amazing people, including the chief architect at Oculus, Atman Brinstock. He gave me precious advices and I made
-a few big decisions. I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
+<p align="center"> <img src="/img/maxime.png" width="370"> </p>
+<p align="center"> <strong> Maxime: </strong> I created WRMHL and with Gabriel we created FastVR. I'm also behind the code of the hardware. </p>
+<p align="center"> <img src="/img/jonas.png" width="370"> </p>
+<p align="center"> <strong> Jonas: </strong> I conviced chinese factory to sell us component with premium prices and I'm working on a Master Guide for Relativ. </p>
+<p align="center"> <img src="/img/sensei.png" width="370"> </p>
+<p align="center"> <strong> Sensei: </strong> I'm the theorician of the team, I teach them math and I help them solving algorithme issues </p>
+
+## Why open source ? ❤️
+
+<p> Thanks to this project I have had the incredible chance to meet amazing people, including the chief architect at Oculus, Atman Brinstock. He gave me a precious advice "open source-it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
+
+<img src="/img/headset" width="100%">
