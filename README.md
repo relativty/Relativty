@@ -45,15 +45,16 @@ build your VR headset too. </p>
 
 # Getting Started ⚡️
 
+Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>.
+
 ## What you'll need
 
 ### What component ?
-<p> First will need to the following componant:
+First you will need to the following componant:
 * Arduino Due, 34$ for the offical one and 10$ for a Chinese clone
 * GY-521 MPU-6050, 1$
-* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, from 45$ on Alie Express (recommended) ⚠️ Price may vary a lot
-* Fresnel lens Focal Length 50mm (recommended)
-</p>
+* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, from 45$ on Alie Express (<a href="https://fr.aliexpress.com/item/Original-A-For-Sharp-5-5-inch-LS055R1SX04-1440-RGB-x2560-high-resolution-with-MIPI-50pin/32667653333.html?spm=a2g0w.10010108.1000016.1.425b94755Kzw8o&isOrigTitle=true">recommended</a>) ⚠️ Price may vary a lot
+* Fresnel lens Focal Length 50mm, 4$ (<a href="https://www.ebay.fr/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021?_trkparms=aid%3D222007%26algo%3DSIM.MBE%26ao%3D2%26asc%3D20170831090034%26meid%3Db81b9551aff144f6a8e2a988fbcdf814%26pid%3D100005%26rk%3D2%26rkt%3D6%26sd%3D232148146221&_trksid=p2047675.c100005.m1851">recommended</a>)
 
 <img src="/img/component.JPG" width="100%">
 
@@ -87,5 +88,8 @@ Make sure you have all the librairies needed installed and upload to the Arduino
 <img src="/img/arduino-upload.gif">
 
 # Play some demos
+
+<p> You can now play with your headset by downloading some cool demos by clicking here. Or build your own game in a minute using the Relativty sdk, learn more by clicking here. </p>
+<p> I would love to hear about what you’re experienced building the headset or help if you have any question. Ping me at maxime@relativty.com or <a href="https://twitter.com/maxcoutte">@maximecoutte</a>. </p>
 
 <p align="center"> <strong> <> with ❤️, maxime@relativty.com</strong> </p>
