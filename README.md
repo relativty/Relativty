@@ -43,7 +43,6 @@ build your VR headset too. </p>
 <p> Thanks to this project I have had the incredible chance to meet amazing people, including the chief architect at Oculus, Atman Brinstock. He gave me a precious advice "open source-it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
 
 <img src="/img/headset.JPG" width="100%">
-<<<<<<< HEAD
 
 # Getting Started ⚡️
 
@@ -55,6 +54,4 @@ build your VR headset too. </p>
 
 # Play some demos
 
-<strong> <> with ❤️, maxime@relativty.com</strong>
-=======
->>>>>>> 7e1bb836076c0e333526d106518b3412fab7435b
+<p align="center"> <strong> <> with ❤️, maxime@relativty.com</strong> </p>
