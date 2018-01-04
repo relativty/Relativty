@@ -47,7 +47,7 @@ build your VR headset too. </p>
 
 ## What you'll need
 
-### what component ?
+### What component ?
 <p> First will need to the following componant:
 * Arduino Due, 34$ for the offical one and 10$ for a Chinese clone
 * GY-521 MPU-6050, 1$
