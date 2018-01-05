@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/github/issues/relativty/Relativ.svg">
 </p>
 
-<img src="https://github.com/relativty/fastVR-sdk/blob/master/img/fastVR_demo.gif" width="100%"  height="500">
+<img src="https://github.com/relativty/fastVR-sdk/blob/master/img/fastVR_demo.gif" width="100%"  height="500em">
 <h4 align="center">Build your own VR headset for $100 💸
 </h4>
 
@@ -20,8 +20,7 @@
 
 <p> My name is <a href="https://twitter.com/maxcoutte">Maxime Coutté</a>.  I’m 16 years old and I live in a small village in France where I’m the only teenager. With my best friends, <a href="https://medium.com/@jonasceccon">Jonas Ceccon</a> and <a href="https://medium.com/@gabrielcombe">Gabriel Combe</a>, and my math teacher Jerome Dieudonne (we call him Sensei) we built our own VR headset for $100.
 
-<p> I started programming when I was 13, thanks to Sensei when he created a robotics club. On the first day we were 12 students, the next week we were 3 - yep, you guessed it, the other two were Gabriel and Jonas.  I fell in love with VR because of an anime called SAO, but the problem was that the Oculus Rift was way too expensive for me. I talked about this with Gabriel and we both agreed that we should build our own VR headset. That got us into the math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapest components we could and we reinvented VR. That got us into the
-math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapper component we could and we re invent VR. Now using <a href="https://github.com/relativty/fastVR-sdk">FastVR</a> and Relativ you can
+<p> I started programming when I was 13, thanks to Sensei when he created a robotics club. On the first day we were 12 students, the next week we were 3 - yep, you guessed it, the other two were Gabriel and Jonas. I fell in love with VR because of an anime called SAO, but the problem was that the Oculus Rift was way too expensive for me. I talked about this with Gabriel and we both agreed that we should build our own VR headset. That got us into the math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapest components we could and we reinvented VR. Now using <a href="https://github.com/relativty/fastVR-sdk">FastVR</a> and Relativ you can
 build your VR headset too. </p>
 
 # Who are we?
