@@ -52,8 +52,8 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 First you will need the following components:
 * Arduino Due, $34 for the official one or $10 for a Chinese clone
 * GY-521 MPU-6050, $1
-* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, from $45 on Alie Express (<a href="https://fr.aliexpress.com/item/Original-A-For-Sharp-5-5-inch-LS055R1SX04-1440-RGB-x2560-high-resolution-with-MIPI-50pin/32667653333.html?spm=a2g0w.10010108.1000016.1.425b94755Kzw8o&isOrigTitle=true">recommended</a>) ⚠️ Price may vary a lot
-* Fresnel lens Focal Length 50mm, $4 (<a href="https://www.ebay.fr/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021?_trkparms=aid%3D222007%26algo%3DSIM.MBE%26ao%3D2%26asc%3D20170831090034%26meid%3Db81b9551aff144f6a8e2a988fbcdf814%26pid%3D100005%26rk%3D2%26rkt%3D6%26sd%3D232148146221&_trksid=p2047675.c100005.m1851">recommended</a>)
+* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on Alie Express (<a href="https://fr.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html?spm=a2g0w.10010108.1000016.1.2931f508qMQrlz&isOrigTitle=true">recommended</a>) ⚠️ Price may vary a lot
+* Fresnel lens Focal Length 50mm, $3 (<a href="https://www.ebay.fr/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021?_trkparms=aid%3D222007%26algo%3DSIM.MBE%26ao%3D2%26asc%3D20170831090034%26meid%3Db81b9551aff144f6a8e2a988fbcdf814%26pid%3D100005%26rk%3D2%26rkt%3D6%26sd%3D232148146221&_trksid=p2047675.c100005.m1851">recommended</a>)
 
 <img src="/img/component.JPG" width="100%">
 
