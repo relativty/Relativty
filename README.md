@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/github/issues/relativty/Relativ.svg">
 </p>
 
-<img src="https://github.com/relativty/fastVR-sdk/blob/master/img/fastVR_demo.gif" width="1280px" height="480px" align="center">
+<img src="https://github.com/relativty/fastVR-sdk/blob/master/img/fastVR_demo.gif" width="100%">
 <h4 align="center">Build your own VR headset for $100 💸
 </h4>
 
