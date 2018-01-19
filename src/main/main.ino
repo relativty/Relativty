@@ -19,13 +19,7 @@
 #endif
 
 MPU6050 mpu;
-Relativ relativ("NATIVE"); // "NATIVE" For arduino Due and other 32-bit ARM core with native USB
-
-//=============================================================================
-// Uncomment the following line if you're not using an Arduino Due
-//=============================================================================
-//Relativ relativ("OTHER"); // "OTHER" For arduino UNO, mega, ... (significantly slower than NATIVE)
-
+Relativ relativ; 
 
 #define INTERRUPT_PIN 2
 
@@ -39,10 +33,6 @@ uint8_t fifoBuffer[64];
 
 
 Quaternion q;           // [w, x, y, z]
-Relativ Relativ("NATIVE");    // "NATIVE" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
-//                               which is recommended.
-// Relativ Relativ("OTHER");  // "OTHER" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
-                              // Those are significantly slower.
 
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
 void dmpDataReady() {
@@ -58,10 +48,16 @@ void setup() {
         Fastwire::setup(400, true);
     #endif
 
-    Relativ.start(); 
+
+    relativ.startNative(); // "startNative" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
+    //                        which is recommended.
+    // Relativ.start(); //    "start" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
+                        //    Those are significantly slower.
    
     mpu.initialize();
     pinMode(INTERRUPT_PIN, INPUT);
+
+     SerialUSB.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
     // configure the DMP
     devStatus = mpu.dmpInitialize();
@@ -100,7 +96,6 @@ void loop() {
 
     // wait for MPU interrupt or extra packet(s) to be available
     while (!mpuInterrupt && fifoCount < packetSize) {
-       Relativ.updateOrientation(q.x, q.y, q.z, q.w, 4);
     }
 
     // reset interrupt flag and get INT_STATUS byte
@@ -110,13 +105,21 @@ void loop() {
     // get current FIFO count
     fifoCount = mpu.getFIFOCount();
 
+      if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+        mpu.resetFIFO();
+      }
+      
     // check for interrupt
-    if (mpuIntStatus & 0x02) {
+    else if (mpuIntStatus & 0x02) {
       while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
       mpu.getFIFOBytes(fifoBuffer, packetSize);
       fifoCount -= packetSize;
         
       mpu.dmpGetQuaternion(&q, fifoBuffer);
+     relativ.updateOrientationNative(q.x, q.y, q.z, q.w, 4); // updateOrientationNative" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
+      //                                                        which is recommended.
+      //relativ.updateOrientation(q.x, q.y, q.z, q.w, 4); //    Relativ.updateOrientation" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
+                                                          //    Those are significantly slower.
     }
 }
 
