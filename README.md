@@ -88,6 +88,6 @@ Make sure you have all the libraries needed installed and upload the following p
 # Play some demos
 
 <p> You can now play with your headset by downloading some cool demos by <a href="https://github.com/relativty/Relativ/releases/download/v0.1-beta/Unity_build.zip">clicking here<a/>. Or build your own game in a minute using the Relativty sdk, learn more by clicking here. </p>
-<p> I would love to hear about what you’ve experienced building the headset or help if you have any questions. Ping me at maxime@relativty.com or <a href="https://twitter.com/maxcoutte">@maximecoutte</a>. </p>
+<p> I would love to hear about what you’ve experienced building the headset or help if you have any questions. Ping me at maxime@relativty.com or <a href="https://twitter.com/maximecoutte">@maximecoutte</a>. </p>
 
 <p align="center"> <strong> <> with ❤️, maxime@relativty.com</strong> </p>
