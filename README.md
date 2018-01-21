@@ -37,7 +37,7 @@ build your VR headset too. </p>
 
 # Open-Source it FTW
 
-<p> Thanks to this project I’ve had the incredible fortune to meet amazing people, including the chief architect at Oculus, Atman Brinstock. He gave me a precious piece of advice: "open source it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
+<p> Thanks to this project I’ve had the incredible fortune to meet amazing people, including the chief architect at Oculus, Atman Binstock. He gave me a precious piece of advice: "open source it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
 
 <img src="/img/headset.JPG" width="100%">
 
