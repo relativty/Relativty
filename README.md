@@ -31,7 +31,7 @@ build your VR headset too. </p>
 <p align="center"> <img src="/img/maxime.png" width="370"> </p>
 <p align="center"> <strong> Maxime: </strong> I created <a href="https://github.com/relativty/wrmhl">WRMHL</a> and with Gabriel we created <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>. I'm also behind the code for the hardware. </p>
 <p align="center"> <img src="/img/jonas.png" width="370"> </p>
-<p align="center"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us components at premium prices and I'm working on a Master Guide for Relativ. </p>
+<p align="center"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us premium components at low prices and I'm working on a Master Guide for Relativ. </p>
 <p align="center"> <img src="/img/sensei.png" width="370"> </p>
 <p align="center"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them solving algorithm issues. </p>
 
