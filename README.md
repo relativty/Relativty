@@ -51,7 +51,7 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 First you will need the following components:
 * Arduino Due, $34 for the official one or $10 for a Chinese clone
 * GY-521 MPU-6050, $1
-* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on Alie Express (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
+* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
 * Fresnel lens Focal Length 50mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
 
 <img src="/img/component.JPG" width="100%">
