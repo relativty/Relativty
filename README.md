@@ -1,3 +1,4 @@
+
 <h1 align="center">
   <br>
   <a href="https://github.com/relativty/Relativ"><img src="https://avatars0.githubusercontent.com/u/31791204?s=200&v=4" width="180"></a>
@@ -33,11 +34,11 @@ build your VR headset too. </p>
 <p align="center"> <img src="/img/jonas.png" width="370"> </p>
 <p align="center"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us premium components at low prices and I'm working on a Master Guide for Relativ. </p>
 <p align="center"> <img src="/img/sensei.png" width="370"> </p>
-<p align="center"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them solving algorithm issues. </p>
+<p align="center"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them to solve algorithm issues. </p>
 
 # Open-Source it FTW
 
-<p> Thanks to this project I’ve had the incredible fortune to meet amazing people, including the chief architect at Oculus, Atman Binstock. He gave me a precious piece of advice: "open source it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to put the project into open source. </p>
+<p> Thanks to this project I’ve had the incredible fortune to meet amazing people, including the chief architect at Oculus, Atman Binstock. He gave me a precious piece of advice: "open source it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to open source the project </p>
 
 <img src="/img/headset.JPG" width="100%">
 
