@@ -51,7 +51,7 @@ void setup() {
 
     relativ.startNative(); // "startNative" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
     //                        which is recommended.
-    // Relativ.start(); //    "start" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
+    // relativ.start(); //    "start" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
                         //    Those are significantly slower.
    
     mpu.initialize();
