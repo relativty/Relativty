@@ -15,7 +15,7 @@
 #include "MPU6050_6Axis_MotionApps20.h"
 
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-    #include "Wire.h"
+#include "Wire.h"
 #endif
 
 MPU6050 mpu;
@@ -40,7 +40,7 @@ void dmpDataReady() {
 }
 
 void setup() {
-  
+
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
         Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
@@ -48,16 +48,18 @@ void setup() {
         Fastwire::setup(400, true);
     #endif
 
+    /**
+    * Relativ::startNative() is for 32-bit ARM microconrollers with Native USB like Arduino DUE (recommended) 
+    * Relativ::start() is for NON-NATIVE USB microcontrollers, like Arduino MEGA, Arduino UNO, etc. (slower)
+    */
+    relativ.startNative(); //Compile error? change this to relativ.start() if you have an UNO, MEGA, etc... 
 
-    relativ.startNative(); // "startNative" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
-    //                        which is recommended.
-    // relativ.start(); //    "start" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
-                        //    Those are significantly slower.
-   
     mpu.initialize();
     pinMode(INTERRUPT_PIN, INPUT);
-
-     SerialUSB.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+   
+    //If you are getting "SerialUSB was not declared" when compiling, change
+    //the following line to Serial.println(.......)
+    SerialUSB.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
     // configure the DMP
     devStatus = mpu.dmpInitialize();
@@ -65,13 +67,13 @@ void setup() {
     // ==================================
     // supply your own gyro offsets here:
     // ==================================
-    
+
     mpu.setXGyroOffset(220);
     mpu.setYGyroOffset(76);
     mpu.setZGyroOffset(-85);
     mpu.setZAccelOffset(1788);
 
-    // devSTatus if everything worked properly
+    // devStatus if everything worked properly
     if (devStatus == 0) {
         // turn on the DMP, now that it's ready
         mpu.setDMPEnabled(true);
@@ -105,21 +107,30 @@ void loop() {
     // get current FIFO count
     fifoCount = mpu.getFIFOCount();
 
-      if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+    if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         mpu.resetFIFO();
-      }
-      
+    }
+
     // check for interrupt
     else if (mpuIntStatus & 0x02) {
-      while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
-      mpu.getFIFOBytes(fifoBuffer, packetSize);
-      fifoCount -= packetSize;
-        
-      mpu.dmpGetQuaternion(&q, fifoBuffer);
-     relativ.updateOrientationNative(q.x, q.y, q.z, q.w, 4); // updateOrientationNative" can be used for 32-bit ARM core microcontroller with Native USB like Arduino DUE
-      //                                                        which is recommended.
-      //relativ.updateOrientation(q.x, q.y, q.z, q.w, 4); //    Relativ.updateOrientation" is for NON-NATIVE USB microcontroller, like Arduino MEGA, Arduino UNO.. 
-                                                          //    Those are significantly slower.
+        while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+        mpu.getFIFOBytes(fifoBuffer, packetSize);
+        fifoCount -= packetSize;
+
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+
+
+/**
+* Relativ::updateOrientationNative() is for 32-bit ARM core microcontrollers
+* with Native USB like Arduino DUE (recommended)
+* Relativ::updateOrientation() is for NON-NATIVE USB microcontrollers
+* like Arduino Mega, Arduino Uno, etc. (slower)
+*/
+
+        relativ.updateOrientationNative(q.x, q.y, q.z, q.w, 4); 
+
+        //If your microcontroller is non-native usb, change the above line to:
+        //relativ.updateOrientation(q.x, q.y, q.z, q.w, 4); 
     }
 }
 
