@@ -80,6 +80,9 @@ Now what you need to do is 3D-print the hardware; if needed you can change any m
 * box_screen_spherical.STL x1 OR box_screen.STL x1 ⚠️
 * support_lens.STL x1
 
+⚠️ **PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE** ⚠️
+
+
 # Building the software
 
 Make sure you have all the libraries needed installed and upload the following program to the Arduino:
