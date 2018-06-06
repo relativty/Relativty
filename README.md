@@ -1,4 +1,12 @@
 
+
+<h1 align="center"> ⚠️ Attention ⚠️ </h1>
+<p> This is a customized version of Relativ with an improved (but not quite finished) headset-design based on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. This modification was done with their permission. </p>
+<p> There are some notes about the design in the notes.txt file, what will be updated in the future and what you should pay attention to when you build your own. </p>
+
+
+<p> And now for the original Readme: </p>
+
 <h1 align="center">
   <br>
   <a href="https://github.com/relativty/Relativ"><img src="https://avatars0.githubusercontent.com/u/31791204?s=200&v=4" width="180"></a>
