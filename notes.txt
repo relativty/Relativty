@@ -1,0 +1,11 @@
+Before building - what you need in addition to the things mentioned in the readme.md:
+- A 3D Printer that can print PLA as well as TPU 95 A or another flexible filament (for the head straps and the cushion you could probably construct something with elastic straps that serves the same purpose, but you need it to mount the screen)
+- M3 and M2 10mm long screws: The design uses a total of 4 M3 screws with nuts to hold the arduino board and 2 M2 screws also with nuts for the MIPI board, you'll also have to shorten some of the screws
+- Cables to connect everything - see Schematic.png for the general overview of the system
+- A screen which has a cable with a 90 degree bend. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen
+
+
+During building - this should make sense once you get to the corresponding steps:
+- Read the info about the headset this modification is based on: http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/
+- Parts 2 a & b didn't fit correctly for me, I believe they were printed too large. I'd suggest printing them at 94% scaling for now
+- The screen mounting is unsatisfactory at the moment, so you'll have to be EXTREMELY careful when handling the screen. I broke mine while trying to get it into the Soft mount but modified it afterwards so that this specific problem shouldn't happen again. 
