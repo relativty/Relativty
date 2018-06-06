@@ -5,8 +5,9 @@
 <p> There are some notes about the design in the notes.txt file, what will be updated in the future and what you should pay attention to when you build your own. </p>
 
 <p> Here's a schematic to give you an overview over the project: </p>
-<h1 align="center">
+<h1 align="center">  
   <br>
+  <a href="https://github.com/relativty/Relativ"><img src="https://raw.githubusercontent.com/TheYxxy/Relativ/master/img/Schematic.png"  width=100%></a>
 </h1>
 
 <p> And now for the original Readme: </p>
