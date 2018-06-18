@@ -1,17 +1,3 @@
-
-
-<h1 align="center"> ⚠️ Attention ⚠️ </h1>
-<p> This is a customized version of Relativ with an improved (but not quite finished) headset-design based on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. This modification was done with their permission. </p>
-<p> There are some notes about the design in the notes.txt file, what will be updated in the future and what you should pay attention to when you build your own. </p>
-
-<p> Here's a schematic to give you an overview over the project: </p>
-<h1 align="center">  
-  <br>
-  <a href="https://github.com/relativty/Relativ"><img src="https://raw.githubusercontent.com/TheYxxy/Relativ/master/img/Schematic.png"  width=100%></a>
-</h1>
-
-<p> And now for the original Readme: </p>
-
 <h1 align="center">
   <br>
   <a href="https://github.com/relativty/Relativ"><img src="https://avatars0.githubusercontent.com/u/31791204?s=200&v=4" width="180"></a>
@@ -36,6 +22,10 @@
 
 <p> I started programming when I was 13, thanks to Sensei when he created a robotics club. On the first day we were 12 students, the next week we were 3 - yep, you guessed it, the other two were Gabriel and Jonas. I fell in love with VR because of an anime called SAO, but the problem was that the Oculus Rift was way too expensive for me. I talked about this with Gabriel and we both agreed that we should build our own VR headset. That got us into the math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapest components we could and we reinvented VR. Now using <a href="https://github.com/relativty/fastVR-sdk">FastVR</a> and Relativ you can
 build your VR headset too. </p>
+<p> Here's a schematic by TheYxxy to give you an overview of the project: </p>
+  <a href="https://github.com/TheYxxy/Relativ"><img src="https://raw.githubusercontent.com/TheYxxy/Relativ/master/img/Schematic.png"  width=100%></a>
+
+
 
 # Meet the team ❤️
 
@@ -62,11 +52,21 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 ## What you'll need
 
 ### What components ?
-First you will need the following components:
+There are now two variants of Relativ. The original design by the founders and new version by TheYxxy based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
+##### For both designs:
 * Arduino Due, $34 for the official one or $10 for a Chinese clone
 * GY-521 MPU-6050, $1
 * 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
+* Face foam, about $4, see [here](https://www.ebay.com/itm/Face-Foam-Replacement-Eye-Masks-Pads-Cover-Fit-For-HTC-Vive-VR-Goggles-Headphone/152798949280?_mwBanner=1&_rdt=1 "here")
+
+###### For the original design:
 * Fresnel lens Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
+
+###### For the new modified design:
+* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
+* 4 M3 Screws and 2 M2 screws, both with nuts, $3 - alternatively you can use hot glue if M2 screws are not available
+* TPU 95 filament is recommended in addition to the normal PLA, and a printer which supports printing it
+* A screen which has a cable with a 90 degree bend just like the <a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a> one. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen.
 
 <img src="/img/component.JPG" width="100%">
 
@@ -82,7 +82,8 @@ Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libr
 
 # Building the hardware
 
-Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files. You will need to print the following:
+Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files. 
+You will need to print the following for the original design:
 * Relativ_headset_structure.STL x1
 * box_Arduino_DUE.stl x1
 * box_lens_1.STL x2 ⚠️
@@ -93,8 +94,17 @@ Now what you need to do is 3D-print the hardware; if needed you can change any m
 * box_screen_spherical.STL x1 OR box_screen.STL x1 ⚠️
 * support_lens.STL x1
 
+And the following for the new design:
+* (1x): Part 1, Part 2a, Part 2b, Part 3, Part 3a, Part 4, Part 5
+* (2x): Part 2c, Part 2d, Part 3b
+* (1x) Part 6: Use of Flexible filament with 10% to 50% infill density
+* (3x) Part 7: Use of Flexible filament with 10% to 50% infill density
+* (1x) Part 8: Use of Flexible filament with 5% infill density (it makes it like a sponge)
+* If you uses the the short straps (190mm, because the large ones don't fit in your printer for example), there are extensions (part 9) that should be printed aswell (2x).
+
 ⚠️ **PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE** ⚠️
 
+Additional build information can be found in the build manuals in the 3D-Models folders.
 
 # Building the software
 
