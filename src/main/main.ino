@@ -61,7 +61,7 @@ void setup() {
    
     //If you are getting "SerialUSB was not declared" when compiling, change
     //the following line to Serial.println(.......)
-    SerialUSB.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+    Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
     // configure the DMP
     devStatus = mpu.dmpInitialize();
@@ -129,14 +129,14 @@ void loop() {
 */
 
         // find direction of gravity (down in world frame)
-        VectorFloat16 down;
+        VectorFloat down;
         mpu.dmpGetGravity(&down, &q);
         
         // tilt angle is the angle made between world-y and the "up"-vector (just negative of "down")
-        float phi = acos( -down.y / down.magnitude() );
+        float phi = acos( -down.y / down.getMagnitude() );
 
         // drift due to tilt
-        Quaternion d_tilt( cos(phi/2.f), -down.normalize().z * sin(phi/2.f), 0.f, down.normalize().x * sin(phi/2.f) );
+        Quaternion d_tilt( cos(phi/2.f), -down.getNormalized().z * sin(phi/2.f), 0.f, down.getNormalized().x * sin(phi/2.f) );
 
         // TO DO: if magnetometer readings are available, yaw drift can be accounted for
         // int16_t ax_tmp, ay_tmp, az_tmp, gx_tmp, gy_tmp, gz_tmp, mx, my, mz;
@@ -150,7 +150,7 @@ void loop() {
         // COMPLEMENTARY FILTER (YAW CORRECTION * TILT CORRECTION * QUATERNION FROM ABOVE)
         double tilt_correct = -ALPHA * 2.f * acos(d_tilt.w);
         double yaw_correct  = -BETA  * 2.f * acos(d_yaw.w);
-        Quaternion tilt_correction( cos(tilt_correct/2.f), -down.normalize() * sin(tilt_correct/2.f), 0.f, down.normalize().x * sin(tilt_correct/2.f) );
+        Quaternion tilt_correction( cos(tilt_correct/2.f), -down.getNormalized().getMagnitude() * sin(tilt_correct/2.f), 0.f, down.getNormalized().x * sin(tilt_correct/2.f) );
         Quaternion yaw_correction( cos(yaw_correct/2.f), 0.f, sin(yaw_correct/2.f), 0.f);
 
         // qc = yc * tc * q
