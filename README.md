@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/relativty/Relativ"><img src="https://avatars0.githubusercontent.com/u/31791204?s=200&v=4" width="180"></a>
+  <a href="https://relativty.net"><img src="https://github.com/AdmiraalHugo/Relativty-LM/blob/master/img/leapmotion-gif.gif" width="75%"></a>
 </h1>
 
 # Why Relativty LM? 📖
