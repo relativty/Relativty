@@ -28,7 +28,20 @@ After installation, we will do the following steps;
 * Install the Visual C++ 2015 Update 2 redistributables (32 and 64 bits) https://www.microsoft.com/en-us/download/details.aspx?id=51682
 * Download the most recent zip file from the Releases section of this project and run the contained exe setup program https://github.com/cbuchner1/driver_leap/releases
 
+Ok, now a small wierd part. (at least on machines I've heard of) the Leap Motion Drivers install, places the files in a folder in Program Files, but doesn't actually install them in SteamVR, where they need to be.
+
+<h1 align="center">
+<a href="https://relativty.net"><img src="https://github.com/AdmiraalHugo/Relativty-LM-distro/blob/master/img/leapmotion.jpg" width="50%"></a>
+</h1>
+
+So in the picture above, you see the leap map, Copy that. Then we need to navigate to the drivers folder of SteamVR, where all the plugins go (<your_drive_letter>:/Steam/steamapps/common/SteamVR/drivers/). When we paste it there, we'll gain controls in SteamVR with our LeapMotion! It's pretty simple, just a strange way to go about it.
+
 Start SteamVR to see if two additional controllers show up (they should be blinking if your hands are not in the field of view of the Leap Motion, solid otherwise).
+
+If this works, we will add the following driver to the Leap Motion driver; https://github.com/SDraw/driver_leap/releases
+
+After installing, we will do the following;
+Extract the files to this folder; Extract files to "<your_drive_letter>:/Steam/steamapps/common/SteamVR/drivers/leap/bin/<your operating system>"
 
 # Building the hardware
 
