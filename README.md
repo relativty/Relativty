@@ -30,11 +30,6 @@ After installation, we will do the following steps;
 
 Start SteamVR to see if two additional controllers show up (they should be blinking if your hands are not in the field of view of the Leap Motion, solid otherwise).
 
-If this works, we will add the following driver to the Leap Motion driver; https://github.com/SDraw/driver_leap/releases
-
-After installing, we will do the following steps;
-First, extract the files to this folder; Extract files to "<your_drive_letter>:/SteamVR Leap Motion driver/leap/bin/<your_platform>"
-
 # Building the hardware
 
 Simply mount the Leap Motion controller on the front site of your headset!
