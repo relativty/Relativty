@@ -48,3 +48,5 @@ Extract the files to this folder; Extract files to "<your_drive_letter>:/Steam/s
 Simply mount the Leap Motion controller on the front site of your headset!
 
 # ENJOY!
+
+You can support me here; https://www.patreon.com/relativty
