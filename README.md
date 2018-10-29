@@ -10,7 +10,7 @@
 
 # Getting Started ⚡️
 
-Please NOTE, you will need to build the Relativty headset first! Wich you can find here; 
+Please NOTE, you will need to build the Relativty headset first! Wich you can find here; https://github.com/relativty/Relativ
 
 ## What you'll need
 
