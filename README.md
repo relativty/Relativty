@@ -69,7 +69,10 @@ Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libr
 
 # Building the hardware
 
-Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files. You will need to print the following:
+Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files. You will need to print the following :
+
+⚠️ **The <a href="https://github.com/relativty/Relativ/tree/TheYxxy-distro">Yxxy Distro</a>features a much better headset. Everything is explained nicely so please use it ! **
+
 * Relativ_headset_structure.STL x1
 * box_Arduino_DUE.stl x1
 * box_lens_1.STL x2 ⚠️
