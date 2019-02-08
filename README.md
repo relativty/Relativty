@@ -19,7 +19,7 @@
 
 # Why Relativ? 📖
 
-<p> My name is <a href="https://twitter.com/maximecoutte">Maxime Coutté</a>.  I’m 16 years old and I live in a small village in France where I’m the only teenager. With my best friends, <a href="https://medium.com/@jonasceccon">Jonas Ceccon</a> and <a href="https://medium.com/@gabrielcombe">Gabriel Combe</a>, and my math teacher <a href="https://www.linkedin.com/in/jérôme-dieudonne-696a18b5"> Jerome Dieudonne </a> (we call him Sensei) we built our own VR headset for $100.
+<p> My name is <a href="https://twitter.com/maximecoutte">Maxime Coutte</a>.  I’m 16 years old and I live in a small village in the countryside where I’m the only teenager. With my best friends, <a href="https://medium.com/@jonasceccon">Jonas Ceccon</a> and <a href="https://medium.com/@gabrielcombe">Gabriel Combe</a>, and my math teacher <a href="https://www.linkedin.com/in/jérôme-dieudonne-696a18b5"> Jerome Dieudonne </a> (we call him Sensei) we built our own VR headset for $100.
 
 <p> I started programming when I was 13, thanks to Sensei when he created a robotics club. On the first day we were 12 students, the next week we were 3 - yep, you guessed it, the other two were Gabriel and Jonas. I fell in love with VR because of an anime called SAO, but the problem was that the Oculus Rift was way too expensive for me. I talked about this with Gabriel and we both agreed that we should build our own VR headset. That got us into the math and physics behind VR (quaternions, proper acceleration, antiderivatives…). Then we bought the cheapest components we could and we reinvented VR. Now using <a href="https://github.com/relativty/fastVR-sdk">FastVR</a> and Relativ you can
 build your VR headset too. </p>
@@ -96,5 +96,5 @@ Make sure you have all the libraries needed installed and upload the following p
 
 <p> You can now play with your headset by downloading some cool demos by <a href="https://github.com/relativty/Relativ/releases/download/v0.1-beta/Unity_build.zip">clicking here<a/>. Or build your own game in a minute using the Relativty sdk, learn more by <a href="https://github.com/relativty/fastVR-sdk"> clicking here </a>. </p>
 <p> I would love to hear about what you’ve experienced building the headset or help if you have any questions. Ping me at maxime@relativty.com or <a href="https://twitter.com/maximecoutte">@maximecoutte</a>. </p>
-<p align="center">😍🤙 You can now chat with me and the Fellowship https://discord.gg/W9VKbjU</p>
+<p align="center">🤗You can now chat with me and the Fellowship https://discord.gg/W9VKbjU</p>
 <p align="center"> <strong> <> with ❤️, maxime@relativty.com</strong> </p>
