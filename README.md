@@ -66,7 +66,11 @@ There are now two variants of Relativ. The original design by the founders **(de
 * A screen which has a cable with a 90 degree bend just like the <a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a> one. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen.
 
 ###### For the Vang1 design:
-!!Info will be added soon!!
+* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
+* Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a bit modification)
+* ABS or PETG filament is recommended, but PLA also works fine.
+* HTC vive replacement foam / A piece of ARMAflex to make your own.
+* M3 screws (More info will be added soon!!)
 
 ###### For the old (deprecated) design:
 * Fresnel lens Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
