@@ -52,27 +52,27 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 ## What you'll need
 
 ### What components ?
-There are now two variants of Relativ. The original design by the founders **(deprecated)** and new version by TheYxxy based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
-##### For both designs:
+There are now three variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
+
+##### Parts needed for all the designs:
 * Arduino Due, $34 for the official one or $10 for a Chinese clone
 * GY-521 MPU-6050, $1
 * 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
 * Face foam, about $4, see [here](https://www.ebay.com/itm/Face-Foam-Replacement-Eye-Masks-Pads-Cover-Fit-For-HTC-Vive-VR-Goggles-Headphone/152798949280?_mwBanner=1&_rdt=1 "here")
 
-###### For the TheYXXY design:
+###### Extra needed for the TheYXXY design:
 * Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
 * 4 M3 Screws and 2 M2 screws, both with nuts, $3 - alternatively you can use hot glue if M2 screws are not available
 * TPU 95 filament is recommended in addition to the normal PLA, and a printer which supports printing it
 * A screen which has a cable with a 90 degree bend just like the <a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a> one. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen.
 
-###### For the Vang1 design:
+###### Extra needed for the Vang1 design:
 * Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
 * Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a bit modification)
-* ABS or PETG filament is recommended, but PLA also works fine.
-* HTC vive replacement foam / A piece of ARMAflex to make your own.
+* ABS or PETG filament with 20% infill is recommended, but PLA also works fine. All the parts can be printed without infill.
 * M3 screws (More info will be added soon!!)
 
-###### For the old (deprecated) design:
+###### Extra needed for the old (deprecated) design:
 * Fresnel lens Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
 
 <img src="/img/component.JPG" width="100%">
