@@ -48,7 +48,7 @@ build your VR headset too. </p>
 
 <p> Thanks to this project I’ve had the incredible fortune to meet amazing people, including the chief architect at Oculus, Atman Binstock. He gave me a precious piece of advice: "open source it". I deleted all the code I had, and started rewriting it all from scratch, better. And I convinced my two friends and our math teacher to open source the project </p>
 
-<img src="/img/headset.JPG" width="100%">
+<img src="/img/headset.JPG" width="70%">
 
 # Getting Started ⚡️
 
@@ -57,7 +57,7 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 ## What you'll need
 
 ### What components ?
-There are now three variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
+There are a few variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
 
 ##### Parts needed for all the designs:
 * Arduino Due, $34 for the official one or $10 for a Chinese clone
@@ -94,27 +94,20 @@ Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libr
 
 # Building the hardware
 
-Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files. 
-You will need to print the following :
+**A detailed documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>!**
+  
+Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files.
 
-* (1x): Part 1, Part 2a, Part 2b, Part 3, Part 3a, Part 4, Part 5
-* (2x): Part 2c, Part 2d, Part 3b
-* (1x) Part 6: Use of Flexible filament with 10% to 50% infill density
-* (3x) Part 7: Use of Flexible filament with 10% to 50% infill density
-* (1x) Part 8: Use of Flexible filament with 5% infill density (it makes it like a sponge)
-* If you uses the the short straps (190mm, because the large ones don't fit in your printer for example), there are extensions (part 9) that should be printed aswell (2x).
-
-⚠️ **PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE** ⚠️
-
-Additional build information can be found in the build manuals in the 3D-Models folders.
+⚠️ PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE ⚠️
 
 # Building the software
-
 Make sure you have all the libraries needed installed and upload the following program to the Arduino:
-#### Path: Relativ/src/main/main.ino
-<img src="/img/arduino-upload.gif">
 
-# Play some demos
+Path: Relativ/src/main/main.ino
+
+Our documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>.
+
+# Play some demos or use SteamVR
 
 <p> You can now play with your headset by downloading some cool demos by <a href="https://github.com/relativty/Relativ/releases/download/v0.1-beta/Unity_build.zip">clicking here<a/>. Or build your own game in a minute using the Relativty sdk, learn more by <a href="https://github.com/relativty/fastVR-sdk"> clicking here </a>. </p>
 <p> I would love to hear about what you’ve experienced building the headset or help if you have any questions. Ping me at maxime@relativty.com or <a href="https://twitter.com/maximecoutte">@maximecoutte</a>. </p>
