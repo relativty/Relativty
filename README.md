@@ -32,11 +32,14 @@ build your VR headset too. </p>
 <img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/gabriel.png"> </p>
 <p align="left"> <strong> Gabriel: </strong>I work on optics for <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>, 3D conception with Maxime and cheap tracking for the next big update. </p>
 <br>
+<br>
 <img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/maxime.png"> </p>
 <p align="left"> <strong> Maxime: </strong> I created <a href="https://github.com/relativty/wrmhl">WRMHL</a> and with Gabriel we created <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>. I'm also behind the code for the hardware. </p>
 <br>
+<br>
 <img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/jonas.png"> </p>
 <p align="left"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us premium components at low prices and I'm working on a Master Guide for Relativ. </p>
+<br>
 <br>
 <img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/sensei.png"> </p>
 <p align="left"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them to solve algorithm issues. </p>
