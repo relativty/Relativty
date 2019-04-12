@@ -29,15 +29,15 @@ build your VR headset too. </p>
 
 # Meet the team ❤️
 
-<p align="center"> <img src="/img/gabriel.png" width="370"> </p>
-<p align="center"> <strong> Gabriel: </strong>I work on optics for <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>, 3D conception with Maxime and cheap tracking for the next big update. </p>
+<img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/gabriel.png"> </p>
+<p align="left"> <strong> Gabriel: </strong>I work on optics for <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>, 3D conception with Maxime and cheap tracking for the next big update. </p>
 
-<p align="center"> <img src="/img/maxime.png" width="370"> </p>
-<p align="center"> <strong> Maxime: </strong> I created <a href="https://github.com/relativty/wrmhl">WRMHL</a> and with Gabriel we created <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>. I'm also behind the code for the hardware. </p>
-<p align="center"> <img src="/img/jonas.png" width="370"> </p>
-<p align="center"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us premium components at low prices and I'm working on a Master Guide for Relativ. </p>
-<p align="center"> <img src="/img/sensei.png" width="370"> </p>
-<p align="center"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them to solve algorithm issues. </p>
+<img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/maxime.png"> </p>
+<p align="left"> <strong> Maxime: </strong> I created <a href="https://github.com/relativty/wrmhl">WRMHL</a> and with Gabriel we created <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>. I'm also behind the code for the hardware. </p>
+<img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/jonas.png"> </p>
+<p align="left"> <strong> Jonas: </strong>  I convinced a Chinese factory to sell us premium components at low prices and I'm working on a Master Guide for Relativ. </p>
+<img align="right" width="100" height="100" src="https://github.com/relativty/Relativ/blob/master/img/sensei.png"> </p>
+<p align="left"> <strong> Sensei: </strong>  I'm the theoretician of the team. I teach them math and I help them to solve algorithm issues. </p>
 
 # Open-Source it FTW
 
