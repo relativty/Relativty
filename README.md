@@ -1,8 +1,3 @@
-<h1 align="center">
-  <br>
-  <a href="https://github.com/relativty/Relativ"><img src="https://avatars0.githubusercontent.com/u/31791204?s=200&v=4" width="180"></a>
-</h1>
-
 <h4 align="center">We couldn't afford an Oculus so we built one
 </h4>
 
