@@ -57,7 +57,7 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 There are a few variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
 
 ##### Parts needed for all the designs:
-* ESP32, $3,50 [recommended](https://robotdyn.com/stm32-arm-arduino-mini-system-dev-board-blue-pill-with-arduino-bootloader.html "recommended")
+* STM32, $3,50 [recommended](https://robotdyn.com/stm32-arm-arduino-mini-system-dev-board-blue-pill-with-arduino-bootloader.html "recommended")
 * ST-link V2 USB +-$3,00 [recommended](https://www.amazon.com/ "recommended") ⚠️ Price may vary a lot
 * GY-521 MPU-6050, $1
 * 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
@@ -88,7 +88,6 @@ You can either install it using [Git](https://git-scm.com/) or direct [Download]
 # Clone this repository
 $ git clone https://github.com/relativty/Relativ
 ```
-Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libraries folder: **Documents\Arduino\libraries**. You're now ready to build the headset!
 
 # Building the headset
 
@@ -96,7 +95,7 @@ Detailed instructions and parts lists can be found in the Relativ Wiki at:
 
 https://wiki.relativty.net/index.php/STM32
 
-Basically, copy the contents of "library" folder into your Arduino libraries folder, then copy the main STM32-Tracker folder (which contains the STM32_BlackPill and STM32_BluePill folders) into your main Arduino folder. However, all the critical information that you need to build this tracker is in the Wiki, so you really do need to read it before you start this build.
+Basically, copy the contents of **"library"** folder into your Arduino libraries folder, then copy the main STM32-Tracker folder (which contains the **STM32_BlackPill** and **STM32_BluePill** folders) into your main Arduino folder. However, all the critical information that you need to build this tracker is in the Wiki, so you really do need to read it before you start this build.
 
 Because we had to edit some of the main library files so that they would compile on an STM32 board, we have included them in each sketch folder (so that the changes don't mess up any other sketches that use those particular libraries). However, bacause other parts of the code rely on the un-patched libraries, we have to make the original libraries available in the main arduino libraries folder as well.
 
