@@ -64,13 +64,13 @@ There are a few variants of Relativ. The original design by the founders **(depr
 * Face foam (10mm wide), about $4, see [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=face+foam+vr+headset+10mm&_sacat=0 "here")
 
 ###### Extra needed for the TheYXXY design:
-* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
+* Biconvex lens, Focal length 45mm, 37mm diameter <a href="https://www.ebay.com/">recommended</a>
 * 4 M3 Screws and 2 M2 screws, both with nuts, $3 - alternatively you can use hot glue if M2 screws are not available
 * TPU 95 filament is recommended in addition to the normal PLA, and a printer which supports printing it
 * A screen which has a cable with a 90 degree bend just like the <a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a> one. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen.
 
 ###### Extra needed for the Vang1 design:
-* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
+* Biconvex lens, Focal length 45mm, 37mm diameter <a href="https://www.ebay.com/">recommended</a>
 * Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a bit modification)
 * ABS or PETG filament with 20% infill is recommended, but PLA also works fine. All the parts can be printed without infill.
 * M3 screws (More info will be added soon!!)
