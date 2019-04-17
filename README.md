@@ -58,7 +58,7 @@ There are a few variants of Relativ. The original design by the founders **(depr
 
 ##### Parts needed for all the designs:
 * STM32, $3,50 [recommended](https://robotdyn.com/stm32-arm-arduino-mini-system-dev-board-blue-pill-with-arduino-bootloader.html "recommended")
-* ST-link V2 USB +-$3,00 [recommended](https://www.amazon.com/ "recommended") ⚠️ Price may vary a lot
+* ST-link V2 USB ~$3,00 [recommended](https://www.amazon.com/ "recommended") ⚠️ Price may vary a lot
 * GY-521 MPU-6050, $1
 * 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
 * Face foam, about $4, see [here](https://www.ebay.com/itm/Face-Foam-Replacement-Eye-Masks-Pads-Cover-Fit-For-HTC-Vive-VR-Goggles-Headphone/152798949280?_mwBanner=1&_rdt=1 "here")
