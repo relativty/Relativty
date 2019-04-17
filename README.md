@@ -49,13 +49,16 @@ build your VR headset too. </p>
 
 Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>.
 
+**PLEASE NOTE**; We highly recommend that you use the STM32 tracker because it has proved to be more stable than the Due based one. The Due code has recently been reported to throw compiler errors, and the Due trackers have exhibited stability issues. Because of this, we will be phasing out support for the Arduino DUE code in the next couple of months.
+
 ## What you'll need
 
 ### What components ?
 There are a few variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
 
 ##### Parts needed for all the designs:
-* Arduino Due, $34 for the official one or $10 for a Chinese clone
+* ESP32, $3,50 [recommended](https://robotdyn.com/stm32-arm-arduino-mini-system-dev-board-blue-pill-with-arduino-bootloader.html "recommended")
+* ST-link V2 USB +-$3,00 [recommended](https://www.amazon.com/ "recommended") ⚠️ Price may vary a lot
 * GY-521 MPU-6050, $1
 * 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
 * Face foam, about $4, see [here](https://www.ebay.com/itm/Face-Foam-Replacement-Eye-Masks-Pads-Cover-Fit-For-HTC-Vive-VR-Goggles-Headphone/152798949280?_mwBanner=1&_rdt=1 "here")
@@ -87,20 +90,17 @@ $ git clone https://github.com/relativty/Relativ
 ```
 Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libraries folder: **Documents\Arduino\libraries**. You're now ready to build the headset!
 
-# Building the hardware
+# Building the headset
 
-**A detailed documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>!**
-  
-Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files.
+Detailed instructions and parts lists can be found in the Relativ Wiki at:
 
-⚠️ PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE ⚠️
+https://wiki.relativty.net/index.php/STM32
 
-# Building the software
-Make sure you have all the libraries needed installed and upload the following program to the Arduino:
+Basically, copy the contents of "library" folder into your Arduino libraries folder, then copy the main STM32-Tracker folder (which contains the STM32_BlackPill and STM32_BluePill folders) into your main Arduino folder. However, all the critical information that you need to build this tracker is in the Wiki, so you really do need to read it before you start this build.
 
-Path: Relativ/src/main/main.ino
+Because we had to edit some of the main library files so that they would compile on an STM32 board, we have included them in each sketch folder (so that the changes don't mess up any other sketches that use those particular libraries). However, bacause other parts of the code rely on the un-patched libraries, we have to make the original libraries available in the main arduino libraries folder as well.
 
-Our documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>.
+These really should work straignt out of the box - however, if they don't then please raise a GitHub issue or message us on the Relativ Discord.
 
 # Play some demos or use SteamVR
 
