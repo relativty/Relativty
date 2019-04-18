@@ -71,7 +71,7 @@ There are a few variants of Relativ. The original design by the founders **(depr
 * 2 Biconvex lenses, Focal length 45mm, 37mm diameter <a href="https://www.ebay.com/">recommended</a>
 * Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a slight modification)
 * ABS or PETG filament with 20% infill is recommended, but PLA also works fine. All the parts can be printed without infill.
-* M3 screws (More info will be added soon!!)
+* M3 screws (7x M3x20 and 6x M3x10)
 
 ###### Extra needed for the old (deprecated) design:
 * 2 Fresnel lenses Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
