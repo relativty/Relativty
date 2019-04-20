@@ -1,0 +1,1 @@
+PLEASE NOTE; We highly recommend that you use the STM32 tracker because it has proved to be more stable than the Due based one. The Due code has recently been reported to throw compiler errors, and the Due trackers have exhibited stability issues. Because of this, we will be phasing out support for the Arduino DUE code in the next couple of months.
