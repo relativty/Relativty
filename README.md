@@ -47,7 +47,7 @@ build your VR headset too. </p>
 
 # Getting Started ⚡️
 
-Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <a href="https://github.com/relativty/fastVR-sdk">FastVR</a>.
+**PLEASE NOTE**; We highly recommend that you use the STM32 tracker because it has proved to be more stable than the Due based one. The Due code has recently been reported to throw compiler errors, and the Due trackers have exhibited stability issues. Because of this, we will be phasing out support for the Arduino DUE code in the next couple of months. *(NOTE added on Apr 17, 2019)*
 
 ## What you'll need
 
@@ -55,25 +55,26 @@ Relativ is based on <a href="https://github.com/relativty/wrmhl">WRMHL</a> and <
 There are a few variants of Relativ. The original design by the founders **(deprecated)** and two new version by TheYXXY and Vang1 based on a on a model from <a href="http://horizonlab.co/2017/05/28/vr-headset-fully-3d-printed/">Horizon Lab</a>. Shoutout to them for making this possible and allowing their design to be modified! </p>
 
 ##### Parts needed for all the designs:
-* Arduino Due, $34 for the official one or $10 for a Chinese clone
+* STM32, $3,50 [recommended](https://robotdyn.com/stm32-arm-arduino-mini-system-dev-board-blue-pill-with-arduino-bootloader.html "recommended")
+* ST-link V2 USB ~$3,00 [recommended](https://www.amazon.com/ "recommended") ⚠️ Price may vary a lot
 * GY-521 MPU-6050, $1
-* 5.5 inch 2560*1440 2K LCD Screen HDMI to MIPI, up to 100€ on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
-* Face foam, about $4, see [here](https://www.ebay.com/itm/Face-Foam-Replacement-Eye-Masks-Pads-Cover-Fit-For-HTC-Vive-VR-Goggles-Headphone/152798949280?_mwBanner=1&_rdt=1 "here")
+* 5.5 inch 25601440 2K LCD Screen with an HDMI to MIPI board, between €65 and €95 on AliExpress (<a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a>) ⚠️ Price may vary a lot
+* Face foam (10mm wide), about $4, see [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=face+foam+vr+headset+10mm&_sacat=0 "here")
 
 ###### Extra needed for the TheYXXY design:
-* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
+* 2 Biconvex lenses, Focal length 45mm, 37mm diameter <a href="https://www.ebay.com/">recommended</a>
 * 4 M3 Screws and 2 M2 screws, both with nuts, $3 - alternatively you can use hot glue if M2 screws are not available
 * TPU 95 filament is recommended in addition to the normal PLA, and a printer which supports printing it
 * A screen which has a cable with a 90 degree bend just like the <a href="https://www.aliexpress.com/item/5-5-inch-1440x2560-2K-IPS-LCD-screen-display-with-HDMI-top-MIPI-controller-board-for/32817672501.html">recommended</a> one. For the direction: it should go up behind the screen when the small non-screen part is on the right while looking at the screen.
 
 ###### Extra needed for the Vang1 design:
-* Biconvex lens, Focal length 37mm, 45mm diameter <a href="https://www.ebay.com/">recommended</a>
-* Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a bit modification)
+* 2 Biconvex lenses, Focal length 45mm, 37mm diameter <a href="https://www.ebay.com/">recommended</a>
+* Headstrap <a href="https://www.ebay.com/itm/SJCAM-SJ4000-SJ5000-Xiaomi-Yi-Head-Strap-Mount-Elastic-Adjustable-Head-Band/272024772003?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m2749.l2649">recommended</a> (needs a slight modification)
 * ABS or PETG filament with 20% infill is recommended, but PLA also works fine. All the parts can be printed without infill.
-* M3 screws (More info will be added soon!!)
+* M3 screws (7x M3x20 and 6x M3x10)
 
 ###### Extra needed for the old (deprecated) design:
-* Fresnel lens Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
+* 2 Fresnel lenses Focal Length 80mm, $3 (<a href="https://www.ebay.com/itm/2Pcs-Fresnel-lens-Focal-Length-40-50-55-60-70-80mm-for-Google-Cardboard-3D-VR/201984369021">recommended</a>)
 
 <img src="/img/component.JPG" width="100%">
 
@@ -85,22 +86,18 @@ You can either install it using [Git](https://git-scm.com/) or direct [Download]
 # Clone this repository
 $ git clone https://github.com/relativty/Relativ
 ```
-Copy all folders in **Relativ/src/libraries** and past them in your Arduino Libraries folder: **Documents\Arduino\libraries**. You're now ready to build the headset!
 
-# Building the hardware
+# Building the headset
 
-**A detailed documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>!**
-  
-Now what you need to do is 3D-print the hardware; if needed you can change any models with provided Source Files.
+Detailed instructions and parts lists can be found in the Relativ Wiki at:
 
-⚠️ PAY EXTRA ATTENTION TO THE SCREEN, IT'S VERY FRAGILE ⚠️
+https://wiki.relativty.net/index.php/STM32
 
-# Building the software
-Make sure you have all the libraries needed installed and upload the following program to the Arduino:
+Basically, copy the contents of **"library"** folder into your Arduino libraries folder, then copy the main STM32-Tracker folder (which contains the **STM32_BlackPill** and **STM32_BluePill** folders) into your main Arduino folder. However, all the critical information that you need to build this tracker is in the Wiki, so you really do need to read it before you start this build.
 
-Path: Relativ/src/main/main.ino
+Because we had to edit some of the main library files so that they would compile on an STM32 board, we have included them in each sketch folder (so that the changes don't mess up any other sketches that use those particular libraries). However, bacause other parts of the code rely on the un-patched libraries, we have to make the original libraries available in the main arduino libraries folder as well.
 
-Our documentation can be found on our <a href="https://wiki.relativty.net/index.php/Main_Page">wiki<a/>.
+These really should work straignt out of the box - however, if they don't then please raise a GitHub issue or message us on the Relativ Discord.
 
 # Play some demos or use SteamVR
 
