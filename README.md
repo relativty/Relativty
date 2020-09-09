@@ -43,13 +43,13 @@ Where to position those components on the PCB is described in the file `Relativt
 **Using an Arduino**
 
 An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
-
+<pre>
 5V      -> VCC  
 GND     -> GND  
 SDA(20) -> SDA  
 SCL(21) -> SCL  
 PIN 2   -> INT  
-
+</pre>
 Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
 
 Installing The Relativty Firmware
@@ -103,10 +103,12 @@ Make sure in your Windows settings that the Relativty’s display is in landscap
 
 Then, set `windowWidth`, `windowHeight`, `renderWidth`, and `renderHeight` to the resolution of your Relativty Display.
 For instance,  
+```
 "windowWidth" : 2880,  
 "windowHeight" : 1440,  
 "renderWidth" : 2880,  
 "renderHeight" : 1440,  
+```
 
 You can now install Relativty Driver, do so by locating your `vrpathreg.exe` program, usually located at `C:/Steam/steamapps/common/SteamVR/bin/win64/vrpathreg.exe`
 
