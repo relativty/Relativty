@@ -119,7 +119,7 @@ Then open the Windows Command Prompt and run the following commands:
 vrpathreg.exe`
 
 And then assuming your `Relativty_Driver/Relativty` driver folder is located at
-`C:/code/Relativty_Driver/Relativty`, run ```vrpathreg adddriver C:/code/Relativty_Driver/Relativty```
+`C:/code/Relativty_Driver/Relativty`, run `vrpathreg adddriver C:/code/Relativty_Driver/Relativty`
 
 Relativty Driver is now installed. You can uninstall it any time by running:
 `Vrpathreg removedriver C:/code/Relativty_Driver/Relativty`
