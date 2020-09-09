@@ -121,8 +121,8 @@ vrpathreg.exe`
 And then assuming your `Relativty_Driver/Relativty` driver folder is located at
 `C:/code/Relativty_Driver/Relativty`, run `vrpathreg adddriver C:/code/Relativty_Driver/Relativty`
 
-Relativty Driver is now installed. You can uninstall it any time by running:
-`Vrpathreg removedriver C:/code/Relativty_Driver/Relativty`
+Relativty Driver is now installed. You can uninstall it any time by running:  
+`vrpathreg removedriver C:/code/Relativty_Driver/Relativty`
 
 Setting up the Experimental 3D Tracking
 -
