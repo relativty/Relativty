@@ -104,11 +104,10 @@ Make sure in your Windows settings that the Relativty’s display is in landscap
 
 Then, set `windowWidth`, `windowHeight`, `renderWidth`, and `renderHeight` to the resolution of your Relativty Display.
 For instance,  
-`windowWidth : 2880,  
+windowWidth : 2880,  
 windowHeight : 1440,  
 renderWidth : 2880,  
 renderHeight : 1440,  
-`
 
 You can now install Relativty Driver, do so by locating your `vrpathreg.exe` program, usually located at `C:/Steam/steamapps/common/SteamVR/bin/win64/vrpathreg.exe`
 
@@ -117,7 +116,7 @@ Then open the Windows Command Prompt and run the following commands:
 vrpathreg.exe`
 
 And then assuming your `Relativty_Driver/Relativty` driver folder is located at
-`C:/code/Relativty_Driver/Relativty`
+`C:/code/Relativty_Driver/Relativty`  
 , run `vrpathreg adddriver C:/code/Relativty_Driver/Relativty`
 
 Relativty Driver is now installed. You can uninstall it any time by running:
