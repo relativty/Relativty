@@ -44,12 +44,11 @@ Where to position those components on the PCB is described in the file `Relativt
 
 An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
 
-5V      -> VCC
-GND     -> GND
-SDA(20) -> SDA
-SCL(21) -> SCL
-PIN 2   -> INT
-
+5V      -> VCC  
+GND     -> GND  
+SDA(20) -> SDA  
+SCL(21) -> SCL  
+PIN 2   -> INT  
 
 Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
 
