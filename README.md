@@ -43,13 +43,13 @@ Where to position those components on the PCB is described in the file `Relativt
 **Using an Arduino**
 
 An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
-<pre>
+```
 5V      -> VCC  
 GND     -> GND  
 SDA(20) -> SDA  
 SCL(21) -> SCL  
 PIN 2   -> INT  
-</pre>
+```
 Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
 
 Installing The Relativty Firmware
@@ -96,8 +96,10 @@ Setting Up the Software
 The Relativty Driver is contained in the `Relativty_Driver/Relativty` folder. You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings` before you install it.
 
 Start by setting `windowX` and `windowY` to the `x` and `y` resolution of your main display. For instance,  
+```
 "windowX" : 1920,  
 "windowY" : 1080,  
+```
 
 Make sure in your Windows settings that the Relativty’s display is in landscape mode, located at the right of your main display and with theirs tops aligned horizontally.
 
