@@ -129,7 +129,8 @@ You’ll then need to download the Folder `RelativtyPyPath` and add its location
 
 Set `tracking` to 1. The tracking is now turned on and can be turned off anytime by setting `tracking` to 0.
 
-**You’re now all set**
+You’re now all set
+-
 
 Everything is now set up to start playing. 
 To start using Relativty lay the headset on a flat surface with the front panel facing the ground, then plug in the Headset and It’ll automatically calibrate after a few seconds. 
