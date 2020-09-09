@@ -8,22 +8,22 @@ I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old w
 
 Made for Hackers
 -
-Relativty is **not a consumer product**. We made Halfdive in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
+Relativty is **not a consumer product**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
 
 To learn more about the features of the Firmware, Software and Hardware visit Relativty.com
 
 We also have a friendly Discord server, a place for our community to learn, share their knowledge, and ask for help. 
 All the links are at: Relativty.com
 
-Start Building Halfdive
+Start Building Relativty
 -
 <p align="center"> <img src="ressources/img/open.jpg"> </p>
 
 **Building The Hardware**
-The hardware is based on the Halfdive Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
-Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Halfdive. Both methods are explained below.
+The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
+Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Relativty. Both methods are explained below.
 
-Building The Halfdive Motherboard,
+Building The Relativty Motherboard,
 
 **Step 1 - PCB Manufacturing.**
 
@@ -36,20 +36,20 @@ it can be manufactured and bought for around $4 on websites like `https://jlcpcb
 
 **Step 2 - Assembling** 
 
-soldering the components onto the naked PCB. You’ll have to buy the components listed in one of the two BOMs, depending on availability, `Halfdive_Electronics_build/Assembly/jlcpcb.com_motherboard_BOM.csv` or `Halfdive_Electronics_build/Assembly/motherboard_BOM.xlsx`
+soldering the components onto the naked PCB. You’ll have to buy the components listed in one of the two BOMs, depending on availability, `Relativty_Electronics_build/Assembly/jlcpcb.com_motherboard_BOM.csv` or `Relativty_Electronics_build/Assembly/motherboard_BOM.xlsx`
 
-Where to position those components on the PCB is described in the file `Halfdive_Electronics_source/motherboard.brd` which can be opened in Eagle.
+Where to position those components on the PCB is described in the file `Relativty_Electronics_source/motherboard.brd` which can be opened in Eagle.
 
 <p align="center"> <img src="ressources/img/motherboard.jpg"> </p>
 
 **Using an Arduino**
 
-An alternative to the Halfdive Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
+An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
 <picture of the Arduino MPU schematics>
 
 Then click the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
 
-Installing The Halfdive Firmware
+Installing The Relativty Firmware
 -
 <p align="center"> <img src="ressources/img/cards.jpg"> </p>
 You’ll now need to install the Relativty board in the Arduino IDE. To do that copy that JSON URL: https://github.com/Relativty/.../.json and open the Arduino IDE
@@ -88,7 +88,7 @@ Setting Up the Software
 <p align="center"> <img src="ressources/img/front.jpg"> </p>
 
 **Installing Relativty Driver for SteamVR**
-The Relativty Driver is contained in the `Relativty_Driver/Relativty` folder. You’ll need to set it up by editing the JSON file `Relativty_Driver/Halfdive/resources/settings/default.vrsettings` before you install it.
+The Relativty Driver is contained in the `Relativty_Driver/Relativty` folder. You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings` before you install it.
 
 Start by setting `windowX` and `windowY` to the `x` and `y` resolution of your main display. For instance,
 "windowX" : 1920,
@@ -108,7 +108,7 @@ Then open the Windows Command Prompt and run the following commands:
 `cd C:/Steam/steamapps/common/SteamVR/bin/win64
 vrpathreg.exe`
 And then assuming your `Relativty_Driver/Relativty` driver folder is located at
-`C:/code/Halfdive_Driver/Halfdive`, run
+`C:/code/Relativty_Driver/Relativty`, run
 
 `vrpathreg adddriver C:/code/Relativty_Driver/Relativty`
 Relativty Driver is now installed. You can uninstall it any time by running:
