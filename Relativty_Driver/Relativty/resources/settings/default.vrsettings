@@ -1,0 +1,31 @@
+{
+   "driver_Relativty" : {
+      "enable" : true,
+      "serialNumber" : "zero",
+      "modelNumber" : "akira_zero",
+      "windowX" : 0,
+      "windowY" : 0,
+      "windowWidth" : 1920,
+      "windowHeight" : 1080,
+      "renderWidth" : 1920,
+      "renderHeight" : 1080,
+      "secondsFromVsyncToPhotons" : 0.011,
+      "displayFrequency" : 60,
+      "upperBound" : 1.0,
+      "lowerBound" : -1.0,
+      "normalizeMinX" : -200.0,
+      "normalizeMinY" : -45.0,
+      "normalizeMinZ" : -40.0,
+      "normalizeMaxX" : 0.5,
+      "normalizeMaxY" : 55.0,
+      "normalizeMaxZ" : 70.0,
+      "scalesCoordinateMeterX" : 0.5,
+      "scalesCoordinateMeterY" : 0.8,
+      "scalesCoordinateMeterZ" : 0.8,
+      "offsetCoordinateX" : -5.0,
+      "offsetCoordinateY" : 0,
+      "offsetCoordinateZ" : 0,
+      "startTrackingServer" : 1,
+      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
+   }
+}
