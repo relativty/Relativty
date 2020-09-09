@@ -6,7 +6,7 @@ I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old w
 
 **This repo serves as a Build guide, to learn more about the headset see you at: https://www.relativty.com/**
 
-Make it for $200
+Made for Hackers
 -
 Relativty is **not a consumer product**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
 
