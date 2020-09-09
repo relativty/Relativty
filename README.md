@@ -17,8 +17,9 @@ All the links are at: Relativty.com
 
 Start Building Halfdive
 -
-<picture: 3D Render of the headset>
- Building The Hardware
+<p align="center"> <img src="ressources/img/open.jpg"> </p>
+
+**Building The Hardware**
 The hardware is based on the Halfdive Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
 Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Halfdive. Both methods are explained below.
 
@@ -39,6 +40,8 @@ soldering the components onto the naked PCB. You’ll have to buy the components
 
 Where to position those components on the PCB is described in the file `Halfdive_Electronics_source/motherboard.brd` which can be opened in Eagle.
 
+<p align="center"> <img src="ressources/img/motherboard.jpg"> </p>
+
 **Using an Arduino**
 
 An alternative to the Halfdive Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
@@ -48,6 +51,7 @@ Then click the `ERASE` and the `RESET` button on the Arduino Due and you’ll be
 
 Installing The Halfdive Firmware
 -
+<p align="center"> <img src="ressources/img/cards.jpg"> </p>
 You’ll now need to install the Relativty board in the Arduino IDE. To do that copy that JSON URL: https://github.com/Relativty/.../.json and open the Arduino IDE
 
 In Arduino, Click File and then Preferences
@@ -73,6 +77,7 @@ This is the strap we use: https://loremipsum.com and this is the foam: https://l
 
 
 **The screen for the HMD**
+<p align="center"> <img src="ressources/img/display.jpg"> </p>
 
 Relativty Headset runs a dual-screen at 120FPS 2K, however, because of the open nature of Relativty you can equip it with any screen.
 
@@ -80,6 +85,7 @@ Our model can be found on Aliexpress, but depending on the vendor similar screen
 
 Setting Up the Software
 -
+<p align="center"> <img src="ressources/img/front.jpg"> </p>
 
 **Installing Relativty Driver for SteamVR**
 The Relativty Driver is contained in the `Relativty_Driver/Relativty` folder. You’ll need to set it up by editing the JSON file `Relativty_Driver/Halfdive/resources/settings/default.vrsettings` before you install it.
