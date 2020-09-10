@@ -1,4 +1,4 @@
-# Relativty is an open-source VR headset with SteamVR support
+# Relativty is an open-source VR headset with SteamVR support and a 2K@120FPS Display
 <p align="center"> <img src="ressources/img/headset.jpg"> </p>
 
 I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
