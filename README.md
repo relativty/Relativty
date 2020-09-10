@@ -1,8 +1,23 @@
-# Relativty is an open-source VR headset with SteamVR support
-<p align="center"> <img src="ressources/img/headset.jpg"> </p>
+<h1 align="center">
+	<img
+		width="300"
+		alt="Relativty"
+		src="ressources/img/headset.jpg">
+</h1>
+
+<h3 align="center">
+	Open-source VR headset with SteamVR support.
+</h3>
 
 I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 5 years later : this headset became Relativty.
+
+* Fully Open-source - **hardware**, **software**, **firmware**.
+* **Steam VR** support.
+* Natively displays **2K** resolution at **120FPS**.
+* Compatible with **Arduino**.
+* Experimental **Body-Tracking**
+
 
 **This repo serves as a Build guide, to learn more about the headset see you at: https://www.relativty.com/**
 
@@ -10,8 +25,7 @@ Made for Hackers
 -
 Relativty is **not a consumer product**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
 
-To learn more about the features of the Firmware, Software and Hardware visit https://www.relativty.com/
-
+To learn more about the features of the Firmware, Software and Hardware visit the website.
 We also have a friendly Discord server, a place for our community to learn, share their knowledge, and ask for help. 
 All the links are at: https://www.relativty.com/
 
