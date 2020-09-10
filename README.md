@@ -1,6 +1,6 @@
 <h1 align="center">
 	<img
-		width="300"
+		width="400"
 		alt="Relativty"
 		src="ressources/img/title.png">
 </h1>
