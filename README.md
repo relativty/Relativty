@@ -17,9 +17,6 @@
 
 I’m <a href="https://twitter.com/maxcoutte?lang=en">Max Coutte</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 
-# Relativty is an open-source VR headset with SteamVR support and a 2K@120FPS Display
-<p align="center"> <img src="ressources/img/headset.jpg"> </p>
-
 I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 
 5 years later : this headset became Relativty.
@@ -51,7 +48,7 @@ Alternatively, any processor that supports the ArduinoCore and is connected to a
 
 Building The Relativty Motherboard,
 
-## Step 1 - PCB Manufacturing.
+## PCB Manufacturing.
 
 We first start with the naked PCB.
 
@@ -60,7 +57,7 @@ it can be manufactured and bought for around $4 on websites like <a href="https:
 You’ll need to provide the Gerber file folder `Relativty_Electronics_build/GerberFiles.zip` which describes the shape of the board.
 
 
-## Step 2 - Assembling
+## Assembling
 
 Soldering the components onto the naked PCB. 
 
@@ -181,13 +178,10 @@ Set `tracking` to 1. The tracking is now turned on and can be turned off anytime
 
 Everything is now set up to start playing. 
 
-
 To start using Relativty:
 - Lay the headset on a flat surface with the front panel facing the ground
 - Plug in the Headset.
 It’ll automatically calibrate after a few seconds.
 
 You can now run any SteamVR game!
-
-You can now run any SteamVR game.
 
