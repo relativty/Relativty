@@ -42,13 +42,12 @@ All the links are at <a href="https://relativty.com">relativty.com</a>.
 
 <p align="center"> <img src="ressources/img/open.jpg"> </p>
 
-## Building The Hardware
+# Building The Hardware
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
 Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Relativty. Both methods are explained below.
 
-Building The Relativty Motherboard,
-
-## PCB Manufacturing.
+## Building The Relativty Motherboard
+### PCB Manufacturing.
 
 We first start with the naked PCB.
 
@@ -57,7 +56,7 @@ it can be manufactured and bought for around $4 on websites like <a href="https:
 You’ll need to provide the Gerber file folder `Relativty_Electronics_build/GerberFiles.zip` which describes the shape of the board.
 
 
-## Assembling
+### Assembling
 
 Soldering the components onto the naked PCB. 
 
@@ -69,7 +68,7 @@ Where to position those components on the PCB is described in the file `Relativt
 
 <p align="center"> <img src="ressources/img/motherboard.jpg"> </p>
 
-### Using an Arduino
+#### Using an Arduino
 
 An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
 ```
