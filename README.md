@@ -2,7 +2,7 @@
 	<img
 		width="300"
 		alt="Relativty"
-		src="ressources/img/headset.jpg">
+		src="ressources/img/title.png">
 </h1>
 
 <h3 align="center">
