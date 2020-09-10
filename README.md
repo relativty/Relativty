@@ -17,8 +17,6 @@
 
 I’m <a href="https://twitter.com/maxcoutte?lang=en">Max Coutte</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 
-I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
-
 5 years later : this headset became Relativty.
 
 * Fully Open-source - **hardware**, **software**, **firmware**.
