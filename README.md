@@ -1,3 +1,4 @@
+
 <h1 align="center">
 	<img
 		width="400"
@@ -15,6 +16,12 @@
 </p>
 
 I’m <a href="https://twitter.com/maxcoutte?lang=en">Max Coutte</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
+
+# Relativty is an open-source VR headset with SteamVR support and a 2K@120FPS Display
+<p align="center"> <img src="ressources/img/headset.jpg"> </p>
+
+I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
+
 5 years later : this headset became Relativty.
 
 * Fully Open-source - **hardware**, **software**, **firmware**.
@@ -174,9 +181,13 @@ Set `tracking` to 1. The tracking is now turned on and can be turned off anytime
 
 Everything is now set up to start playing. 
 
+
 To start using Relativty:
 - Lay the headset on a flat surface with the front panel facing the ground
 - Plug in the Headset.
 It’ll automatically calibrate after a few seconds.
 
 You can now run any SteamVR game!
+
+You can now run any SteamVR game.
+
