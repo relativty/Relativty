@@ -8,8 +8,13 @@
 <h3 align="center">
 	Open-source VR headset with SteamVR support.
 </h3>
+<p align="center">
+	<strong>
+		<a href="https://relativty.com">Website</a>
+	</strong>
+</p>
 
-I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
+I’m <a href="https://twitter.com/maxcoutte?lang=en">Max Coutte</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 5 years later : this headset became Relativty.
 
 * Fully Open-source - **hardware**, **software**, **firmware**.
@@ -19,7 +24,7 @@ I’m Max Coutte and when my best friend Gabriel Combe and I were 15 years old w
 * Experimental **Body-Tracking**
 
 
-**This repo serves as a Build guide, to learn more about the headset see you at: https://www.relativty.com/**
+**This repo serves as a Build guide, to learn more about the headset see you at <a href="https://relativty.com">Relativty.com</a>**
 
 Made for Hackers
 -
@@ -27,13 +32,13 @@ Relativty is **not a consumer product**. We made Relativty in my bedroom with a 
 
 To learn more about the features of the Firmware, Software and Hardware visit the website.
 We also have a friendly Discord server, a place for our community to learn, share their knowledge, and ask for help. 
-All the links are at: https://www.relativty.com/
+All the links are at <a href="https://relativty.com">relativty.com</a>.
 
-Start Building Relativty
--
+# Start Building Relativty
+
 <p align="center"> <img src="ressources/img/open.jpg"> </p>
 
-**Building The Hardware**
+## Building The Hardware
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
 Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Relativty. Both methods are explained below.
 
