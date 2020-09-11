@@ -12,6 +12,8 @@
 <p align="center">
 	<strong>
 		<a href="https://relativty.com">Website</a>
+		•
+		<a href="https://discord.gg/jARCsVb">Discord</a>
 	</strong>
 </p>
 
