@@ -25,7 +25,7 @@
       "offsetCoordinateX" : -5.0,
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
-      "startTrackingServer" : 1,
+      "startTrackingServer" : 0,
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    }
 }
