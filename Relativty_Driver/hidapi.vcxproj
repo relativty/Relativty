@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)libraries</OutDir>
     <TargetName>hidapi</TargetName>
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)libraries</OutDir>
     <TargetName>hidapi</TargetName>
