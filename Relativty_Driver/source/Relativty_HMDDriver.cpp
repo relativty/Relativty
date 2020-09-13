@@ -25,6 +25,8 @@
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_EmbeddedPython.h"
+#include <string>
+//#include "driverlog.h"
 
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
 	vr::HmdQuaternion_t quat;
@@ -53,7 +55,11 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 
 	this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
 	if (!this->handle) {
-		Relativty::ServerDriver::Log("USB: Unable to open HMD device. \n");
+		#ifdef DRIVERLOG_H
+		DriverLog("USB: Unable to open HMD device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
+		#else
+		Relativty::ServerDriver::Log("USB: Unable to open HMD device with pid="+ std::to_string(m_iPid) +" and vid="+ std::to_string(m_iVid) +".\n");
+		#endif
 		return vr::VRInitError_Unknown;
 	}
 
