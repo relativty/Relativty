@@ -73,28 +73,33 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Relativty\bin\win32</OutDir>
     <TargetName>driver_Relativty</TargetName>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\Python;$(SolutionDir)\include;$(SolutionDir)\include\OpenVR;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)\libraries;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libraries\$(Platform);$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>driver_Relativty</TargetName>
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Relativty\bin\win32</OutDir>
     <TargetName>driver_Relativty</TargetName>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\Python;$(SolutionDir)\include;$(SolutionDir)\include\OpenVR;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)\libraries;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libraries\$(Platform);$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>driver_Relativty</TargetName>
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,7 +127,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;setupapi.lib;hidapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,7 +146,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,7 +165,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;setupapi.lib;hidapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

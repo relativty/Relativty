@@ -16,7 +16,7 @@
 #include <atomic>
 #include <WinSock2.h>
 #include <Windows.h>
-#include <hidapi/hidapi.h>
+#include "hidapi/hidapi.h"
 #include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_ServerDriver.hpp"

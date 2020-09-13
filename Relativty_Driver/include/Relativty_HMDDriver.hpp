@@ -17,7 +17,7 @@
 #include <thread>
 #include <atomic>
 #include <WinSock2.h>
-#include <hidapi/hidapi.h>
+#include "hidapi/hidapi.h"
 #include "openvr_driver.h"
 
 namespace Relativty {

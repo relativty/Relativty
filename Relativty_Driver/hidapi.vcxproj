@@ -72,28 +72,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>hidapi</TargetName>
-    <OutDir>$(SolutionDir)libraries</OutDir>
+    <OutDir>$(SolutionDir)libraries\$(Platform)</OutDir>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)libraries</OutDir>
+    <OutDir>$(SolutionDir)libraries\$(Platform)</OutDir>
     <TargetName>hidapi</TargetName>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)libraries</OutDir>
+    <OutDir>$(SolutionDir)libraries\$(Platform)</OutDir>
     <TargetName>hidapi</TargetName>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hidapi</TargetName>
-    <OutDir>$(SolutionDir)libraries</OutDir>
+    <OutDir>$(SolutionDir)libraries\$(Platform)</OutDir>
+    <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\include;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)\include\hidapi;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
