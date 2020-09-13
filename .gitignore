@@ -5,6 +5,8 @@
 .Trashes
 Win32
 x64
+!libraries/x64/*
+!libraries/Win32/*
 Release
 .vs
 Relativty_Driver/Relativty/bin/win32/*
