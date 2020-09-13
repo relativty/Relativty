@@ -17,9 +17,6 @@
 #include "Relativty_ServerDriver.hpp"
 
 
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment (lib, "Setupapi.lib")
-
 static std::shared_ptr<Relativty::ServerDriver> Relativty_Driver;
 
 extern "C" __declspec(dllexport) void* HmdDriverFactory(const char* InterfaceName, int* ReturnCode) {
