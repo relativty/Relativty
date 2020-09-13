@@ -60,6 +60,9 @@ namespace Relativty {
 		int32_t RenderWidth;
 		int32_t RenderHeight;
 
+		int32_t m_iPid;
+		int32_t m_iVid;
+
 		float SecondsFromVsyncToPhotons;
 		float DisplayFrequency;
 		float IPD;

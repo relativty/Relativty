@@ -50,7 +50,8 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 		Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
 		return vr::VRInitError_Unknown;
 	}
-	this->handle = hid_open(0x2341, 0x003e, NULL);
+
+	this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
 	if (!this->handle) {
 		Relativty::ServerDriver::Log("USB: Unable to open HMD device. \n");
 		return vr::VRInitError_Unknown;
@@ -353,6 +354,9 @@ Relativty::HMDDriver::HMDDriver() {
 	this->offsetCoordinateX = vr::VRSettings()->GetFloat(Relativty_Section, "offsetCoordinateX");
 	this->offsetCoordinateY = vr::VRSettings()->GetFloat(Relativty_Section, "offsetCoordinateY");
 	this->offsetCoordinateZ = vr::VRSettings()->GetFloat(Relativty_Section, "offsetCoordinateZ");
+
+	this->m_iPid = vr::VRSettings()->GetInt32(Relativty_Section, "hmdPid");
+	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_Section, "hmdVid");
 
 	vr::VRSettings()->GetString(Relativty_Section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
