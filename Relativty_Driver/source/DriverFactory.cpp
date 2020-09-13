@@ -13,9 +13,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <OpenVR/openvr_driver.h>
+#include "openvr_driver.h"
 #include "Relativty_ServerDriver.hpp"
+
+
+#pragma comment(lib, "Ws2_32.lib")
+#pragma comment (lib, "Setupapi.lib")
 
 static std::shared_ptr<Relativty::ServerDriver> Relativty_Driver;
 

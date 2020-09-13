@@ -14,7 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
-#include <OpenVR/openvr_driver.h>
+#include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
 
 namespace Relativty {

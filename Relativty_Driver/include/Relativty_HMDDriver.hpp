@@ -18,7 +18,7 @@
 #include <atomic>
 #include <WinSock2.h>
 #include <hidapi/hidapi.h>
-#include <OpenVR/openvr_driver.h>
+#include "openvr_driver.h"
 
 namespace Relativty {
 	class HMDDriver : public vr::ITrackedDeviceServerDriver, public vr::IVRDisplayComponent

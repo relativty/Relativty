@@ -17,7 +17,7 @@
 #include <WinSock2.h>
 #include <Windows.h>
 #include <hidapi/hidapi.h>
-#include <OpenVR/openvr_driver.h>
+#include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_EmbeddedPython.h"
@@ -46,7 +46,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 		Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
 		return vr::VRInitError_Unknown;
 	}
-	this->handle = hid_open(0x1209, 0x0009, NULL);
+	this->handle = hid_open(6790, 29987, NULL);
 	if (!this->handle) {
 		Relativty::ServerDriver::Log("USB: Unable to open HMD device. \n");
 		return vr::VRInitError_Unknown;

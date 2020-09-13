@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include <OpenVR/openvr_driver.h>
+#include "openvr_driver.h"
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_HMDDriver.hpp"
 

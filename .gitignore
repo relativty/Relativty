@@ -3,3 +3,11 @@
 .DS_Store
 .DS_Store?
 .Trashes
+Win32
+x64
+Release
+.vs
+Relativty_Driver/Relativty/bin/win32/*
+Relativty_Driver/Relativty/bin/win64/*
+!Relativty_Driver/Relativty/bin/win32/driver_Relativty.dll
+!Relativty_Driver/Relativty/bin/win64/driver_Relativty.dll

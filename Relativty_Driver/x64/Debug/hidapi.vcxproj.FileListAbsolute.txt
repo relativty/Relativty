@@ -1,2 +1,0 @@
-F:\Relativty\Relativty_Driver\libraries\hidapi.pdb
-F:\Relativty\Relativty_Driver\x64\Debug\hidapi.pdb
