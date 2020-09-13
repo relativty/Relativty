@@ -82,7 +82,7 @@
     <TargetName>driver_Relativty</TargetName>
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
     <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
-    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,7 +97,7 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>driver_Relativty</TargetName>
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
-    <LibraryPath>$(WindowsSDK_LibraryPath_x86);$(VC_LibraryPath_x86);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64);$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)include\hidapi;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include\Python;$(SolutionDir)include;$(SolutionDir)include\OpenVR;$(IncludePath)</IncludePath>
     <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
