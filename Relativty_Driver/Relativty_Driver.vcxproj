@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +127,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;setupapi.lib;hidapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -146,7 +146,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -165,7 +165,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;setupapi.lib;hidapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
