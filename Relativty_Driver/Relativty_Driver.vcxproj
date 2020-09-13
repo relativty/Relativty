@@ -113,7 +113,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\python38.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,14 +122,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)include\Python</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\python38.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\python38.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +160,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)include\Python</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -168,7 +170,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\python38.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
