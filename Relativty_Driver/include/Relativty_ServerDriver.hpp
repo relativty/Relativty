@@ -14,6 +14,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
+#ifndef RELATIVTY_SERVERDRIVER_H
+#define RELATIVTY_SERVERDRIVER_H
+
 #include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
 
@@ -34,3 +37,5 @@ namespace Relativty {
 		HMDDriver* HMDDriver = nullptr;
 	};
 }
+
+#endif // RELATIVTY_SERVERDRIVER_H

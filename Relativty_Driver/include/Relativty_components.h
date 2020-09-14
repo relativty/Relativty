@@ -62,6 +62,8 @@ namespace Relativty {
       DriverLog("render target: %dx%d\n", m_nRenderWidth, m_nRenderHeight);
       DriverLog("window target: %dx%d\n", m_nWindowWidth, m_nWindowHeight);
       DriverLog("eye gap offset: %d", m_iEyeGapOff);
+      #else
+      vr::VRDriverLog()->Log("Extended display component created\n");
       #endif
 
     }
@@ -105,9 +107,9 @@ namespace Relativty {
       *pfBottom = 1.0;
     }
 
-    virtual DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU,
+    virtual vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU,
                                                       float fV) {
-      DistortionCoordinates_t coordinates;
+      vr::DistortionCoordinates_t coordinates;
 
       if constexpr(g_bRelativtyExtDisplayComp_doLensStuff) {
         // Distortion for lens implementation from

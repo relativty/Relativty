@@ -25,6 +25,8 @@
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_EmbeddedPython.h"
+#include "Relativty_components.h"
+
 #include <string>
 //#include "driverlog.h"
 
@@ -262,7 +264,7 @@ void* Relativty::HMDDriver::GetComponent(const char* pchComponentNameAndVersion)
 }
 
 std::string Relativty::HMDDriver::GetSerialNumber() {
-	return this->SerialNumber.c_str();
+	return this->SerialNumber;
 }
 
 void Relativty::HMDDriver::DebugRequest(const char* pchRequest, char* pchResponseBuffer, uint32_t unResponseBufferSize) {
