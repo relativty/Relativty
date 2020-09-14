@@ -26,8 +26,8 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : 0,
-      "hmdPid" : 62,
-      "hmdVid" : 9025,
+      "hmdPid" : 9,
+      "hmdVid" : 4617,
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    }
 }
