@@ -333,7 +333,8 @@ inline void Relativty::HMDDriver::setProperties(uint32_t unObjectId) {
 
 	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_ModelNumber_String, this->ModelNumber.c_str());
 
-	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, this->ModelNumber.c_str()); // this is bad, NEVER use model number as a path to the render model!
+	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, "{Relativty}/rendermodels/generic_hmd");
+	// render models are important, and its best if ship them with the driver
 
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
