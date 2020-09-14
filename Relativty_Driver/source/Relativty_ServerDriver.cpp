@@ -14,6 +14,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "openvr_driver.h"
+
+#include "driverlog.h"
+
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_HMDDriver.hpp"
 
@@ -23,6 +26,10 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 		if (eError != vr::VRInitError_None) {
 			return eError;
 	}
+	#ifdef DRIVERLOG_H
+	InitDriverLog(vr::VRDriverLog());
+	#endif
+
 	this->Log("Relativty Init successful.\n");
 	
 	this->HMDDriver = new Relativty::HMDDriver();
@@ -35,6 +42,12 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 void Relativty::ServerDriver::Cleanup() {
 	delete this->HMDDriver;
 	this->HMDDriver = NULL;
+
+	#ifdef DRIVERLOG_H
+	CleanupDriverLog();
+	#endif
+
+	VR_CLEANUP_SERVER_DRIVER_CONTEXT();
 }
 
 const char* const* Relativty::ServerDriver::GetInterfaceVersions() {

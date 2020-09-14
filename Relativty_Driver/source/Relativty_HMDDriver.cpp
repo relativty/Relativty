@@ -22,13 +22,15 @@
 #include <Windows.h>
 #include "hidapi/hidapi.h"
 #include "openvr_driver.h"
+
+#include "driverlog.h"
+
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_EmbeddedPython.h"
 #include "Relativty_components.h"
 
 #include <string>
-//#include "driverlog.h"
 
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
 	vr::HmdQuaternion_t quat;
@@ -334,7 +336,7 @@ inline void Relativty::HMDDriver::setProperties(uint32_t unObjectId) {
 	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_ModelNumber_String, this->ModelNumber.c_str());
 
 	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, "{Relativty}/rendermodels/generic_hmd");
-	// render models are important, and its best if ship them with the driver
+	// render models are important, shipping them with the driver is a good idea
 
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
