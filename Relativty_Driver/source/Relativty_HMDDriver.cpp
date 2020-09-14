@@ -256,7 +256,7 @@ void Relativty::HMDDriver::EnterStandby() {
 
 void* Relativty::HMDDriver::GetComponent(const char* pchComponentNameAndVersion) {
 	if (!_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version)) {
-		return static_cast<vr::IVRDisplayComponent*>(this);
+		return m_pExtDisplayComp.get();
 	}
 	return nullptr;
 }
@@ -270,57 +270,6 @@ void Relativty::HMDDriver::DebugRequest(const char* pchRequest, char* pchRespons
 		pchResponseBuffer[0] = 0;
 }
 
-void Relativty::HMDDriver::GetWindowBounds(int32_t* pnX, int32_t* pnY, uint32_t* pnWidth, uint32_t* pnHeight) {
-	*pnX = this->WindowX;
-	*pnY = this->WindowY;
-	*pnWidth = this->WindowWidth;
-	*pnHeight = this->WindowHeight;
-}
-
-bool Relativty::HMDDriver::IsDisplayOnDesktop() {
-	return true;
-}
-
-bool Relativty::HMDDriver::IsDisplayRealDisplay() {
-	return false;
-}
-
-void Relativty::HMDDriver::GetRecommendedRenderTargetSize(uint32_t* pnWidth, uint32_t* pnHeight) {
-	*pnWidth = this->RenderWidth;
-	*pnHeight = this->RenderHeight;
-}
-
-void Relativty::HMDDriver::GetEyeOutputViewport(vr::EVREye eEye, uint32_t* pnX, uint32_t* pnY, uint32_t* pnWidth, uint32_t* pnHeight) {
-	*pnY = 0;
-	*pnWidth = this->WindowWidth / 2;
-	*pnHeight = this->WindowHeight;
-
-	if (eEye == vr::EVREye::Eye_Left) {
-		*pnX = 0;
-	}
-	else {
-		*pnX = this->WindowWidth / 2;
-	}
-}
-
-void Relativty::HMDDriver::GetProjectionRaw(vr::EVREye eEye, float* pfLeft, float* pfRight, float* pfTop, float* pfBottom) {
-	*pfLeft = -1.0;
-	*pfRight = 1.0;
-	*pfTop = -1.0;
-	*pfBottom = 1.0;
-}
-
-vr::DistortionCoordinates_t Relativty::HMDDriver::ComputeDistortion(vr::EVREye eEye, float fU, float fV) {
-	vr::DistortionCoordinates_t coordinates;
-	coordinates.rfBlue[0] = fU;
-	coordinates.rfBlue[1] = fV;
-	coordinates.rfGreen[0] = fU;
-	coordinates.rfGreen[1] = fV;
-	coordinates.rfRed[0] = fU;
-	coordinates.rfRed[1] = fV;
-	return coordinates;
-}
-
 Relativty::HMDDriver::HMDDriver() {
 	// keys for use with the settings API
 	static const char* const Relativty_Section = "driver_Relativty";
@@ -328,20 +277,16 @@ Relativty::HMDDriver::HMDDriver() {
 	this->ObjectId = vr::k_unTrackedDeviceIndexInvalid;
 	this->PropertyContainer = vr::k_ulInvalidPropertyContainer;
 
-	Relativty::ServerDriver::Log("Loading Settings\n");
-	this->IPD = vr::VRSettings()->GetFloat(vr::k_pch_SteamVR_Section, vr::k_pch_SteamVR_IPD_Float);
+	m_pExtDisplayComp = std::make_shared<Relativty::RelativtyExtendedDisplayComponent>();
 
-	char buffer[1024];
-	vr::VRSettings()->GetString(Relativty_Section, "serialNumber", buffer, sizeof(buffer));
-	this->SerialNumber = buffer;
-	vr::VRSettings()->GetString(Relativty_Section, "modelNumber", buffer, sizeof(buffer));
-	this->ModelNumber = buffer;
-	this->WindowX = vr::VRSettings()->GetInt32(Relativty_Section, "windowX");
-	this->WindowY = vr::VRSettings()->GetInt32(Relativty_Section, "windowY");
-	this->WindowWidth = vr::VRSettings()->GetInt32(Relativty_Section, "windowWidth");
-	this->WindowHeight = vr::VRSettings()->GetInt32(Relativty_Section, "windowHeight");
-	this->RenderWidth = vr::VRSettings()->GetInt32(Relativty_Section, "renderWidth");
-	this->RenderHeight = vr::VRSettings()->GetInt32(Relativty_Section, "renderHeight");
+	Relativty::ServerDriver::Log("Loading Settings\n");
+
+	this->SerialNumber = "zero";
+	this->ModelNumber = "akira_zero";
+	// ^^^ these two should NEVER be accessible by users, they are responsible for how apps see devices!
+
+
+	this->IPD = vr::VRSettings()->GetFloat(vr::k_pch_SteamVR_Section, vr::k_pch_SteamVR_IPD_Float);
 	this->SecondsFromVsyncToPhotons = vr::VRSettings()->GetFloat(Relativty_Section, "secondsFromVsyncToPhotons");
 	this->DisplayFrequency = vr::VRSettings()->GetFloat(Relativty_Section, "displayFrequency");
 
@@ -364,6 +309,7 @@ Relativty::HMDDriver::HMDDriver() {
 	this->m_iPid = vr::VRSettings()->GetInt32(Relativty_Section, "hmdPid");
 	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_Section, "hmdVid");
 
+	char buffer[1024];
 	vr::VRSettings()->GetString(Relativty_Section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
 
@@ -384,7 +330,9 @@ inline void Relativty::HMDDriver::setProperties(uint32_t unObjectId) {
 	this->PropertyContainer = vr::VRProperties()->TrackedDeviceToPropertyContainer(this->ObjectId);
 
 	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_ModelNumber_String, this->ModelNumber.c_str());
-	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, this->ModelNumber.c_str());
+
+	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, this->ModelNumber.c_str()); // this is bad, NEVER use model number as a path to the render model!
+
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
 	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_DisplayFrequency_Float, this->DisplayFrequency);

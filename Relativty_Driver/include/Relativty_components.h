@@ -18,7 +18,7 @@ namespace Relativty {
   static const char *const k_pch_ExtDisplay_EyeGapOffset_Int = "EyeGapOffsetPx";
 
 
-  static const bool RelativtyExtDisplayComp_doLensStuff = false;
+  static const bool g_bRelativtyExtDisplayComp_doLensStuff = false;
   class RelativtyExtendedDisplayComponent: public vr::IVRDisplayComponent {
   public:
     RelativtyExtendedDisplayComponent(){
@@ -109,7 +109,7 @@ namespace Relativty {
                                                       float fV) {
       DistortionCoordinates_t coordinates;
 
-      if constexpr(RelativtyExtDisplayComp_doLensStuff) {
+      if constexpr(g_bRelativtyExtDisplayComp_doLensStuff) {
         // Distortion for lens implementation from
         // https://github.com/HelenXR/openvr_survivor/blob/master/src/head_mount_display_device.cc
         float hX;

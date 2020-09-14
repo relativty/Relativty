@@ -21,7 +21,7 @@
 #include "openvr_driver.h"
 
 namespace Relativty {
-	class HMDDriver : public vr::ITrackedDeviceServerDriver, public vr::IVRDisplayComponent
+	class HMDDriver : public vr::ITrackedDeviceServerDriver
 	{
 	public:
 		HMDDriver();
@@ -39,26 +39,13 @@ namespace Relativty {
 		virtual void DebugRequest(const char* pchRequest, char* pchResponseBuffer, uint32_t unResponseBufferSize) override;
 		virtual vr::DriverPose_t GetPose() override;
 
-		// Inherited from IVRDisplayComponent.
-		virtual void GetWindowBounds(int32_t* pnX, int32_t* pnY, uint32_t* pnWidth, uint32_t* pnHeight) override;
-		virtual bool IsDisplayOnDesktop() override;
-		virtual bool IsDisplayRealDisplay() override;
-		virtual void GetRecommendedRenderTargetSize(uint32_t* pnWidth, uint32_t* pnHeight) override;
-		virtual void GetEyeOutputViewport(vr::EVREye eEye, uint32_t* pnX, uint32_t* pnY, uint32_t* pnWidth, uint32_t* pnHeight) override;
-		virtual void GetProjectionRaw(vr::EVREye eEye, float* pfLeft, float* pfRight, float* pfTop, float* pfBottom) override;
-		virtual vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU, float fV) override;
 	private:
 		vr::TrackedDeviceIndex_t ObjectId;
 		vr::PropertyContainerHandle_t PropertyContainer;
 		std::string SerialNumber;
 		std::string ModelNumber;
 
-		int32_t WindowX;
-		int32_t WindowY;
-		int32_t WindowWidth;
-		int32_t WindowHeight;
-		int32_t RenderWidth;
-		int32_t RenderHeight;
+		std::shared_ptr<RelativtyExtendedDisplayComponent> m_pExtDisplayComp;
 
 		int32_t m_iPid;
 		int32_t m_iVid;
