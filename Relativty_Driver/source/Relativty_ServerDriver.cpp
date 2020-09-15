@@ -35,7 +35,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 
 	this->Log("Relativty Init successful.\n");
 	
-	this->HMDDriver = new Relativty::HMDDriver();
+	this->HMDDriver = new Relativty::HMDDriver("zero");
 	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
 	// GetSerialNumber() is there for a reason!
 
@@ -57,11 +57,7 @@ const char* const* Relativty::ServerDriver::GetInterfaceVersions() {
 	return vr::k_InterfaceVersions;
 }
 
-void Relativty::ServerDriver::RunFrame() {
-	if (this->HMDDriver) {
-		this->HMDDriver->frameUpdate();
-	}
-}
+void Relativty::ServerDriver::RunFrame() {} // if ur not using it don't populate with garbage!
 
 bool Relativty::ServerDriver::ShouldBlockStandbyMode() {
 	return false;

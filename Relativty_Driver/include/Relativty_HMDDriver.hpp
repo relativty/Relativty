@@ -20,34 +20,23 @@
 #include "hidapi/hidapi.h"
 #include "openvr_driver.h"
 #include "Relativty_components.h"
+#include "Relativty_base_device.h"
 
 namespace Relativty {
-	class HMDDriver : public vr::ITrackedDeviceServerDriver
+	class HMDDriver : public RelativtyDevice<false>
 	{
 	public:
-		HMDDriver();
+		HMDDriver(std::string myserial);
 		~HMDDriver() = default;
 
 		void frameUpdate();
-		std::string GetSerialNumber();
-		inline void setProperties(uint32_t unObjectId);
+		inline void setProperties();
 
 		// Inherited from ITrackedDeviceServerDriver.
-		virtual vr::EVRInitError Activate(uint32_t unObjectId) override;
-		virtual void Deactivate() override;
-		virtual void EnterStandby() override;
-		virtual void* GetComponent(const char* pchComponentNameAndVersion) override;
-		virtual void DebugRequest(const char* pchRequest, char* pchResponseBuffer, uint32_t unResponseBufferSize) override;
-		virtual vr::DriverPose_t GetPose() override;
+		virtual vr::EVRInitError Activate(uint32_t unObjectId);
+		virtual void Deactivate();
 
 	private:
-		vr::TrackedDeviceIndex_t ObjectId;
-		vr::PropertyContainerHandle_t PropertyContainer;
-		std::string SerialNumber;
-		std::string ModelNumber;
-
-		std::shared_ptr<RelativtyExtendedDisplayComponent> m_pExtDisplayComp;
-
 		int32_t m_iPid;
 		int32_t m_iVid;
 

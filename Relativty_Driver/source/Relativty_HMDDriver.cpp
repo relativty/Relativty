@@ -29,6 +29,8 @@
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_EmbeddedPython.h"
 #include "Relativty_components.h"
+#include "Relativty_base_device.h"
+
 
 #include <string>
 
@@ -48,7 +50,8 @@ inline void Normalize(float norma[3], float v[3], float max[3], float min[3], in
 }
 
 vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
-	this->setProperties(unObjectId);
+	RelativtyDevice::Activate(unObjectId);
+	this->setProperties();
 
 	int result;
 	result = hid_init(); //Result should be 0.
@@ -96,8 +99,7 @@ void Relativty::HMDDriver::Deactivate() {
 		this->retrieve_vector_thread_worker.join();
 		WSACleanup();
 	}
-
-	this->ObjectId = vr::k_unTrackedDeviceIndexInvalid;
+	RelativtyDevice::Deactivate();
 	this->update_pose_thread_worker.join();
 
 	Relativty::ServerDriver::Log("Thread0: all threads exit correctly \n");
@@ -105,18 +107,18 @@ void Relativty::HMDDriver::Deactivate() {
 
 void Relativty::HMDDriver::update_pose_threaded() {
 	Relativty::ServerDriver::Log("Thread2: successfully started\n");
-	while (this->ObjectId != vr::k_unTrackedDeviceIndexInvalid) {
+	while (m_unObjectId != vr::k_unTrackedDeviceIndexInvalid) {
 		if (this->new_quaternion_avaiable || this->new_vector_avaiable) {
-			this->lastPose.qRotation.w = this->quat[0];
-			this->lastPose.qRotation.x = this->quat[1];
-			this->lastPose.qRotation.y = this->quat[2];
-			this->lastPose.qRotation.z = this->quat[3];
+			m_Pose.qRotation.w = this->quat[0];
+			m_Pose.qRotation.x = this->quat[1];
+			m_Pose.qRotation.y = this->quat[2];
+			m_Pose.qRotation.z = this->quat[3];
 
-			this->lastPose.vecPosition[0] = this->vector_xyz[0];
-			this->lastPose.vecPosition[1] = this->vector_xyz[1];
-			this->lastPose.vecPosition[2] = this->vector_xyz[2];
+			m_Pose.vecPosition[0] = this->vector_xyz[0];
+			m_Pose.vecPosition[1] = this->vector_xyz[1];
+			m_Pose.vecPosition[2] = this->vector_xyz[2];
 
-			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(this->ObjectId, this->lastPose, sizeof(vr::DriverPose_t));
+			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_quaternion_avaiable = false;
 			this->new_vector_avaiable = false;
 		}
@@ -248,48 +250,18 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	Relativty::ServerDriver::Log("Thread3: successfully stopped\n");
 }
 
-vr::DriverPose_t Relativty::HMDDriver::GetPose() {
-	return lastPose;
-}
-
-void Relativty::HMDDriver::frameUpdate() {
-}
-
-void Relativty::HMDDriver::EnterStandby() {
-}
-
-void* Relativty::HMDDriver::GetComponent(const char* pchComponentNameAndVersion) {
-	if (!_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version)) {
-		return m_pExtDisplayComp.get();
-	}
-	return nullptr;
-}
-
-std::string Relativty::HMDDriver::GetSerialNumber() {
-	return this->SerialNumber;
-}
-
-void Relativty::HMDDriver::DebugRequest(const char* pchRequest, char* pchResponseBuffer, uint32_t unResponseBufferSize) {
-	if (unResponseBufferSize >= 1)
-		pchResponseBuffer[0] = 0;
-}
-
-Relativty::HMDDriver::HMDDriver() {
+Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, "akira_") {
 	// keys for use with the settings API
 	static const char* const Relativty_Section = "driver_Relativty";
 
-	this->ObjectId = vr::k_unTrackedDeviceIndexInvalid;
-	this->PropertyContainer = vr::k_ulInvalidPropertyContainer;
+	// openvr api stuff
+	m_sRenderModelPath = "{Relativty}/rendermodels/generic_hmd";
+	m_sBindPath = "{Relativty}/input/relativty_hmd_profile.json";
 
-	m_pExtDisplayComp = std::make_shared<Relativty::RelativtyExtendedDisplayComponent>();
+	m_spExtDisplayComp = std::make_shared<Relativty::RelativtyExtendedDisplayComponent>();
 
+	// not openvr api stuff
 	Relativty::ServerDriver::Log("Loading Settings\n");
-
-	this->SerialNumber = "zero";
-	this->ModelNumber = "akira_zero";
-	// ^^^ these two should NEVER be accessible by users, they are responsible for how apps see devices!
-
-
 	this->IPD = vr::VRSettings()->GetFloat(vr::k_pch_SteamVR_Section, vr::k_pch_SteamVR_IPD_Float);
 	this->SecondsFromVsyncToPhotons = vr::VRSettings()->GetFloat(Relativty_Section, "secondsFromVsyncToPhotons");
 	this->DisplayFrequency = vr::VRSettings()->GetFloat(Relativty_Section, "displayFrequency");
@@ -317,33 +289,15 @@ Relativty::HMDDriver::HMDDriver() {
 	vr::VRSettings()->GetString(Relativty_Section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
 
-	this->lastPose.poseIsValid = true;
-	this->lastPose.result = vr::TrackingResult_Running_OK;
-	this->lastPose.deviceIsConnected = true;
-	this->lastPose.willDriftInYaw = false;
-
-	this->lastPose.qWorldFromDriverRotation = HmdQuaternion_Init(1, 0, 0, 0);
-	this->lastPose.qDriverFromHeadRotation = HmdQuaternion_Init(1, 0, 0, 0);
-	this->lastPose.vecPosition[0] = 0;
-	this->lastPose.vecPosition[1] = 0;
-	this->lastPose.vecPosition[2] = 0;
+	// this->lastPose.poseIsValid = true;
 }
 
-inline void Relativty::HMDDriver::setProperties(uint32_t unObjectId) {
-	this->ObjectId = unObjectId;
-	this->PropertyContainer = vr::VRProperties()->TrackedDeviceToPropertyContainer(this->ObjectId);
+inline void Relativty::HMDDriver::setProperties() {
+	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
+	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
+	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_DisplayFrequency_Float, this->DisplayFrequency);
+	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_SecondsFromVsyncToPhotons_Float, this->SecondsFromVsyncToPhotons);
 
-	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_ModelNumber_String, this->ModelNumber.c_str());
-
-	vr::VRProperties()->SetStringProperty(this->PropertyContainer, vr::Prop_RenderModelName_String, "{Relativty}/rendermodels/generic_hmd");
-	// render models are important, shipping them with the driver is a good idea
-
-	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
-	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
-	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_DisplayFrequency_Float, this->DisplayFrequency);
-	vr::VRProperties()->SetFloatProperty(this->PropertyContainer, vr::Prop_SecondsFromVsyncToPhotons_Float, this->SecondsFromVsyncToPhotons);
-	// return a constant that's not 0 (invalid) or 1 (reserved for Oculus)
-	vr::VRProperties()->SetUint64Property(this->PropertyContainer, vr::Prop_CurrentUniverseId_Uint64, 2);
 	// avoid "not fullscreen" warnings from vrmonitor
-	vr::VRProperties()->SetBoolProperty(this->PropertyContainer, vr::Prop_IsOnDesktop_Bool, false);
+	vr::VRProperties()->SetBoolProperty(m_ulPropertyContainer, vr::Prop_IsOnDesktop_Bool, false);
 }
