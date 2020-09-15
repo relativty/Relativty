@@ -54,7 +54,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	result = hid_init(); //Result should be 0.
 	if (result) {
 		Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
-		return vr::VRInitError_Init_InvalidInterface;
+		return vr::VRInitError_Driver_TrackedDeviceInterfaceUnknown;
 	}
 
 	this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
