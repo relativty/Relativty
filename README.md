@@ -105,7 +105,7 @@ We've used parts from Aliexpress:
 
 - <a href="https://www.aliexpress.com/item/33058848848.html">The Strap</a>, 
 - <a href="https://www.aliexpress.com/item/4000199486058.html">The Foam</a>,
-- <a href="https://www.aliexpress.com/item/33029909783.html">The Lenses</a>.
+- <a href="https://www.aliexpress.com/item/33029909783.html">The Lenses</a> (40mm diameter/50mm focal length).
 
 ### The screen for the HMD
 <p align="center"> <img src="ressources/img/display.jpg"> </p>
