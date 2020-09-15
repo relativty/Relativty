@@ -289,7 +289,8 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	vr::VRSettings()->GetString(Relativty_Section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
 
-	// this->lastPose.poseIsValid = true;
+	// this is a bad idea, this should be set by the tracking loop
+	m_Pose.result = vr::TrackingResult_Running_OK;
 }
 
 inline void Relativty::HMDDriver::setProperties() {
