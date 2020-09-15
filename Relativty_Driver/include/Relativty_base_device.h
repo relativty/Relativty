@@ -96,6 +96,10 @@ namespace Relativty {
         vr::VRDriverInput()->CreateHapticComponent(m_ulPropertyContainer,
                                                        "/output/haptic", &m_compHaptic);
       }
+
+      vr::VRProperties()->SetBoolProperty(
+          m_ulPropertyContainer, vr::Prop_Identifiable_Bool, UseHaptics);
+
       vr::VRProperties()->SetStringProperty(
         m_ulPropertyContainer, vr::Prop_Firmware_ManualUpdateURL_String,
         m_sUpdateUrl.c_str());
