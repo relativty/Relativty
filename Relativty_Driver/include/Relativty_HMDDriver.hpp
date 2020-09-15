@@ -32,7 +32,7 @@ namespace Relativty {
 		void frameUpdate();
 		inline void setProperties();
 
-		// Inherited from ITrackedDeviceServerDriver.
+		// Inherited from RelativtyDevice, to be overridden
 		virtual vr::EVRInitError Activate(uint32_t unObjectId);
 		virtual void Deactivate();
 

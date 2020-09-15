@@ -1,6 +1,8 @@
 {
    "driver_Relativty" : {
       "enable" : true,
+      "PoseTimeOffset" : 0.0,
+      "ManualUpdateURL" : "https://gist.github.com/okawo80085/dd327eda3b87c8df353cf783b17e1c82",
       "secondsFromVsyncToPhotons" : 0.011,
       "displayFrequency" : 60,
       "upperBound" : 1.0,
