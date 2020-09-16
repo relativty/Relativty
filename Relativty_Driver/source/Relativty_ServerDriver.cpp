@@ -57,7 +57,7 @@ const char* const* Relativty::ServerDriver::GetInterfaceVersions() {
 	return vr::k_InterfaceVersions;
 }
 
-void Relativty::ServerDriver::RunFrame() {} // if ur not using it don't populate with garbage!
+void Relativty::ServerDriver::RunFrame() {} // if ur not using it don't populate it with garbage!
 
 bool Relativty::ServerDriver::ShouldBlockStandbyMode() {
 	return false;
