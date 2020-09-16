@@ -34,6 +34,7 @@ namespace Relativty {
   class RelativtyDevice: public vr::ITrackedDeviceServerDriver {
   public:
     RelativtyDevice(std::string myserial, std::string deviceBreed): m_sSerialNumber(myserial) {
+      // boilerplate
 
       m_unObjectId = vr::k_unTrackedDeviceIndexInvalid;
       m_ulPropertyContainer = vr::k_ulInvalidPropertyContainer;
@@ -69,6 +70,7 @@ namespace Relativty {
     }
 
     virtual vr::EVRInitError Activate(vr::TrackedDeviceIndex_t unObjectId) {
+      // more boilerplate
       m_unObjectId = unObjectId;
       m_ulPropertyContainer =
           vr::VRProperties()->TrackedDeviceToPropertyContainer(m_unObjectId);
@@ -119,6 +121,7 @@ namespace Relativty {
     }
 
     virtual void Deactivate() {
+      // even more boilerplate
       DriverLog("device with serial %s deactivated\n", m_sSerialNumber.c_str());
       m_unObjectId = vr::k_unTrackedDeviceIndexInvalid;
     }
@@ -127,7 +130,7 @@ namespace Relativty {
 
     virtual void PowerOff() {}
 
-    /** debug request from a client, TODO: uh... actually implement this? */
+    // debug request from the client, TODO: uh... actually implement this? 
     virtual void DebugRequest(const char *pchRequest, char *pchResponseBuffer,
                               uint32_t unResponseBufferSize) {
       DriverLog("device serial \"%s\", got debug request: \"%s\"", m_sSerialNumber.c_str(), pchRequest);
@@ -138,6 +141,7 @@ namespace Relativty {
     virtual vr::DriverPose_t GetPose() { return m_Pose; }
 
     void *GetComponent(const char *pchComponentNameAndVersion) {
+      // don't touch this
       DriverLog("device serial \"%s\", got request for \"%s\" component\n", m_sSerialNumber.c_str(), pchComponentNameAndVersion);
       if (!_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version) && m_spExtDisplayComp != nullptr){
         DriverLog("component found, responding...\n");
@@ -150,6 +154,7 @@ namespace Relativty {
 
     std::string GetSerialNumber() const { return m_sSerialNumber; }
 
+    // processes events, reacts to haptics only
     void ProcessEvent(const vr::VREvent_t &vrEvent) {
       if constexpr(UseHaptics)
       {
