@@ -21,14 +21,15 @@
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : 0,
       "hmdPid" : 9,
-      "hmdVid" : 4617,
+      "hmdVid": 4617,
+      "hmdIMU":  "mpu9250",
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    },
    "extendedDisplay": {
       "windowX" : 10,
       "windowY" : 10,
-      "windowWidth" : 3840,
-      "windowHeight" : 2160,
+      "windowWidth" : 1024,
+      "windowHeight" : 600,
       "renderWidth" : 1920,
       "renderHeight" : 1080,
       "DistortionK1" : 0.4,

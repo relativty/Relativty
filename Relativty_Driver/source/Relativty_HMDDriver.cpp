@@ -149,34 +149,66 @@ void Relativty::HMDDriver::calibrate_quaternion() {
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 	uint8_t packet_buffer[64];
 	int16_t quaternion_packet[4];
+	//this struct is for mpu9250 support
+	#pragma pack(push, 1)
+	struct pak {
+		uint8_t id;
+		float quat[4];
+		uint8_t rest[47];
+	};
+	#pragma pack(pop)
 	int result;
 	Relativty::ServerDriver::Log("Thread1: successfully started\n");
 	while (this->retrieve_quaternion_isOn) {
 		result = hid_read(this->handle, packet_buffer, 64); //Result should be greater than 0.
 		if (result > 0) {
-			quaternion_packet[0] = ((packet_buffer[1] << 8) | packet_buffer[2]);
-			quaternion_packet[1] = ((packet_buffer[5] << 8) | packet_buffer[6]);
-			quaternion_packet[2] = ((packet_buffer[9] << 8) | packet_buffer[10]);
-			quaternion_packet[3] = ((packet_buffer[13] << 8) | packet_buffer[14]);
-			this->quat[0] = static_cast<float>(quaternion_packet[0]) / 16384.0f;
-			this->quat[1] = static_cast<float>(quaternion_packet[1]) / 16384.0f;
-			this->quat[2] = static_cast<float>(quaternion_packet[2]) / 16384.0f;
-			this->quat[3] = static_cast<float>(quaternion_packet[3]) / 16384.0f;
 
-			float qres[4];
-			qres[0] = quat[0];
-			qres[1] = quat[1];
-			qres[2] = -1 * quat[2];
-			qres[3] = -1 * quat[3];
 
-			this->quat[0] = qres[0];
-			this->quat[1] = qres[1];
-			this->quat[2] = qres[2];
-			this->quat[3] = qres[3];
+			if (m_IMU == "mpu6050") {
 
-			this->calibrate_quaternion();
+				quaternion_packet[0] = ((packet_buffer[1] << 8) | packet_buffer[2]);
+				quaternion_packet[1] = ((packet_buffer[5] << 8) | packet_buffer[6]);
+				quaternion_packet[2] = ((packet_buffer[9] << 8) | packet_buffer[10]);
+				quaternion_packet[3] = ((packet_buffer[13] << 8) | packet_buffer[14]);
+				this->quat[0] = static_cast<float>(quaternion_packet[0]) / 16384.0f;
+				this->quat[1] = static_cast<float>(quaternion_packet[1]) / 16384.0f;
+				this->quat[2] = static_cast<float>(quaternion_packet[2]) / 16384.0f;
+				this->quat[3] = static_cast<float>(quaternion_packet[3]) / 16384.0f;
 
-			this->new_quaternion_avaiable = true;
+				float qres[4];
+				qres[0] = quat[0];
+				qres[1] = quat[1];
+				qres[2] = -1 * quat[2];
+				qres[3] = -1 * quat[3];
+
+				this->quat[0] = qres[0];
+				this->quat[1] = qres[1];
+				this->quat[2] = qres[2];
+				this->quat[3] = qres[3];
+
+				this->calibrate_quaternion();
+
+				this->new_quaternion_avaiable = true;
+
+			}
+			else if (m_IMU == "mpu9250") {
+				
+				pak* recv = (pak*)packet_buffer;
+				this->quat[0] = recv->quat[0];
+				this->quat[1] = recv->quat[2];
+				this->quat[2] = recv->quat[3];
+				this->quat[3] = recv->quat[1];
+
+				this->calibrate_quaternion();
+
+				this->new_quaternion_avaiable = true;
+
+			}
+			else {
+				Relativty::ServerDriver::Log("Thread1: UNKNOWN IMU: " + m_IMU + "\n");
+			}
+
+
 		}
 		else {
 			Relativty::ServerDriver::Log("Thread1: Issue while trying to read USB\n");
@@ -286,6 +318,10 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_Section, "hmdVid");
 
 	char buffer[1024];
+	vr::VRSettings()->GetString(Relativty_Section, "hmdIMU", buffer, sizeof(buffer));
+	this->m_IMU = buffer;
+
+	memset(buffer, 0, sizeof buffer); //clearing buffer before reuse to get pypath
 	vr::VRSettings()->GetString(Relativty_Section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
 
