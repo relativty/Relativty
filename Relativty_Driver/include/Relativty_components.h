@@ -16,6 +16,8 @@ namespace Relativty {
   static const char *const k_pch_ExtDisplay_ZoomWidth_Float = "ZoomWidth";
   static const char *const k_pch_ExtDisplay_ZoomHeight_Float = "ZoomHeight";
   static const char *const k_pch_ExtDisplay_EyeGapOffset_Int = "EyeGapOffsetPx";
+  static const char *const k_pch_ExtDisplay_IsDisplayReal_Bool = "IsDisplayRealDisplay";
+  static const char *const k_pch_ExtDisplay_IsDisplayOnDesktop_bool = "IsDisplayOnDesktop";
 
 
   static const bool g_bRelativtyExtDisplayComp_doLensStuff = false;
@@ -56,12 +58,21 @@ namespace Relativty {
       m_iEyeGapOff = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
                                                  k_pch_ExtDisplay_EyeGapOffset_Int);
 
+      m_bIsDisplayReal = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,
+                                                 k_pch_ExtDisplay_IsDisplayReal_Bool);
+
+      m_bIsDisplayOnDesktop = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,
+                                                 k_pch_ExtDisplay_IsDisplayOnDesktop_bool);
+
+
       #ifdef DRIVERLOG_H
       DriverLog("Extended display component created\n");
       DriverLog("distortion koeffs: k1=%f, k2=%f\n", m_fDistortionK1, m_fDistortionK2);
       DriverLog("render target: %dx%d\n", m_nRenderWidth, m_nRenderHeight);
       DriverLog("window target: %dx%d\n", m_nWindowWidth, m_nWindowHeight);
       DriverLog("eye gap offset: %d", m_iEyeGapOff);
+      DriverLog("is display real: %d", (int)m_bIsDisplayReal);
+      DriverLog("is display on desktop: %d", (int)m_bIsDisplayOnDesktop);
       #else
       vr::VRDriverLog()->Log("Extended display component created\n");
       #endif
@@ -76,9 +87,9 @@ namespace Relativty {
       *pnHeight = m_nWindowHeight;
     }
 
-    virtual bool IsDisplayOnDesktop() { return true; }
+    virtual bool IsDisplayOnDesktop() { return m_bIsDisplayOnDesktop; }
 
-    virtual bool IsDisplayRealDisplay() { return false; }
+    virtual bool IsDisplayRealDisplay() { return m_bIsDisplayReal; }
 
     virtual void GetRecommendedRenderTargetSize(uint32_t *pnWidth,
                                                 uint32_t *pnHeight) {
@@ -155,6 +166,10 @@ namespace Relativty {
     int32_t m_nRenderWidth;
     int32_t m_nRenderHeight;
     int32_t m_iEyeGapOff;
+
+    bool m_bIsDisplayReal;
+    bool m_bIsDisplayOnDesktop;
+
 
     float m_fDistortionK1;
     float m_fDistortionK2;

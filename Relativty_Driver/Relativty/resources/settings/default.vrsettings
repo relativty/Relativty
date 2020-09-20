@@ -36,6 +36,8 @@
       "DistortionK2" : 0.5,
       "ZoomWidth" : 1,
       "ZoomHeight" : 1,
-      "EyeGapOffsetPx" : 0
+      "EyeGapOffsetPx" : 0,
+      "IsDisplayRealDisplay" : true,
+      "IsDisplayOnDesktop" : true
    }
 }
