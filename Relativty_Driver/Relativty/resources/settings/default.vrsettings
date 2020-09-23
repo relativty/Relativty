@@ -23,9 +23,9 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
-      "hmdPid" : 32822,
-      "hmdVid": 9025,
-      "hmdIMUdmpPackets":  false,
+      "hmdPid" : 9,
+      "hmdVid": 4617,
+      "hmdIMUdmpPackets":  true,
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"      
    },
    "Relativty_extendedDisplay": {
@@ -40,7 +40,7 @@
       "ZoomWidth" : 1,
       "ZoomHeight" : 1,
       "EyeGapOffsetPx" : 0,
-      "IsDisplayRealDisplay" : false,
+      "IsDisplayRealDisplay" : true,
       "IsDisplayOnDesktop" : true
    }
 }
