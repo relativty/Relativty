@@ -28,6 +28,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	}
 	#ifdef DRIVERLOG_H
 	InitDriverLog(vr::VRDriverLog());
+	DriverLog("Relativty driver version 0.1.1"); // report driver version
 	DriverLog("Thread1: hid quaternion packet listener loop");
 	DriverLog("Thread2: update driver pose loop");
 	DriverLog("Thread3: receive positional data from python loop");

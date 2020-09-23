@@ -40,7 +40,7 @@ namespace Relativty {
 		int32_t m_iPid;
 		int32_t m_iVid;
 
-		std::string m_IMU;
+		bool m_bIMUpktIsDMP;
 
 		float SecondsFromVsyncToPhotons;
 		float DisplayFrequency;
