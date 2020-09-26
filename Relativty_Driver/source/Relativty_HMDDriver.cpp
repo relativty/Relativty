@@ -108,7 +108,21 @@ void Relativty::HMDDriver::Deactivate() {
 void Relativty::HMDDriver::update_pose_threaded() {
 	Relativty::ServerDriver::Log("Thread2: successfully started\n");
 	while (m_unObjectId != vr::k_unTrackedDeviceIndexInvalid) {
-		if (this->new_quaternion_avaiable) {
+		if (this->new_quaternion_avaiable && this->new_vector_avaiable) {
+			m_Pose.qRotation.w = this->quat[0];
+			m_Pose.qRotation.x = this->quat[1];
+			m_Pose.qRotation.y = this->quat[2];
+			m_Pose.qRotation.z = this->quat[3];
+
+			m_Pose.vecPosition[0] = this->vector_xyz[0];
+			m_Pose.vecPosition[1] = this->vector_xyz[1];
+			m_Pose.vecPosition[2] = this->vector_xyz[2];
+
+			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
+			this->new_quaternion_avaiable = false;
+			this->new_vector_avaiable = false;
+
+		} else if (this->new_quaternion_avaiable) {
 			m_Pose.qRotation.w = this->quat[0];
 			m_Pose.qRotation.x = this->quat[1];
 			m_Pose.qRotation.y = this->quat[2];
@@ -126,19 +140,6 @@ void Relativty::HMDDriver::update_pose_threaded() {
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
 
-		} else if (this->new_quaternion_avaiable && this->new_vector_avaiable) {
-			m_Pose.qRotation.w = this->quat[0];
-			m_Pose.qRotation.x = this->quat[1];
-			m_Pose.qRotation.y = this->quat[2];
-			m_Pose.qRotation.z = this->quat[3];
-
-			m_Pose.vecPosition[0] = this->vector_xyz[0];
-			m_Pose.vecPosition[1] = this->vector_xyz[1];
-			m_Pose.vecPosition[2] = this->vector_xyz[2];
-
-			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
-			this->new_quaternion_avaiable = false;
-			this->new_vector_avaiable = false;
 		}
 	}
 	Relativty::ServerDriver::Log("Thread2: successfully stopped\n");
