@@ -4,7 +4,7 @@
 #define RELATIVTY_COMPONENTS_H
 
 namespace Relativty {
-  static const char *const k_pch_ExtDisplay_Section = "extendedDisplay";
+  static const char *const k_pch_ExtDisplay_Section = "Relativty_extendedDisplay";
   static const char *const k_pch_ExtDisplay_WindowX_Int32 = "windowX";
   static const char *const k_pch_ExtDisplay_WindowY_Int32 = "windowY";
   static const char *const k_pch_ExtDisplay_WindowWidth_Int32 = "windowWidth";

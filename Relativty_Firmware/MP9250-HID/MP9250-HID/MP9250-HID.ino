@@ -84,9 +84,9 @@ void printIMUData(void)
   // format. calcQuat turns them into a float between -1 and 1
 
   quat[0] = imu.calcQuat(imu.qw);
-  quat[1] = imu.calcQuat(imu.qx);
-  quat[2] = imu.calcQuat(imu.qy);
-  quat[3] = imu.calcQuat(imu.qz);
+  quat[1] = imu.calcQuat(imu.qy);
+  quat[2] = imu.calcQuat(imu.qz);
+  quat[3] = imu.calcQuat(imu.qx);
   
   HID().SendReport(1,quat,63);
 }
