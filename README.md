@@ -171,7 +171,7 @@ Then proceed to install `CUDA Toolkit 11.0.`
 
 You’ll then need to download the Folder `PYTHONPATH` at https://github.com/relativty/Relativty/releases and add its location to `PyPath` in the `JSON Relativty_Driver/Relativty/resources/settings/default.vrsettings`
 
-Set `tracking` to 1. The tracking is now turned on and can be turned off anytime by setting `tracking` to 0.
+Set `tracking` to 1. The tracking is now turned on and can be turned off anytime by setting `tracking` to 0. The tracking can also be calibrated depending on your camera, this can be done by tweeking `scalesCoordinateMeter` and `offsetCoordinate`. `scalesCoordinateMeter` correspond to the delta of coordinates in a given axis calculated by the AI after normalization when you move 1 meter in that given axis.
 
 ## Final Steps
 
