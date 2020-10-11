@@ -44,7 +44,7 @@ All the links are at <a href="https://relativty.com">relativty.com</a>.
 
 # Building The Hardware
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
-Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050 can be used as the hardware for Relativty. Both methods are explained below.
+Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250 can be used as the hardware for Relativty. Both methods are explained below.
 
 ## Building The Relativty Motherboard
 ### PCB Manufacturing.
@@ -224,7 +224,7 @@ Change config as follows:
 ```	
 ⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
 
-You can also make IPD (Inter-Pupillary Disance) adjustments within the configuration file:
+You can also make IPD (Interpupillary Disance) adjustments within the configuration file:
 
 In the "Relativty_hmd" segment find and adjust:
 
@@ -232,7 +232,7 @@ In the "Relativty_hmd" segment find and adjust:
       "IPDmeters" : 0.063,
 ```
 
-You can also change the distortion correction by changing these:
+You can also change the lens distortion correction by changing these:
 
 ```
       "DistortionK1" : 0.4,
