@@ -211,15 +211,17 @@ Set your HMD display as a mirrored display of your primary display.
 
 Change config as follows:
 
-      "windowX" : 0,
-      "windowY" : 0,
-      "windowWidth" : *HMD's native resolution width*,
-      "windowHeight" : *HMD's native resolution height*,
-      "renderWidth" : *HMD's native resolution width*,
-      "renderHeight" : *HMD's native resolution height*,
+      	"windowX" : 0,
+      	"windowY" : 0,
+      	"windowWidth" : *HMD's native resolution width*,
+      	"windowHeight" : *HMD's native resolution height*,
+      	"renderWidth" : *HMD's native resolution width*,
+      	"renderHeight" : *HMD's native resolution height*,
 	
-	  "IsDisplayRealDisplay" : false,
-      "IsDisplayOnDesktop" : true
+	"IsDisplayRealDisplay" : false,
+	"IsDisplayOnDesktop" : true
+	
+	
 ⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
 
 You can also make IPD (Inter-Pupillary Disance) adjustments within the configuration file:
@@ -228,6 +230,13 @@ In the "Relativty_hmd" segment find and adjust:
 
 ```
       "IPDmeters" : 0.063,
+```
+
+You can also change the distortion correction by changing these:
+
+```
+      "DistortionK1" : 0.4,
+      "DistortionK2" : 0.5,
 ```
 
 You can now install Relativty Driver:
