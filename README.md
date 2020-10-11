@@ -157,7 +157,7 @@ If you are using and Arduino Due, the correct values will be:
 	  
 In case you are using a different board, the process to get the right values is as below:
 
-1.	Plug your board in and flash your firmware
+1.	Plug your board in
 
 2.	Select your board in Arduino IDE and click Tools/Get Board info. you will see something like this:
 
