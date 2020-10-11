@@ -195,7 +195,7 @@ In the config file's "Relativty_extendedDisplay" segment, find and set these:
 	  
 	  And at the bottom of this segment:
 	  
-	  "IsDisplayRealDisplay" : true,
+      "IsDisplayRealDisplay" : true,
       "IsDisplayOnDesktop" : true
 ```  
 	  
@@ -210,18 +210,18 @@ If for whatever reason the above settings do not work out for you try:
 Set your HMD display as a mirrored display of your primary display.
 
 Change config as follows:
-
-      	"windowX" : 0,
-      	"windowY" : 0,
-      	"windowWidth" : *HMD's native resolution width*,
-      	"windowHeight" : *HMD's native resolution height*,
-      	"renderWidth" : *HMD's native resolution width*,
-      	"renderHeight" : *HMD's native resolution height*,
+```
+      "windowX" : 0,
+      "windowY" : 0,
+      "windowWidth" : *HMD's native resolution width*,
+      "windowHeight" : *HMD's native resolution height*,
+      "renderWidth" : *HMD's native resolution width*,
+      "renderHeight" : *HMD's native resolution height*,
 	
-	"IsDisplayRealDisplay" : false,
-	"IsDisplayOnDesktop" : true
+      "IsDisplayRealDisplay" : false,
+      "IsDisplayOnDesktop" : true
 	
-	
+```	
 ⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
 
 You can also make IPD (Inter-Pupillary Disance) adjustments within the configuration file:
