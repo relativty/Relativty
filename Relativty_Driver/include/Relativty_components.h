@@ -20,7 +20,7 @@ namespace Relativty {
   static const char *const k_pch_ExtDisplay_IsDisplayOnDesktop_bool = "IsDisplayOnDesktop";
 
 
-  static const bool g_bRelativtyExtDisplayComp_doLensStuff = false;
+  static const bool g_bRelativtyExtDisplayComp_doLensStuff = true;
   class RelativtyExtendedDisplayComponent: public vr::IVRDisplayComponent {
   public:
     RelativtyExtendedDisplayComponent(){
