@@ -78,6 +78,16 @@ SDA(20) -> SDA
 SCL(21) -> SCL  
 PIN 2   -> INT  
 ```
+
+If you are using an MPU-9250 with the alternative firmware provided the pinout is:
+
+```
+5V      -> VCC  
+GND     -> GND  
+SDA(20) -> SDA  
+SCL(21) -> SCL   
+```
+
 Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
 
 #### Installing The Relativty Firmware
@@ -89,10 +99,17 @@ To do that copy that JSON URL: https://raw.githubusercontent.com/relativty/Relat
 
 In Arduino, Click File and then Preferences:
 
-- Add the JSON URL to the `Additional Boards Manager` text box.
+- If you are using the Relativty PCB, aad the JSON URL to the `Additional Boards Manager` text box.
 - Go to `Tools > Board > Board Manager` and you should see the Relativty Board, click install.
 - Reboot the Arduino IDE and under Tools > Boards, select Relativty.
 - You can now open `Relativty_Firmware/firmware/firmware.ino` and upload it to your board.
+
+If you are using a different board e.g. Arduino Due:
+
+- install contents of `Relativty_Firmware\Relativty_board\` to your Arduino IDE
+- if you are using MPU-6050, use `Relativty_Firmware/firmware/firmware.ino`
+- if you are using MPU-9250, use `Relativty_Firmware\MP9250-HID\MP9250-HID\MP9250-HID.ino`
+
 
 
 # Building The Mechanical Parts
@@ -124,24 +141,93 @@ This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
 
 The Relativty Driver is contained within `Relativty_Driver/Relativty` folder. 
 
-⚠️ You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings` **before** you install it.
+⚠️ You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings`
 
-Start by setting `windowX` and `windowY` to the `x` and `y` resolution of your main display. For instance,  
+If you are not using a Relativty PCB, you will need to change these:
+
+      "hmdPid" : 9,
+      "hmdVid": 4617,
+	  
+These are the USB HID device's unique Vendor and Producit Identifieres (pid/vid)
+
+If you are using and Arduino Due, the correct values will be:
+
+      "hmdPid" : 62,
+      "hmdVid" : 9025,
+	  
+In case you are using a different board, the process to get the right values is as below:
+
+1.	Plug your board in and flash your firmware
+
+2.	Select your board in Arduino IDE and click Tools/Get Board info. you will see something like this:
+
 ```
-"windowX" : 1920,  
-"windowY" : 1080,  
+	BN: Arduino Due (Native USB Port)
+	VID: 2341
+	PID: 003e
+	SN: HIDHB
 ```
+3.	Make note of the VID and PID numbers. These are hexadecimal values.
 
-Make sure in your Windows settings that the Relativty’s display is in landscape mode, located at the right of your main display and with theirs tops aligned horizontally.
+	To apply them to the config, they need to be converted to int.
+	
+	If you are unsure how to do that, there is plenty online converters available.
+	
+	Such as: https://www.rapidtables.com/convert/number/hex-to-decimal.html
 
-Then, set `windowWidth`, `windowHeight`, `renderWidth`, and `renderHeight` to the resolution of your Relativty Display.
+4.	Change your hmdPid and hmdVid values to the converted values.
 
-For instance,  
+Next, you need to set up the display coordinates and resolution.
+
+At first, you should have the HMD's display set up as a secondary screen extending your desktop,
+
+aligned onto the top right corner of your primary display.
+
+
+In the config file's "Relativty_extendedDisplay" segment, find and set these:
 ```
-"windowWidth" : 2880,  
-"windowHeight" : 1440,  
-"renderWidth" : 2880,  
-"renderHeight" : 1440,  
+      "windowX" : *whatever your primary screen resolution's width is*,
+      "windowY" : 0,
+      "windowWidth" : *HMD's native resolution width*,
+      "windowHeight" : *HMD's native resolution height*,
+      "renderWidth" : *HMD's native resolution width*,
+      "renderHeight" : *HMD's native resolution height*,
+	  
+	  And at the bottom of this segment:
+	  
+	  "IsDisplayRealDisplay" : true,
+      "IsDisplayOnDesktop" : true
+```  
+	  
+Make sure not to delete any "," symbols as that will break the config.
+
+Only the last item in the config should not have a "," symbol.
+
+
+If for whatever reason the above settings do not work out for you try:
+
+
+Set your HMD display as a mirrored display of your primary display.
+
+Change config as follows:
+
+      "windowX" : 0,
+      "windowY" : 0,
+      "windowWidth" : *HMD's native resolution width*,
+      "windowHeight" : *HMD's native resolution height*,
+      "renderWidth" : *HMD's native resolution width*,
+      "renderHeight" : *HMD's native resolution height*,
+	
+	  "IsDisplayRealDisplay" : false,
+      "IsDisplayOnDesktop" : true
+⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
+
+You can also make IPD (Inter-Pupillary Disance) adjustments within the configuration file:
+
+In the "Relativty_hmd" segment find and adjust:
+
+```
+      "IPDmeters" : 0.063,
 ```
 
 You can now install Relativty Driver:
