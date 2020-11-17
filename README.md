@@ -268,6 +268,9 @@ You’ll then need to download the Folder `PYTHONPATH` at https://github.com/rel
 
 Set `tracking` to 1. The tracking is now turned on and can be turned off anytime by setting `tracking` to 0. The tracking can also be calibrated depending on your camera, this can be done by tweeking `scalesCoordinateMeter` and `offsetCoordinate`. `scalesCoordinateMeter` correspond to the delta of coordinates in a given axis calculated by the AI after normalization when you move 1 meter in that given axis.
 
+**Note:** If you plan on using mpu9250 firmware do not forget to switch to it in the driver by setting `hmdIMUdmpPackets` to `false`:
+`"hmdIMUdmpPackets":  false,`
+
 ## Final Steps
 
 Everything is now set up to start playing. 
