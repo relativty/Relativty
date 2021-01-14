@@ -70,7 +70,7 @@ void setup() {
   HID().AppendDescriptor(&node);
   
   Wire.begin();
-  Wire.setClock(2000000);
+  Wire.setClock(400000);
 
   delay(1000);
 
