@@ -31,21 +31,11 @@
 #include "Relativty_components.h"
 #include "Relativty_base_device.h"
 
-
 #include <string>
 
-inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
-	vr::HmdQuaternion_t quat;
-	quat.w = w;
-	quat.x = x;
-	quat.y = y;
-	quat.z = z;
-	return quat;
-}
-
-inline void Normalize(float norma[3], float v[3], float max[3], float min[3], int up, int down, float scale[3], float offset[3]) {
-	for (int i = 0; i < 4; i++) {
-		norma[i] = (((up - down) * ((v[i] - min[i]) / (max[i] - min[i])) + down) / scale[i])+ offset[i];
+inline void Normalize(std::array<float, 3> &norma, const std::array<float, 3> &v, const std::array<float, 3> &max, const std::array<float, 3> &min, const int &up, const int &down, const std::array<float, 3> &scale, const std::array<float, 3> offset) {
+	for (int i = 0; i < 3; i++) {
+		norma[i] = (((up - down) * ((v[i] - min[i]) / (max[i] - min[i])) + down) / scale[i]) + offset[i];
 	}
 }
 
@@ -241,13 +231,13 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	char receiveBuffer[12];
 	int resultReceiveLen;
 
-	float normalize_min[3]{ this->normalizeMinX, this->normalizeMinY, this->normalizeMinZ};
-	float normalize_max[3]{ this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ};
-	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
-	float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
+	std::array<float, 3> normalize_min = {this->normalizeMinX, this->normalizeMinY, this->normalizeMinZ};
+	std::array<float, 3> normalize_max = {this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ};
+	std::array<float, 3> scales_coordinate_meter = {this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
+	std::array<float, 3> offset_coordinate = {this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
 
-	float coordinate[3]{ 0, 0, 0 };
-	float coordinate_normalized[3];
+	std::array<float, 3> coordinate = {0, 0, 0};
+	std::array<float, 3> coordinate_normalized;
 
 	Relativty::ServerDriver::Log("Thread3: Initialising Socket.\n");
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
@@ -287,7 +277,7 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 			coordinate[1] = *(float*)(receiveBuffer + 4);
 			coordinate[2] = *(float*)(receiveBuffer + 8);
 
-			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, static_cast<int>(this->upperBound), static_cast<int>(this->lowerBound), scales_coordinate_meter, offset_coordinate);
 
 			this->vector_xyz[0] = coordinate_normalized[1];
 			this->vector_xyz[1] = coordinate_normalized[2];
