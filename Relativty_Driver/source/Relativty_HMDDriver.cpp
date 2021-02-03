@@ -145,7 +145,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 #pragma pack(push, 1)
 	struct pak {
 		uint8_t id;
-		float[4] quat;
+		float quat[4];
 	};
 #pragma pack(pop)
 	Relativty::ServerDriver::Log("Thread1: successfully started\n");
