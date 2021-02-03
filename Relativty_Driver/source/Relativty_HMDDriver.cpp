@@ -145,7 +145,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 #pragma pack(push, 1)
 	struct pak {
 		uint8_t id;
-		std::array<float, 4> quat;
+		float[4] quat;
 	};
 #pragma pack(pop)
 	Relativty::ServerDriver::Log("Thread1: successfully started\n");
@@ -166,7 +166,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 			} else {
 				pak *recv = reinterpret_cast<pak *>(packet_buffer.data());
 				std::lock_guard writeLock(quatMutex);
-				std::copy(recv->quat.begin(), recv->quat.end(), this->quat.begin());
+				std::copy(std::begin(recv->quat), std::end(recv->quat), this->quat.begin());
 			}
 			this->calibrate_quaternion();
 			this->new_quaternion_available = true;
