@@ -127,11 +127,49 @@ We've used parts from Aliexpress:
 ### The screen for the HMD
 <p align="center"> <img src="ressources/img/display.jpg"> </p>
 
-Relativty Headset runs a dual-screen at 120FPS 2K, however, because of the open nature of Relativty you can equip it with any screen.
+Relativty Headset runs a dual-screen at 120FPS 1440x1440 per eye, however, because of the open nature of Relativty you can equip it with any screen.
 
-Our model can be found on Aliexpress, but depending on the vendor similar screens can cost from $150 to $190. You'll have to hunt and maybe wait for the right vendor at the right price to get the display for cheap (or buy in bulk). 
+<!-- Our model can be found on Aliexpress, but depending on the vendor similar screens can cost from $150 to $190. You'll have to hunt and maybe wait for the right vendor at the right price to get the display for cheap (or buy in bulk).  -->
+There's generally two types of VR display modules you can find on AliExpress, manufactured by Wisecoco. All of them are 1440x1440 per eye.
 
-This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
+- Square blue driver board
+	- HDMI input
+	- TC358870XBG Driver IC
+	- 120Hz **only with displays mirrored**
+	- 60Hz / 70Hz with displays separate
+	- Usually toggelable between mirrored and separate display mode
+
+- Rectangular black board
+	- DisplayPort input
+	- ANX7530 Driver IC
+	- 120Hz with separate displays
+
+Type | Brand | Display | Seller | Link
+---|---|---|---|---
+Blue | Wisecoco | LS029B3SX02 | Wise Technology Co.,Ltd | https://www.aliexpress.com/item/32832780174.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 1st Store | https://www.aliexpress.com/item/32979950508.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 1st Store | https://www.aliexpress.com/item/32977929644.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 2nd Store | https://www.aliexpress.com/item/4001094428494.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 2nd Store | https://www.aliexpress.com/item/4001094416085.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/33026479641.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/33022664353.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/33022181062.html
+Blue | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/33024686868.html
+Blue | Wisecoco | LS029B3SX04 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/1005003041935114.html
+Blue | ? | LS029B3SX02 | GreatMonitor Store | https://www.aliexpress.com/item/4000429534664.html
+Blue | electric magic | LS029B3SX02 | Iron SuperMan | https://www.aliexpress.com/item/4000184424522.html
+Black | Wisecoco | LS029B3SX02 | Wise Technology Co.,Ltd | https://www.aliexpress.com/item/33030720934.html
+Black | Wisecoco | LS029B3SX02 | Wise Technology Co.,Ltd | https://www.aliexpress.com/item/1005002862065009.html
+Black | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 1st Store | https://www.aliexpress.com/item/32975198897.html
+Black | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 1st Store | https://www.aliexpress.com/item/32976735089.html
+Black | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 2nd Store | https://www.aliexpress.com/item/4001110759627.html
+Black | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/32980464899.html
+Black | Wisecoco | LS029B3SX02 | Wisecoco Global Factory 3rd Store | https://www.aliexpress.com/item/32979949502.html
+Black | Wisecoco | LS029B3SX02 | WEIWEI TEAM | https://www.aliexpress.com/item/1005002635916882.html
+Black | electric magic | ? | Iron SuperMan | https://www.aliexpress.com/item/4000184350083.html
+Black | Ukrmon| ? | Shop910325112 Store | https://www.aliexpress.com/item/4001310806489.html
+
+We used [a black model](https://www.aliexpress.com/item/32975198897.html).
 
 ### Setting Up the Software
 
