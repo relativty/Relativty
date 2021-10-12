@@ -127,11 +127,9 @@ We've used parts from Aliexpress:
 ### The screen for the HMD
 <p align="center"> <img src="ressources/img/display.jpg"> </p>
 
-Relativty Headset runs a dual-screen at 120FPS 2K, however, because of the open nature of Relativty you can equip it with any screen.
+Relativty Headset runs a dual-screen at 120FPS 1440x1440 per eye, however, because of the open nature of Relativty you can equip it with any screen.
 
-Our model can be found on Aliexpress, but depending on the vendor similar screens can cost from $150 to $190. You'll have to hunt and maybe wait for the right vendor at the right price to get the display for cheap (or buy in bulk). 
-
-This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
+We used [this display module](https://www.aliexpress.com/item/32975198897.html), but a comprehensive guide to display modules can be found in [DISPLAY.md](DISPLAY.md).
 
 ### Setting Up the Software
 
