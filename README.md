@@ -7,7 +7,7 @@
 </h1>
 
 <h3 align="center">
-	Technoliberal VR headset with SteamVR support.
+	Free and Open-source VR headset with SteamVR support.
 </h3>
 <p align="center">
 	<strong>
