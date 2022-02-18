@@ -11,66 +11,66 @@
 </h3>
 <p align="center">
 	<strong>
-		<a href="https://relativty.com">Website</a>
+		<a href="https://relativty.com">Webサイト</a>
 		•
 		<a href="https://discord.gg/jARCsVb">Discord</a>
 	</strong>
 </p>
 
-I’m <a href="https://twitter.com/maxim_xyz?lang=en">Maxim xyz</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
+私は<a href="https://twitter.com/maxim_xyz">Maxim xyz</a>です。15歳の時、VRヘッドセットを買う余裕がなかったので親友のGabriel Combeと共に自作しました。
 
-5 years later : this headset became Relativty.
+～5年後～
+このヘッドセットはRelativtyとなりました。
 
-* Fully Open-source - **hardware**, **software**, **firmware**.
-* **Steam VR** support.
-* Natively displays **2K** resolution at **120FPS**.
-* Compatible with **Arduino**.
-* Experimental **Body-Tracking**
+* 完全にオープンソースな**hardware**, **software**, **firmware**。
+* **Steam VR**をサポート。
+* **2K**@**120FPS**をネイティブに表示。
+* **Arduino**との互換性
+* 実験的な**Body-Tracking**
 
 
-**This repo serves as a Build guide, to learn more about the headset see you at <a href="https://relativty.com">Relativty.com</a>**
+**このレポジトリはビルドガイドとして用意されています。ヘッドセット自体の詳細については <a>Relativty.com</a> をご覧下さい。**
 
-Made for Hackers
+ハッカーの為の設計
 -
-Relativty is **not a consumer product**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
+Relativtyは**コンシューマ向けではありません**。私たちは自室で半田ごてと3Dプリンターを使ってRelativtyを作りました。皆さんにも同じように **「自分で作る」** 事を期待しています。
 
-To learn more about the features of the Firmware, Software and Hardware visit the website.
-We also have a friendly Discord server, a place for our community to learn, share their knowledge, and ask for help. 
-All the links are at <a href="https://relativty.com">relativty.com</a>.
+ファームウェア、ソフトウェア、ハードウェについて詳しく知りたい方は<a href="https://relativty.com">Webサイト</a>をご覧下さい。
+また、共に学び、助け合える、フレンドリーな<a href="https://discord.gg/jARCsVb">Discord</a>もあります。
+すべてのリンクは<a>relativty.com</a>にあります。
 
-# Start Building Relativty
+# Relativtyの組み立て
 
 <p align="center"> <img src="ressources/img/open.jpg"> </p>
 
-# Building The Hardware
-The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
-Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250 can be used as the hardware for Relativty. Both methods are explained below.
+# ハードウェアを組み立てる
+ハードウェアはAtmel SAM3X8E ARM Cortex-M3プロセッサーを搭載したRelativty Motherboardを使用しており、IMU(慣性計測装置)としてMPU-6050を使用しています。
+他にも、ArduinoCoreをサポートし、MPU-6050/MPU-9250に接続されているプロセッサであれば、Relativtyのハードウェアとして使用することができます。
+どちらの方法も、以下に説明します。
+## Relativty Motherboard使用する場合
+### PCBを製造する
 
-## Building The Relativty Motherboard
-### PCB Manufacturing.
+まずはPCBを用意します。
 
-We first start with the naked PCB.
+<a href="https://jlcpcb.com/">JLCPCB</a>などのサービスで約4$で製造出来ます。
 
-it can be manufactured and bought for around $4 on websites like <a href="https://jlcpcb.com/">jlcpcb</a>.
+PCBを製造するには製造者へガーバーフォーマット(`Relativty_Electronics_build/GerberFiles.zip`)を渡す必要があります。
 
-You’ll need to provide the Gerber file folder `Relativty_Electronics_build/GerberFiles.zip` which describes the shape of the board.
+### 部品の注文・PCBへの取り付け
 
-
-### Assembling
-
-Soldering the components onto the naked PCB. 
-
-You’ll have to buy the components listed in one of the two BOMs, depending on availability:
+部品をPCBへ取り付けていきます。
+以下のBOM(部品表)に記された部品を注文する必要があります:
 - `Relativty_Electronics_build/Assembly/jlcpcb.com_motherboard_BOM.csv` 
 - `Relativty_Electronics_build/Assembly/motherboard_BOM.xlsx`
 
-Where to position those components on the PCB is described in the file `Relativty_Electronics_source/motherboard.brd` which can be opened in Eagle.
+これらの部品を取り付ける位置は、
+`Relativty_Electronics_source/motherboard.brd` に記されています。(Eagleで閲覧出来ます。)
 
 <p align="center"> <img src="ressources/img/motherboard.jpg"> </p>
 
-#### Using an Arduino
+#### Arduinoを使用する場合
 
-An alternative to the Relativty Motherboard is to use an Arduino Due and to connect it to an MPU-6050.
+Relativty Motherboardの代わりに、Arduino Dueを使い、MPU-6050と接続する方法もあります。
 ```
 5V      -> VCC  
 GND     -> GND  
@@ -79,7 +79,7 @@ SCL(21) -> SCL
 PIN 2   -> INT  
 ```
 
-If you are using an MPU-9250 with the alternative firmware provided the pinout is:
+MPU-9250を提供された代替ファームウェアで使用する場合、ピン配置は次のようになります。
 
 ```
 5V      -> VCC  
@@ -88,78 +88,77 @@ SDA(20) -> SDA
 SCL(21) -> SCL   
 ```
 
-Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be able to install the Relativty Firmware.
+そして、Arduino Dueの「ERASE」と「RESET」ボタンを押すと、Relativtyファームウェアがインストールできるようになります。
 
-#### Installing The Relativty Firmware
+#### Relativty Firmwareのインストール
 
 <p align="center"> <img src="ressources/img/cards.jpg"> </p>
-You’ll now need to install the Relativty board in the Arduino IDE. 
-
-To do that copy that JSON URL: https://raw.githubusercontent.com/relativty/Relativty/master/Relativty_Firmware/package_Relativty_board_index.json and open the Arduino IDE
-
-In Arduino, Click File and then Preferences:
-
-- If you are using the Relativty PCB, aad the JSON URL to the `Additional Boards Manager` text box.
-- Go to `Tools > Board > Board Manager` and you should see the Relativty Board, click install.
-- Reboot the Arduino IDE and under Tools > Boards, select Relativty.
-- You can now open `Relativty_Firmware/firmware/firmware.ino` and upload it to your board.
-
-If you are using a different board e.g. Arduino Due:
-
-- install contents of `Relativty_Firmware\Relativty_board\` to your Arduino IDE
-- if you are using MPU-6050, use `Relativty_Firmware/firmware/firmware.ino`
-- if you are using MPU-9250, use `Relativty_Firmware\MP9250-HID\MP9250-HID\MP9250-HID.ino`
 
 
+ここで、Arduino IDEにRelativtyボードをインストールする必要があります。
+そのためには、JSONのURL ( <a>https://raw.githubusercontent.com/relativty/Relativty/master/Relativty_Firmware/package_Relativty_board_index.json</a> ) をコピーして、Arduino IDEを開いてください。
 
-# Building The Mechanical Parts
+Arduinoで、File、Preferencesの順にクリックします。
 
-## Assembling the HMD
+- Relativty PCBを使用している場合、Additional Boards ManagerのテキストボックスにJSON URLを追加します。
+- `Tools > Board > Board Manager` と進み、Relativty Boardが表示されたらインストールをクリックします。
+- Arduino IDEを再起動し、`Tools > Boards` で、Relativtyを選択します。
+- これで `Relativty_Firmware/firmware/firmware.ino` を開いてボードにアップロードすることができるようになりました。
+- Arduino Dueなどの別のボードを使用している場合は、Relativty_Firmwareをボードにアップロードしてください。
 
-All the files needed for the 3D printing can be found in the `Relativty_Mechanical_build` folder and the screws needed to assemble the Headset are listed in `screws_BOM.xlsx`.
+- `Relativty_Firmware\Relativty_board\` の内容をArduino IDEにインストールします。
+- MPU-6050の場合、`Relativty_Firmware/firmware/firmware.ino` を使用します。
+- MPU-9250の場合、`Relativty_Firmware\MP9250-HID\MP9250-HID\MP9250-HID.ino` を使用します。
 
-We've used parts from Aliexpress:
 
-- <a href="https://www.aliexpress.com/item/33058848848.html">The Strap</a>, 
-- <a href="https://www.aliexpress.com/item/4000199486058.html">The Foam</a>,
-- <a href="https://www.aliexpress.com/item/33029909783.html">The Lenses</a> (40mm diameter/50mm focal length).
 
-### The screen for the HMD
+# 機械部品の組み立て
+
+## HMDの取り付け
+3Dプリントに必要なファイルはすべて`Relativty_Mechanical_build`フォルダにあり、ヘッドセットの組み立てに必要なネジは `screws_BOM.xlsx` にリストアップされています。
+
+私たちはAliexpressを使ってパーツを調達しました。
+
+- <a href="https://www.aliexpress.com/item/33058848848.html">ストラップ</a>, 
+- <a href="https://www.aliexpress.com/item/4000199486058.html">フェイスクッション</a>,
+- <a href="https://www.aliexpress.com/item/33029909783.html">レンズ</a> (直径40mm/焦点距離50mm).
+
+### HDM用のディスプレイ
 <p align="center"> <img src="ressources/img/display.jpg"> </p>
 
-Relativty Headset runs a dual-screen at 120FPS 2K, however, because of the open nature of Relativty you can equip it with any screen.
+Relativty Headsetはデフォルトで2K 120Hzのデュアルスクリーンで動作しますが、Relativtyのオープンな性質上どんなスクリーンでも装備することが可能です。
 
-Our model can be found on Aliexpress, but depending on the vendor similar screens can cost from $150 to $190. You'll have to hunt and maybe wait for the right vendor at the right price to get the display for cheap (or buy in bulk). 
+私たちはこのディスプレイをAliexpressで見つけましたが、ベンダーによっては同様の画面が150ドルから190ドルすることがあります。安くディスプレイを手に入れるには、適切な価格で適切なベンダーを探す必要があります。まとめ買いすることで割り引きしてくれる場合もあります。
 
-This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
+写真のモデルは[こちら](https://www.aliexpress.com/item/32975198897.html)です。
 
-### Setting Up the Software
+### ソフトウェアのセットアップ
 
 <p align="center"> <img src="ressources/img/front.jpg"> </p>
 
-#### Installing Relativty Driver for SteamVR
+#### SteamVRにRelativty Driverをインストールする。
 
-The Relativty Driver is contained within `Relativty_Driver/Relativty` folder. 
+Relativty Driverは、`Relativty_Driver/Relativty`フォルダの中に入っています。
 
-⚠️ You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings`
+⚠️ `Relativty_Driver/Relativty/resources/settings/default.vrsettings`を編集する必要があります。
 
-If you are not using a Relativty PCB, you will need to change these:
+Relativty PCBを使用していない場合、以下を変更する必要があります:
 
       "hmdPid" : 9,
       "hmdVid": 4617,
 	  
-These are the USB HID device's unique Vendor and Producit Identifieres (pid/vid)
+これらは、USB HIDデバイスの固有のVendorとProducit Identifieres (pid/vid)です。
 
-If you are using and Arduino Due, the correct values will be:
+Arduino Dueを使用している場合、正しい値は以下のようになります:
 
       "hmdPid" : 62,
       "hmdVid" : 9025,
 	  
-In case you are using a different board, the process to get the right values is as below:
+別の基板をお使いの場合、正しい値を得るために以下の手順を踏む必要があります:
 
-1.	Plug your board in
+1. ボードを接続する
 
-2.	Select your board in Arduino IDE and click Tools/Get Board info. you will see something like this:
+2. Arduino IDEでボードを選択し、ツール/ボード情報の取得をクリックすると、以下のような画面が表示されます。
 
 ```
 	BN: Arduino Due (Native USB Port)
@@ -167,24 +166,24 @@ In case you are using a different board, the process to get the right values is 
 	PID: 003e
 	SN: HIDHB
 ```
-3.	Make note of the VID and PID numbers. These are hexadecimal values.
+3. VID番号とPID番号をメモしてください。これらは16進数の値です。
 
-	To apply them to the config, they need to be converted to int.
-	
-	If you are unsure how to do that, there is plenty online converters available.
-	
-	Such as: https://www.rapidtables.com/convert/number/hex-to-decimal.html
+      これを設定するには、int型に変換する必要があります。
 
-4.	Change your hmdPid and hmdVid values to the converted values.
+      もし、変換の仕方がわからない場合は、様々なオンラインコンバータがあります。
 
-Next, you need to set up the display coordinates and resolution.
+      例えば、https://www.rapidtables.com/convert/number/hex-to-decimal.html 。
 
-At first, you should have the HMD's display set up as a secondary screen extending your desktop,
+4. hmdPidとhmdVidの値を変換後の値に変更します。
 
-aligned onto the top right corner of your primary display.
+次に、ディスプレイの座標と解像度を設定します。
 
+最初は、HMDのディスプレイをデスクトップを拡張したセカンダリ画面として設定してください。
 
-In the config file's "Relativty_extendedDisplay" segment, find and set these:
+プライマリディスプレイの右上に整列させる。
+
+設定ファイルの "Relativty_extendedDisplay" セグメントで、これらを見つけて設定します。
+
 ```
       "windowX" : *whatever your primary screen resolution's width is*,
       "windowY" : 0,
@@ -199,17 +198,18 @@ In the config file's "Relativty_extendedDisplay" segment, find and set these:
       "IsDisplayOnDesktop" : true
 ```  
 	  
-Make sure not to delete any "," symbols as that will break the config.
-
-Only the last item in the config should not have a "," symbol.
+設定ファイルが破損するので「,」を削除しないで下さい。
 
 
-If for whatever reason the above settings do not work out for you try:
+ただし、設定ファイルの最後の項目は「,」を削除して下さい。
 
 
-Set your HMD display as a mirrored display of your primary display.
+もし、何らかの理由で上記の設定がうまくいかない場合は、以下の事を試してみてください:
 
-Change config as follows:
+
+HMDのディスプレイを、プライマリディスプレイのミラーリングディスプレイとして設定します。
+
+以下のように設定を変更して下さい:
 ```
       "windowX" : 0,
       "windowY" : 0,
@@ -220,65 +220,65 @@ Change config as follows:
 	
       "IsDisplayRealDisplay" : false,
       "IsDisplayOnDesktop" : true
-	
 ```	
-⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
+⚠️これにより、キーボード/マウス入力がVRウィンドウにキャプチャされない可能性があります。ゲームでこれらが必要な場合は正常にプレイできなくなるかもしれません。
 
-You can also make IPD (Interpupillary Disance) adjustments within the configuration file:
+また、設定ファイル内でIPD（瞳孔間距離）の調整も可能です。
 
-In the "Relativty_hmd" segment find and adjust:
+"Relativty_hmd" セグメントを調整します。
 
 ```
       "IPDmeters" : 0.063,
 ```
 
-You can also change the lens distortion correction by changing these:
+また、以下を変更することで、レンズの歪み補正を調整することができます。
 
 ```
       "DistortionK1" : 0.4,
       "DistortionK2" : 0.5,
 ```
 
-You can now install Relativty Driver:
-- Locate your `vrpathreg.exe` program, usually located at `C:/Steam/steamapps/common/SteamVR/bin/win64/vrpathreg.exe`
-- Then open the Windows Command Prompt and run the following commands:
-`cd C:/Steam/steamapps/common/SteamVR/bin/win64
-vrpathreg.exe`
+これでRelativity Driverをインストール出来るようになりました:
 
-And then assuming your `Relativty_Driver/Relativty` driver folder is located at:
-`C:/code/Relativty_Driver/Relativty`
-- run `vrpathreg adddriver C:/code/Relativty_Driver/Relativty`
+`vrpathreg.exe` の位置（通常は `C:/Steam/steamapps/common/SteamVR/bin/win64/vrpathreg.exe` ）を確認します。
+- 次に、Windowsのコマンドプロンプトを開いて、以下のコマンドを実行します:
 
-Relativty Driver is now installed. You can uninstall it any time by running:  
+      cd C:/Steam/steamapps/common/SteamVR/bin/win64
+      vrpathreg.exe
+
+ここでは仮に `Relativty_Driver/Relativty` フォルダが `C:/code/Relativty_Driver/Relativty` にあるとします。
+- `vrpathreg adddriver C:/code/Relativty_Driver/Relativty` を実行します。
+
+これでRelativty Driverがインストールされました。次のコマンドを実行することでアンインストール出来ます。
 - `vrpathreg removedriver C:/code/Relativty_Driver/Relativty`
 
-#### Setting up the Experimental 3D Tracking
+#### 試験的な3Dトラッキングのセットアップ
 
-The tracking is still very experimental and can only be run on NVIDIA GPU due to the usage of CUDA. The tracking makes uses of only a video input and an Artificial Neural Network AI trained to estimate a 3D body position. 
+このトラッキングはまだ実験的なもので、CUDAを使用しているためNVIDIA製GPU上でのみ実行可能です。このトラッキングは、ビデオ入力と3Dボディポジションを推定するために学習させたArtificial Neural Network AIを使用しています。
 
-This method is nothing close to the precision or freedom of movements of a dedicated sensor however we believe that the model can be trained and improved by orders of magnitude.
+この方法は、専用センサーの精度や動きの自由度には及びませんが、モデルを学習させれば、桁違いに改善できると考えています。
 
-You first need to connect a webcam to your computer and install Python 3.8.4 and select the option to add it to the path. Then install `PyTorch`, you can do so by running the following commands:
+まず、ウェブカメラをコンピュータに接続し、Python 3.8.4をインストールし、パスに追加するオプションを選択する必要があります。次に、`PyTorch` をインストールします。以下のコマンドを実行する事でインストールできます。
 
 `python -m pip install torch===1.6.0 torchvision===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html`
 
-Then proceed to install `CUDA Toolkit 11.0.`
+次に `CUDA Toolkit 11.0.` をインストールします。
 
-You’ll then need to download the Folder `PYTHONPATH` at https://github.com/relativty/Relativty/releases and add its location to `PyPath` in the `JSON Relativty_Driver/Relativty/resources/settings/default.vrsettings`
+次に、https://github.com/relativty/Relativty/releases から `PYTHONPATH` フォルダをダウンロードし、その場所を `JSON Relativty_Driver/Relativty/resources/settings/default.vrsettings` 内の `PyPath` に追加する必要があります。
 
-Set `tracking` to 1. The tracking is now turned on and can be turned off anytime by setting `tracking` to 0. The tracking can also be calibrated depending on your camera, this can be done by tweeking `scalesCoordinateMeter` and `offsetCoordinate`. `scalesCoordinateMeter` correspond to the delta of coordinates in a given axis calculated by the AI after normalization when you move 1 meter in that given axis.
+`tracking`を1に設定するとトラッキングが有効になり、0にすると無効になります。これはカメラによってキャリブレーションを行うことができます。また、 `scalesCoordinateMeter` と `offsetCoordinate` を調整することで微調整する事ができます。`scalesCoordinateMeter` はAIによって計算された座標軸を1メートル動かしたときの正規化後のデルタに相当します。
 
-**Note:** If you plan on using mpu9250 firmware do not forget to switch to it in the driver by setting `hmdIMUdmpPackets` to `false`:
+
+**Note** MPU9250ファームウェアを使用する場合はドライバで`hmdIMUdmpPackets`を`false`に設定して、ファームウェアを切り替えるのを忘れないようにしてください。
+
 `"hmdIMUdmpPackets":  false,`
 
-## Final Steps
+## 最後のステップ
 
-Everything is now set up to start playing. 
+これですべての設定が完了し、プレイを開始することができます。
 
-To start using Relativty:
-- Lay the headset on a flat surface with the front panel facing the ground
-- Plug in the Headset.
-It’ll automatically calibrate after a few seconds.
+Relativtyを使い始めるには...
+- ヘッドセットを平らな場所に置き、フロントパネルが地面と向き合うようにします。
+- ヘッドセットを差し込んでください。数秒後に自動的にキャリブレーションされます。
 
-You can now run any SteamVR game!
-
+これでどんなSteamVRも実行できるようになりました！
