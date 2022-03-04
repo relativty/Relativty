@@ -17,6 +17,8 @@
 	</strong>
 </p>
 
+<p align="ceter"><strong>日本語版のREADMEは<a href="README.ja.md">こちら</a>です。</strong></p>
+
 I’m <a href="https://twitter.com/maxim_xyz?lang=en">Maxim xyz</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 
 5 years later : this headset became Relativty.
@@ -281,4 +283,3 @@ To start using Relativty:
 It’ll automatically calibrate after a few seconds.
 
 You can now run any SteamVR game!
-
