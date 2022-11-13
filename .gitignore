@@ -17,3 +17,5 @@ Relativty_Driver/DriverLog/Release*
 Debug
 DebugWin32
 Debugx64
+build
+.cache

@@ -36,16 +36,16 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 
 	this->Log("Relativty Init successful.\n");
 
-	this->HMDDriver = new Relativty::HMDDriver("zero");
-	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
+	this->HMD_Driver = new Relativty::HMDDriver("zero");
+	vr::VRServerDriverHost()->TrackedDeviceAdded(this->HMD_Driver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMD_Driver);
 	// GetSerialNumber() is there for a reason!
 
 	return vr::VRInitError_None;
 }
 
 void Relativty::ServerDriver::Cleanup() {
-	delete this->HMDDriver;
-	this->HMDDriver = NULL;
+	delete this->HMD_Driver;
+	this->HMD_Driver = NULL;
 
 	#ifdef DRIVERLOG_H
 	CleanupDriverLog();

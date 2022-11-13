@@ -34,7 +34,7 @@ namespace Relativty {
 
 		static void Log(std::string log);
 	private:
-		HMDDriver* HMDDriver = nullptr;
+		HMDDriver* HMD_Driver = nullptr;
 	};
 }
 

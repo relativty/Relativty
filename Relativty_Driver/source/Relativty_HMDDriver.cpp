@@ -16,6 +16,7 @@
 #include <cstring>
 
 #include <atomic>
+#include <libserialport.h>
 
 #ifdef __unix__
 	#include <unistd.h>
@@ -36,6 +37,7 @@
 #endif
 
 #include "hidapi/hidapi.h"
+
 #include "../include/openvr_driver.hpp"
 
 #include "../include/driverlog.hpp"
@@ -70,6 +72,24 @@
 
 #endif
 
+struct sp_port * open_serial(const char * desired_port, unsigned int baudrate) {
+    struct sp_port *port;
+
+	enum sp_return error = sp_get_port_by_name(desired_port,&port);
+	if (error == SP_OK) {
+		error = sp_open(port,SP_MODE_READ);
+		if (error == SP_OK) {
+			sp_set_baudrate(port, baudrate);
+            return port;
+		} else {
+			Relativty::ServerDriver::Log("Error opening serial device\n");
+		}
+	} else {
+		Relativty::ServerDriver::Log("Error finding serial device\n");
+	}
+	return 0;
+}
+
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
 	vr::HmdQuaternion_t quat;
 	quat.w = w;
@@ -80,7 +100,7 @@ inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, doub
 }
 
 inline void Normalize(float norma[3], float v[3], float max[3], float min[3], int up, int down, float scale[3], float offset[3]) {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 3; i++) {
 		norma[i] = (((up - down) * ((v[i] - min[i]) / (max[i] - min[i])) + down) / scale[i])+ offset[i];
 	}
 }
@@ -89,22 +109,30 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	RelativtyDevice::Activate(unObjectId);
 	this->setProperties();
 
-	int result;
-	result = hid_init(); //Result should be 0.
-	if (result) {
-		Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
-		return vr::VRInitError_Driver_TrackedDeviceInterfaceUnknown;
+	if(this->isSerial) {
+		Relativty::ServerDriver::Log("Starting serial \n");
+		this->serialPort = open_serial(this->serialDevice.c_str(), this->baudrate);
+		if(this->serialPort == nullptr) {
+			return vr::VRInitError_Init_InterfaceNotFound;
+		}
+	} else {
+		Relativty::ServerDriver::Log("Starting hid \n");
+		int result = hid_init(); //Result should be 0.
+		if (result) {
+			Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
+			return vr::VRInitError_Driver_TrackedDeviceInterfaceUnknown;
+		}
+		this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
+		if (!this->handle) {
+			#ifdef DRIVERLOG_H
+			DriverLog("USB: Unable to open HMD device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
+			#else
+			Relativty::ServerDriver::Log("USB: Unable to open HMD device with pid="+ std::to_string(m_iPid) +" and vid="+ std::to_string(m_iVid) +".\n");
+			#endif
+			return vr::VRInitError_Init_InterfaceNotFound;
+		}
 	}
 
-	this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
-	if (!this->handle) {
-		#ifdef DRIVERLOG_H
-		DriverLog("USB: Unable to open HMD device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
-		#else
-		Relativty::ServerDriver::Log("USB: Unable to open HMD device with pid="+ std::to_string(m_iPid) +" and vid="+ std::to_string(m_iVid) +".\n");
-		#endif
-		return vr::VRInitError_Init_InterfaceNotFound;
-	}
 
 	this->retrieve_quaternion_isOn = true;
 	this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded, this);
@@ -126,8 +154,13 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 void Relativty::HMDDriver::Deactivate() {
 	this->retrieve_quaternion_isOn = false;
 	this->retrieve_quaternion_thread_worker.join();
-	hid_close(this->handle);
-	hid_exit();
+
+	if(this->isSerial) {
+		sp_close(this->serialPort);
+	} else {
+		hid_close(this->handle);
+		hid_exit();
+	}
 
 	if (this->start_tracking_server) {
 		this->retrieve_vector_isOn = false;
@@ -212,6 +245,38 @@ void Relativty::HMDDriver::calibrate_quaternion() {
 }
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
+	if(this->isSerial) {
+		this->retrieve_device_quaternion_packet_serial();
+	} else {
+		this->retrieve_device_quaternion_packet_hid();
+	}
+}
+
+void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
+	struct RelativtySerial {
+		float w;
+		float x;
+		float y;
+		float z;
+	} payload;
+
+	while(true) {
+		int bytes_waiting = sp_input_waiting(this->serialPort);
+		if (bytes_waiting >= (int)sizeof(payload)) {
+			sp_nonblocking_read(this->serialPort, &payload, sizeof(payload));
+			this->quat[0] = payload.w;
+			this->quat[1] = payload.x;
+			this->quat[2] = payload.y;
+			this->quat[3] = payload.z;
+
+			this->calibrate_quaternion();
+
+			this->new_quaternion_avaiable = true;
+		}
+	}
+}
+
+void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 	uint8_t packet_buffer[64];
 	int16_t quaternion_packet[4];
 	//this struct is for mpu9250 support
@@ -407,12 +472,19 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	this->offsetCoordinateY = vr::VRSettings()->GetFloat(Relativty_hmd_section, "offsetCoordinateY");
 	this->offsetCoordinateZ = vr::VRSettings()->GetFloat(Relativty_hmd_section, "offsetCoordinateZ");
 
+
+	this->isSerial = vr::VRSettings()->GetBool(Relativty_hmd_section, "isSerial");
+	this->baudrate = vr::VRSettings()->GetInt32(Relativty_hmd_section, "baudrate");
+
+	char buffer[1024];
+	vr::VRSettings()->GetString(Relativty_hmd_section, "serialDevice", buffer, sizeof(buffer));
+	this->serialDevice = std::string(buffer);
+
 	this->m_iPid = vr::VRSettings()->GetInt32(Relativty_hmd_section, "hmdPid");
 	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_hmd_section, "hmdVid");
 
 	this->m_bIMUpktIsDMP = vr::VRSettings()->GetBool(Relativty_hmd_section, "hmdIMUdmpPackets");
 
-	char buffer[1024];
 	vr::VRSettings()->GetString(Relativty_hmd_section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
 

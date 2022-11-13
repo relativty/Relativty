@@ -4,9 +4,9 @@ if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS "-fms-extensions")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -fsanitize=address -O0")
-set(CMAKE_CXX_FLAGS_RELEASE "")
+set(CMAKE_CXX_FLAGS "-Wno-undef")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # generate the compile_commands for vscode / clang
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
@@ -16,7 +16,7 @@ project(relativty)
 
 
 set(SOURCES
-	source/stricmp.c
+	source/stricmp.cpp
 	source/DriverFactory.cpp
 	source/driverlog.cpp
 	source/Relativty_EmbeddedPython.cpp
@@ -24,18 +24,21 @@ set(SOURCES
 	source/Relativty_ServerDriver.cpp
 )
 
+add_subdirectory(hidapi)
+
 # add the executable
-add_library(relativty ${SOURCES})
+add_library(relativty SHARED ${SOURCES})
+
+find_package (Python REQUIRED
+        COMPONENTS Interpreter Development)
+
+target_link_libraries(relativty Python::Python)
+target_link_libraries(relativty hidapi::hidapi hidapi::include)
 
 find_package(PkgConfig REQUIRED)
-pkg_search_module(HID REQUIRED libhid)
-pkg_search_module(PYTHON REQUIRED python3)
-
-target_include_directories(relativty PRIVATE ${HID_INCLUDE_DIRS})
-target_link_libraries(relativty ${HID_LIBRARIES})
-
-target_include_directories(relativty PRIVATE ${PYTHON_INCLUDE_DIRS})
-target_link_libraries(relativty ${PYTHON_LIBRARIES})
+pkg_search_module(SP REQUIRED libserialport)
+target_include_directories(relativty PRIVATE ${SP_INCLUDE_DIRS})
+target_link_libraries(relativty ${SP_LIBRARIES})
 
 set_property(TARGET relativty PROPERTY C_STANDARD 17)
 set_property(TARGET relativty PROPERTY CXX_STANDARD 17)

@@ -94,6 +94,11 @@ namespace Relativty {
 		float offsetCoordinateY;
 		float offsetCoordinateZ;
 
+		bool isSerial;
+		std::string serialDevice;
+		struct sp_port * serialPort;
+		int baudrate;
+
 		std::atomic<bool> serverNotReady = { true };
 		std::thread retrieve_vector_thread_worker;
 		void retrieve_client_vector_packet_threaded();
@@ -103,5 +108,8 @@ namespace Relativty {
 
 		std::string PyPath;
 		std::thread startPythonTrackingClient_worker;
+
+		void retrieve_device_quaternion_packet_hid();
+		void retrieve_device_quaternion_packet_serial();
 	};
 }

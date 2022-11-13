@@ -23,10 +23,13 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
+      "isSerial": true,
+      "serialDevice": "/dev/ttyUSB0",
+      "baudrate": 1000000,
       "hmdPid" : 9,
       "hmdVid": 4617,
       "hmdIMUdmpPackets":  true,
-      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"      
+      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    },
    "Relativty_extendedDisplay": {
       "windowX" : 10,

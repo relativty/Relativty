@@ -21,11 +21,15 @@
 #include <iostream>
 #include <filesystem>
 #include <string>
+
+#ifdef __unix__
+#include <Python.h>
+#else
 #include "Python.h"
+#endif
+
 #include "../include/Relativty_EmbeddedPython.hpp"
 #include "../include/Relativty_ServerDriver.hpp"
-
-namespace fs = std::filesystem;
 
 void startPythonTrackingClient_threaded(std::string PyPath) {
 	std::string fileName = PyPath + "/Client.py";
