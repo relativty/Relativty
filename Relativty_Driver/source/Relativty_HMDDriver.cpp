@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,26 +13,62 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment (lib, "Setupapi.lib")
-#pragma comment(lib, "User32.lib")
+#include <cstring>
 
 #include <atomic>
-#include <WinSock2.h>
-#include <Windows.h>
+
+#ifdef __unix__
+	#include <unistd.h>
+	#include <stdlib.h>
+	#include <X11/Xlib.h>
+	#define XK_LATIN1
+	#include <X11/keysymdef.h>
+	#include <sys/socket.h>
+	#include <netinet/in.h>
+	#include <netinet/ip.h>
+#else
+	#pragma comment(lib, "Ws2_32.lib")
+	#pragma comment (lib, "Setupapi.lib")
+	#pragma comment(lib, "User32.lib")
+	#include <WinSock2.h>
+	#include <Windows.h>
+	#include <ws2tcpip.h>
+#endif
+
 #include "hidapi/hidapi.h"
-#include "openvr_driver.h"
+#include "../include/openvr_driver.hpp"
 
-#include "driverlog.h"
+#include "../include/driverlog.hpp"
 
-#include "Relativty_HMDDriver.hpp"
-#include "Relativty_ServerDriver.hpp"
-#include "Relativty_EmbeddedPython.h"
-#include "Relativty_components.h"
-#include "Relativty_base_device.h"
+#include "../include/Relativty_HMDDriver.hpp"
+#include "../include/Relativty_ServerDriver.hpp"
+#include "../include/Relativty_EmbeddedPython.hpp"
+#include "../include/Relativty_components.hpp"
+#include "../include/Relativty_base_device.hpp"
 
 
 #include <string>
+
+#ifdef __unix__
+	Display * g_pDisplay = nullptr;
+
+	static bool GetKeyState(KeySym keySym){
+		if(g_pDisplay == nullptr)
+		{
+			DefaultScreen(&g_pDisplay);
+			if(g_pDisplay == nullptr)
+				return false;
+		}
+
+		char szKey[32];
+		int iKeyCodeToFind = XKeysymToKeycode(g_pDisplay, keySym);
+
+		XQueryKeymap(g_pDisplay, szKey);
+
+		return szKey[iKeyCodeToFind / 8] & (1 << (iKeyCodeToFind % 8));
+	}
+
+#endif
 
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
 	vr::HmdQuaternion_t quat;
@@ -95,9 +131,13 @@ void Relativty::HMDDriver::Deactivate() {
 
 	if (this->start_tracking_server) {
 		this->retrieve_vector_isOn = false;
-		closesocket(this->sock);
-		this->retrieve_vector_thread_worker.join();
-		WSACleanup();
+		#ifdef __unix__
+			close(this->sock);
+		#else
+			closesocket(this->sock);
+			this->retrieve_vector_thread_worker.join();
+			WSACleanup();
+		#endif
 	}
 	RelativtyDevice::Deactivate();
 	this->update_pose_thread_worker.join();
@@ -146,7 +186,13 @@ void Relativty::HMDDriver::update_pose_threaded() {
 }
 
 void Relativty::HMDDriver::calibrate_quaternion() {
-	if ((0x01 & GetAsyncKeyState(0x52)) != 0) {
+	#ifdef __unix__
+
+	if(GetKeyState(XK_R))
+	#else
+	if ((0x01 & GetAsyncKeyState(0x52)) != 0)
+	#endif
+	{
 		qconj[0].store(quat[0]);
 		qconj[1].store(-1 * quat[1]);
 		qconj[2].store(-1 * quat[2]);
@@ -211,7 +257,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 
 			}
 			else {
-				
+
 				pak* recv = (pak*)packet_buffer;
 				this->quat[0] = recv->quat[0];
 				this->quat[1] = recv->quat[1];
@@ -234,9 +280,8 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 }
 
 void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
-	WSADATA wsaData;
+	socklen_t addressLen;
 	struct sockaddr_in server, client;
-	int addressLen;
 	int receiveBufferLen = 12;
 	char receiveBuffer[12];
 	int resultReceiveLen;
@@ -249,23 +294,41 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	float coordinate[3]{ 0, 0, 0 };
 	float coordinate_normalized[3];
 
+	#ifndef __unix__
+	WSADATA wsaData;
 	Relativty::ServerDriver::Log("Thread3: Initialising Socket.\n");
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
 		Relativty::ServerDriver::Log("Thread3: Failed. Error Code: " + WSAGetLastError());
 		return;
 	}
 	Relativty::ServerDriver::Log("Thread3: Socket successfully initialised.\n");
-
 	if ((this->sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
 		Relativty::ServerDriver::Log("Thread3: could not create socket: " + WSAGetLastError());
+	#else
+	if ((this->sock = socket(AF_INET, SOCK_STREAM, 0)) > 0) {
+		std::string errorlog = "Thread3: could not create socket: ";
+		errorlog += strerror(errno);
+		Relativty::ServerDriver::Log(errorlog);
+	}
+	#endif
+
 	Relativty::ServerDriver::Log("Thread3: Socket created.\n");
 
 	server.sin_family = AF_INET;
 	server.sin_port = htons(50000);
 	server.sin_addr.s_addr = INADDR_ANY;
 
+	#ifndef __unix__
 	if (bind(this->sock, (struct sockaddr*) & server, sizeof(server)) == SOCKET_ERROR)
 		Relativty::ServerDriver::Log("Thread3: Bind failed with error code: " + WSAGetLastError());
+	#else
+	if (bind(this->sock, (struct sockaddr*) & server, sizeof(server)) > 0) {
+		std::string errorlog = "Thread3: Bind failed with error code: ";
+		errorlog += strerror(errno);
+		Relativty::ServerDriver::Log(errorlog);
+	}
+
+	#endif
 	Relativty::ServerDriver::Log("Thread3: Bind done \n");
 
 	listen(this->sock, 1);
@@ -275,13 +338,27 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	Relativty::ServerDriver::Log("Thread3: Waiting for incoming connections...\n");
 	addressLen = sizeof(struct sockaddr_in);
 	this->sock_receive = accept(this->sock, (struct sockaddr*) & client, &addressLen);
+	if (this->sock_receive < 0) {
+		std::string errorlog = "Thread3: accept failed with error code: ";
+		errorlog += strerror(errno);
+		Relativty::ServerDriver::Log(errorlog);
+	}
+	#ifdef __unix__
+
+	#else
 	if (this->sock_receive == INVALID_SOCKET)
 		Relativty::ServerDriver::Log("Thread3: accept failed with error code: " + WSAGetLastError());
+
+	#endif
 	Relativty::ServerDriver::Log("Thread3: Connection accepted");
 
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
+		#ifdef __unix__
+		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, 0);
+		#else
 		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, NULL);
+		#endif
 		if (resultReceiveLen > 0) {
 			coordinate[0] = *(float*)(receiveBuffer);
 			coordinate[1] = *(float*)(receiveBuffer + 4);

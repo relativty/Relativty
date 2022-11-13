@@ -3,10 +3,14 @@
 #ifndef VR_DEVICE_BASE_H
 #define VR_DEVICE_BASE_H
 
-#include "driverlog.h"
+#include "driverlog.hpp"
+#include "Relativty_components.hpp"
 
-
-#include "Relativty_components.h"
+#ifdef __unix__
+  #include <memory>
+  #include <string.h>
+  #include "./stricmp.h"
+#endif
 
 namespace Relativty {
   inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y,
@@ -130,7 +134,7 @@ namespace Relativty {
 
     virtual void PowerOff() {}
 
-    // debug request from the client, TODO: uh... actually implement this? 
+    // debug request from the client, TODO: uh... actually implement this?
     virtual void DebugRequest(const char *pchRequest, char *pchResponseBuffer,
                               uint32_t unResponseBufferSize) {
       DriverLog("device serial \"%s\", got debug request: \"%s\"", m_sSerialNumber.c_str(), pchRequest);

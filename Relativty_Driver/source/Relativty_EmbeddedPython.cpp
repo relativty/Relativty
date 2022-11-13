@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -22,8 +22,8 @@
 #include <filesystem>
 #include <string>
 #include "Python.h"
-#include "Relativty_EmbeddedPython.h"
-#include "Relativty_ServerDriver.hpp"
+#include "../include/Relativty_EmbeddedPython.hpp"
+#include "../include/Relativty_ServerDriver.hpp"
 
 namespace fs = std::filesystem;
 

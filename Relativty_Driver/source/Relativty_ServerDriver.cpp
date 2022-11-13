@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,12 +13,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "openvr_driver.h"
+#include "../include/openvr_driver.hpp"
 
-#include "driverlog.h"
+#include "../include/driverlog.hpp"
 
-#include "Relativty_ServerDriver.hpp"
-#include "Relativty_HMDDriver.hpp"
+#include "../include/Relativty_ServerDriver.hpp"
+#include "../include/Relativty_HMDDriver.hpp"
 
 vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
 
@@ -35,7 +35,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	#endif
 
 	this->Log("Relativty Init successful.\n");
-	
+
 	this->HMDDriver = new Relativty::HMDDriver("zero");
 	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
 	// GetSerialNumber() is there for a reason!

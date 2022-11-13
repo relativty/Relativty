@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -17,8 +17,8 @@
 #ifndef RELATIVTY_SERVERDRIVER_H
 #define RELATIVTY_SERVERDRIVER_H
 
-#include "openvr_driver.h"
-#include "Relativty_HMDDriver.hpp"
+#include "openvr_driver.hpp"
+#include "./Relativty_HMDDriver.hpp"
 
 namespace Relativty {
 	class ServerDriver : public vr::IServerTrackedDeviceProvider
