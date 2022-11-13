@@ -23,7 +23,7 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
-      "isSerial": true,
+      "isSerial": false,
       "serialDevice": "/dev/ttyUSB0",
       "baudrate": 1000000,
       "hmdPid" : 9,
