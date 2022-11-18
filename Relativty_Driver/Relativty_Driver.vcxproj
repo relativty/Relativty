@@ -28,26 +28,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -112,8 +112,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,8 +129,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,8 +148,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(outDir)hidapi.lib;$(outDir)libserialport.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,8 +169,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)libraries\$(Platform)\hidapi.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib;$(SolutionDir)Release\hidapi.lib;$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(outDir)hidapi.lib;$(outDir)libserialport.lib;$(SolutionDir)libraries\$(Platform)\python38.lib;$(SolutionDir)libraries\$(Platform)\driverlog.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

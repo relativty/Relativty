@@ -16,7 +16,6 @@
 #include <cstring>
 
 #include <atomic>
-#include <libserialport.h>
 
 #ifdef __unix__
 	#include <unistd.h>
@@ -27,6 +26,7 @@
 	#include <sys/socket.h>
 	#include <netinet/in.h>
 	#include <netinet/ip.h>
+	#include <libserialport.h>
 #else
 	#pragma comment(lib, "Ws2_32.lib")
 	#pragma comment (lib, "Setupapi.lib")
@@ -34,9 +34,10 @@
 	#include <WinSock2.h>
 	#include <Windows.h>
 	#include <ws2tcpip.h>
+	#include "../libserialport/libserialport.h"
 #endif
 
-#include "hidapi/hidapi.h"
+#include "../hidapi/hidapi/hidapi.h"
 
 #include "../include/openvr_driver.hpp"
 

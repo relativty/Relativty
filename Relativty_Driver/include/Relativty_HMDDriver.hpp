@@ -29,7 +29,7 @@
 	#define SOCKET int
 #else
 	#include <WinSock2.h>
-	#include "hidapi/hidapi.h"
+	#include "../hidapi/hidapi/hidapi.h"
 #endif
 
 namespace Relativty {
