@@ -40,7 +40,15 @@ if(WIN32)
 		set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/win32/$<0:>)
 	endif()
 else()
-	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/linux64/$<0:>)
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}linux64/$<0:>)
+	#remove the lib from libdriver_relativty.so
+	set(CMAKE_SHARED_LIBRARY_PREFIX "")
+
+	#adding our own implementation of stricmp since gnu doesn't have one
+	set(SOURCES
+		source/stricmp.cpp
+		${SOURCES}
+	)
 endif()
 
 
@@ -60,11 +68,6 @@ if(WIN32)
 	target_include_directories(driver_relativty PRIVATE "libsp/libserialport")
 
 else(WIN32)
-	set(SOURCES
-		source/stricmp.cpp
-		${SOURCES}
-	)
-
 	find_package (Python REQUIRED
 	        COMPONENTS Interpreter Development)
 	target_link_libraries(driver_relativty Python::Python)

@@ -110,7 +110,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	this->setProperties();
 
 	if(this->isSerial) {
-		Relativty::ServerDriver::Log("Starting serial \n");
+		Relativty::ServerDriver::Log("Starting serial\n");
 		this->serialPort = open_serial(this->serialDevice.c_str(), this->baudrate);
 		if(this->serialPort == nullptr) {
 			return vr::VRInitError_Init_InterfaceNotFound;
@@ -260,7 +260,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 		float z;
 	} payload;
 
-	while(true) {
+	while(this->retrieve_quaternion_isOn) {
 		int bytes_waiting = sp_input_waiting(this->serialPort);
 		if (bytes_waiting >= (int)sizeof(payload)) {
 			sp_nonblocking_read(this->serialPort, &payload, sizeof(payload));

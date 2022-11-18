@@ -10,6 +10,8 @@ if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS --enable-auto-import)
     add_compile_definitions(LIBSERIALPORT_MSBUILD)
 else()
+    link_directories(libserialport)
+    add_compile_definitions(LIBSERIALPORT_ATBUILD)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall -pedantic")
 endif()
 
@@ -19,7 +21,7 @@ set(SOURCE_FILES libserialport/serialport.c libserialport/timing.c)
 
 if (WIN32)
     set (SOURCE_FILES ${SOURCE_FILES} libserialport/windows.c)
-    
+
 endif()
 if (UNIX)
     set (SOURCE_FILES ${SOURCE_FILES} libserialport/linux.c libserialport/linux_termios.c)
@@ -35,10 +37,9 @@ endif()
 set(LANGUAGE C)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}) 
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 include_directories(./libserialport)
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} cfgmgr32 SetupAPI)
 endif()
-
