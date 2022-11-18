@@ -13,19 +13,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment(lib, "User32.lib")
-#pragma comment (lib, "Setupapi.lib")
-#pragma comment (lib, "python38.lib")
-
 #include <iostream>
-#include <filesystem>
+#include <filesystem>	
 #include <string>
 
 #ifdef __unix__
 #include <Python.h>
 #else
-#include "Python.h"
+#pragma comment (lib, "python38.lib")
+#pragma comment(lib, "Ws2_32.lib")
+#pragma comment(lib, "User32.lib")
+#pragma comment (lib, "Setupapi.lib")
+#include "../include/Python/Python.h"
 #endif
 
 #include "../include/Relativty_EmbeddedPython.hpp"

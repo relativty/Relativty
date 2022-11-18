@@ -24,14 +24,14 @@
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
       "isSerial": false,
-      "serialDevice": "/dev/ttyUSB0",
-      "baudrate": 1000000,
+      "serialDevice": "COM3",
+      "baudrate": 115200,
       "hmdPid" : 9,
       "hmdVid": 4617,
       "hmdIMUdmpPackets":  true,
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    },
-   "Relativty_extendedDisplay": {
+  "Relativty_extendedDisplay": {
       "windowX" : 10,
       "windowY" : 10,
       "windowWidth" : 3840,
@@ -45,5 +45,5 @@
       "EyeGapOffsetPx" : 0,
       "IsDisplayRealDisplay" : true,
       "IsDisplayOnDesktop" : true
-   }
+  }
 }
