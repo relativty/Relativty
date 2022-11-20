@@ -59,7 +59,7 @@ namespace Relativty {
       m_fZoomHeight = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
                                                  k_pch_ExtDisplay_ZoomHeight_Float);
 
-      m_iEyeGapOff = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
+      m_iEyeGapOff = (int32_t)vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
                                                  k_pch_ExtDisplay_EyeGapOffset_Int);
 
       m_bIsDisplayReal = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,

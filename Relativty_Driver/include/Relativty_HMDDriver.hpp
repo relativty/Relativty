@@ -21,6 +21,7 @@
 #include "openvr_driver.hpp"
 #include "Relativty_components.hpp"
 #include "Relativty_base_device.hpp"
+#include "Serial.hpp"
 
 #ifdef __unix__
 	#include <memory>
@@ -96,7 +97,7 @@ namespace Relativty {
 
 		bool isSerial;
 		std::string serialDevice;
-		int serialPort;
+		Serial* serialPort = nullptr;
 		int baudrate;
 
 		std::atomic<bool> serverNotReady = { true };

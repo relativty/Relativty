@@ -9,6 +9,8 @@
 #include "../include/openvr_driver.hpp"
 #include "../include/Serial.hpp"
 
+int open_serial(const char* port, int baudrate);
+
 int get_baud(int baud)
 {
     switch (baud) {
@@ -53,20 +55,25 @@ int get_baud(int baud)
     }
 }
 
-void serial_close(int port) {
-	close(port);
+void Serial::read(void* buffer, unsigned int size) const {
+	if (read(port_fd, buffer, size) != size) {
+		throw std::exception("Read failed");
+	}
 }
 
-/**
- * @brief Read data from the serial port into a buffer might timeout
- *
- * @param port identifier returned by open_serial
- * @return false in case of failure
- */
-bool serial_read(int port, void * buffer, unsigned int size) {
-	ssize_t bytesRead = read(port, buffer, size);
-	return bytesRead == size;
+void Serial::reconnect() {
+	close(port_fd);
+	port_fd = open_serial(m_port.c_str(), m_baudrate);
 }
+
+Serial::~Serial() {
+	close(port_fd);
+}
+
+Serial::Serial(const std::string port, int baudrate) : m_baudrate(baudrate), m_port(port) {
+	port_fd = open_serial(m_port.c_str(), m_baudrate);
+}
+
 
 int open_serial(const char * port, int baudrate) {
 	if(access(port, F_OK) != 0) {

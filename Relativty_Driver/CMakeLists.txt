@@ -39,6 +39,11 @@ if(WIN32)
 	else()
 		set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/win32/$<0:>)
 	endif()
+
+	set(SOURCES
+		source/WindowsSerial.cpp
+		${SOURCES}
+	)
 else()
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}linux64/$<0:>)
 	#remove the lib from libdriver_relativty.so
