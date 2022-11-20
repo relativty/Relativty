@@ -21,6 +21,8 @@
 #ifdef __unix__
 	#include <unistd.h>
 	#include <stdlib.h>
+
+	//TODO: test this and add wayland support
 	#include <X11/Xlib.h>
 	#define XK_LATIN1
 	#include <X11/keysymdef.h>
@@ -271,7 +273,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 
 			this->new_quaternion_avaiable = true;
 		}
-		catch(const std::exception&) {
+		catch(const serial_exception&) {
 			Relativty::ServerDriver::Log("Serial lost: reconnecting...");
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			this->serialPort->reconnect();

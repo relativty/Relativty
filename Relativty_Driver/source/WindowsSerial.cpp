@@ -4,7 +4,7 @@
 HANDLE open_handle(const char* port, int baudrate);
 void Serial::read(void* buffer, unsigned int size) const {
 	if (!ReadFile(port_handle, buffer, size, NULL, NULL)) {
-		throw std::exception("Read failed");
+		throw serial_exception("Read failed");
 	}
 }
 
@@ -34,10 +34,10 @@ HANDLE open_handle(const char * port, int baudrate) {
 
 	if (port_handle == INVALID_HANDLE_VALUE) {
 		if (GetLastError() == ERROR_FILE_NOT_FOUND) {
-			throw std::exception("Serial port not found");
+			throw serial_exception("Serial port not found");
 		}
 		else {
-			throw std::exception("Could not open the serial port");
+			throw serial_exception("Could not open the serial port");
 		}
 	}
 
@@ -48,7 +48,7 @@ HANDLE open_handle(const char * port, int baudrate) {
 
 	if (!GetCommState(port_handle, &dcbSerialParams)) {
 		CloseHandle(port_handle);
-		throw std::exception("Could not get the serial port configuration");
+		throw serial_exception("Could not get the serial port configuration");
 	}
 
 	dcbSerialParams.BaudRate = baudrate;
@@ -57,7 +57,7 @@ HANDLE open_handle(const char * port, int baudrate) {
 	dcbSerialParams.Parity = EVENPARITY;
 	if (!SetCommState(port_handle, &dcbSerialParams)) {
 		CloseHandle(port_handle);
-		throw std::exception("Could not change the serial port configuration");
+		throw serial_exception("Could not change the serial port configuration");
 	}
 
 	const int timeout = 100;
@@ -67,7 +67,7 @@ HANDLE open_handle(const char * port, int baudrate) {
 	timeouts.WriteTotalTimeoutConstant = timeout;
 	timeouts.WriteTotalTimeoutMultiplier = 1;
 	if (!SetCommTimeouts(port_handle, &timeouts)) {
-		throw std::exception("Could not change the serial port timeout configuration");
+		throw serial_exception("Could not change the serial port timeout configuration");
 		CloseHandle(port_handle);
 	}
 

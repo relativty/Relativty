@@ -56,8 +56,8 @@ int get_baud(int baud)
 }
 
 void Serial::read(void* buffer, unsigned int size) const {
-	if (read(port_fd, buffer, size) != size) {
-		throw std::exception("Read failed");
+	if (::read(port_fd, buffer, size) != size) {
+		throw serial_exception("Read failed");
 	}
 }
 
@@ -77,16 +77,14 @@ Serial::Serial(const std::string port, int baudrate) : m_baudrate(baudrate), m_p
 
 int open_serial(const char * port, int baudrate) {
 	if(access(port, F_OK) != 0) {
-		vr::VRDriverLog()->Log("Could not open the serial port");
-		return -1;
+		throw serial_exception("Could not open the serial port");
 	}
 
 
 	//we need write to run tcsetattr
 	int port_fd = open(port, O_RDWR);
 	if(port_fd < 0) {
-		vr::VRDriverLog()->Log("Could not open the serial port");
-		return -1;
+		throw serial_exception("Could not open the serial port");
 	}
 
 	struct termios settings;
@@ -94,8 +92,7 @@ int open_serial(const char * port, int baudrate) {
 	//read the settings
 	if(tcgetattr(port_fd, &settings) != 0) {
 		close(port_fd);
-		vr::VRDriverLog()->Log("Could not get the port settings");
-		return -1;
+		throw serial_exception("Could not get the port settings");
 	}
 
 	//enable parity bit (even for odd you need to add PARODD)
@@ -132,20 +129,17 @@ int open_serial(const char * port, int baudrate) {
 
 	if(baud == B0) {
 		close(port_fd);
-		vr::VRDriverLog()->Log("Invalid baud rate");
-		return -1;
+		throw serial_exception("Invalid baud rate");
 	}
 
 	if(cfsetispeed(&settings, baud) != 0) {
 		close(port_fd);
-		vr::VRDriverLog()->Log("Could not set baud");
-		return -1;
+		throw serial_exception("Could not set baud");
 	}
 
 	if(tcsetattr(port_fd, TCSANOW, &settings) != 0) {
 		close(port_fd);
-		vr::VRDriverLog()->Log("Could not set baud");
-		return -1;
+		throw serial_exception("Could not set baud");
 	}
 
 	return port_fd;
