@@ -96,7 +96,7 @@ namespace Relativty {
 
 		bool isSerial;
 		std::string serialDevice;
-		struct sp_port * serialPort;
+		int serialPort;
 		int baudrate;
 
 		std::atomic<bool> serverNotReady = { true };

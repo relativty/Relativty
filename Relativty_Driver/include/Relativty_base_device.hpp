@@ -9,7 +9,7 @@
 #ifdef __unix__
   #include <memory>
   #include <string.h>
-  #include "./stricmp.h"
+  #include "./stricmp.hpp"
 #endif
 
 namespace Relativty {

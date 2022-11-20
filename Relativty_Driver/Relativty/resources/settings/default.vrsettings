@@ -25,7 +25,7 @@
       "startTrackingServer" : false,
       "isSerial": true,
       "serialDevice": "/dev/ttyUSB0",
-      "baudrate": 9600,
+      "baudrate": 230400,
       "hmdPid" : 9,
       "hmdVid": 4617,
       "hmdIMUdmpPackets":  true,

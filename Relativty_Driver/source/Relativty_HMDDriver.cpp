@@ -35,8 +35,6 @@
 	#include <Windows.h>
 	#include <ws2tcpip.h>
 #endif
-#include <libserialport.h>
-
 #include "../hidapi/hidapi/hidapi.h"
 
 #include "../include/openvr_driver.hpp"
@@ -48,7 +46,7 @@
 #include "../include/Relativty_EmbeddedPython.hpp"
 #include "../include/Relativty_components.hpp"
 #include "../include/Relativty_base_device.hpp"
-
+#include "../include/Serial.hpp"
 
 #include <string>
 
@@ -73,29 +71,6 @@
 
 #endif
 
-struct sp_port * open_serial(const char * desired_port, unsigned int baudrate) {
-	if (struct sp_port *port; sp_get_port_by_name(desired_port,&port) == SP_OK) {
-		if (sp_open(port,SP_MODE_READ) == SP_OK) {
-			if(sp_set_parity(port, SP_PARITY_EVEN) != SP_OK) {
-				Relativty::ServerDriver::Log("Could not set parity\n");
-				sp_close(port);
-				return nullptr;
-			}
-			if(sp_set_baudrate(port, baudrate) != SP_OK) {
-				Relativty::ServerDriver::Log("Could not set baud rate\n");
-				sp_close(port);
-				return nullptr;
-			}
-			return port;
-		} else {
-			Relativty::ServerDriver::Log("Error opening serial device\n");
-		}
-	} else {
-		Relativty::ServerDriver::Log("Error finding serial device\n");
-	}
-	return nullptr;
-}
-
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
 	vr::HmdQuaternion_t quat;
 	quat.w = w;
@@ -118,7 +93,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	if(this->isSerial) {
 		Relativty::ServerDriver::Log("Starting serial\n");
 		this->serialPort = open_serial(this->serialDevice.c_str(), this->baudrate);
-		if(this->serialPort == nullptr) {
+		if(this->serialPort < 0) {
 			return vr::VRInitError_Init_InterfaceNotFound;
 		}
 	} else {
@@ -162,7 +137,7 @@ void Relativty::HMDDriver::Deactivate() {
 	this->retrieve_quaternion_thread_worker.join();
 
 	if(this->isSerial) {
-		sp_close(this->serialPort);
+		serial_close(this->serialPort);
 	} else {
 		hid_close(this->handle);
 		hid_exit();
@@ -267,7 +242,18 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 	} payload;
 
 	while(this->retrieve_quaternion_isOn) {
-		if (sp_blocking_read(this->serialPort, &payload, sizeof(payload), 0)) {
+		if(serial_read(this->serialPort, &payload, sizeof(payload))) {
+
+			//the result of sqrt(w²+x²+y²+z²) should be 1 if it's not one we get corrupted data
+			float unitLength = sqrt(payload.w * payload.w + payload.x * payload.x + payload.y * payload.y + payload.z * payload.z);
+			if(fabs(unitLength - 1) > 0.1 ) {
+				std::string error = "Discarded serial packet: ";
+				error += std::to_string(unitLength);
+
+				Relativty::ServerDriver::Log(error);
+				continue;
+			}
+
 			this->quat[0] = payload.w;
 			this->quat[1] = payload.x;
 			this->quat[2] = payload.y;
@@ -277,12 +263,12 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 
 			this->new_quaternion_avaiable = true;
 		} else {
-			sp_close(this->serialPort);
+			serial_close(this->serialPort);
 			Relativty::ServerDriver::Log("Serial connection dropped, trying to reconnect");
-			this->serialPort = nullptr;
-			while(this->serialPort == nullptr) {
+			this->serialPort = -1;
+			while(this->serialPort < 0) {
 				this->serialPort = open_serial(this->serialDevice.c_str(), this->baudrate);
-				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			}
 			Relativty::ServerDriver::Log("Serial connection restored");
 		}

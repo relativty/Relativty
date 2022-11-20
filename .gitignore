@@ -19,3 +19,4 @@ DebugWin32
 Debugx64
 build
 .cache
+.vscode

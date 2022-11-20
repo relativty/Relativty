@@ -47,6 +47,7 @@ else()
 	#adding our own implementation of stricmp since gnu doesn't have one
 	set(SOURCES
 		source/stricmp.cpp
+		source/LinuxSerial.cpp
 		${SOURCES}
 	)
 endif()
@@ -55,8 +56,6 @@ endif()
 # add the executable
 add_library(driver_relativty SHARED ${SOURCES})
 add_subdirectory(hidapi)
-add_subdirectory(libsp)
-target_link_libraries(driver_relativty serialport)
 target_link_libraries(driver_relativty hidapi::hidapi hidapi::include)
 
 if(WIN32)
@@ -65,17 +64,10 @@ if(WIN32)
 	else()
 		target_link_libraries(driver_relativty	"${CMAKE_SOURCE_DIR}/libraries/Win32/python38.lib")
 	endif()
-	target_include_directories(driver_relativty PRIVATE "libsp/libserialport")
-
 else(WIN32)
 	find_package (Python REQUIRED
 	        COMPONENTS Interpreter Development)
 	target_link_libraries(driver_relativty Python::Python)
-
-	find_package(PkgConfig REQUIRED)
-	pkg_search_module(SP REQUIRED libserialport)
-	target_include_directories(driver_relativty PRIVATE ${SP_INCLUDE_DIRS})
-	target_link_libraries(driver_relativty ${SP_LIBRARIES})
 endif(WIN32)
 
 set_property(TARGET driver_relativty PROPERTY C_STANDARD 17)
