@@ -13,7 +13,8 @@ void setup() {
   mympu_open(200);
   //serial rs232 is slow so i try to get the highest baud rate possible
   //this value need to match the one of the driver
-  Serial.begin(115200);
+  //8b + even parity + 1 stop bit
+  Serial.begin(9600, SERIAL_8E1);
 }
 
 
