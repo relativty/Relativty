@@ -16,6 +16,7 @@
 #include <cstring>
 
 #include <atomic>
+#include <ctime>
 
 #ifdef __unix__
 	#include <unistd.h>
@@ -73,21 +74,26 @@
 #endif
 
 struct sp_port * open_serial(const char * desired_port, unsigned int baudrate) {
-    struct sp_port *port;
-
-	enum sp_return error = sp_get_port_by_name(desired_port,&port);
-	if (error == SP_OK) {
-		error = sp_open(port,SP_MODE_READ);
-		if (error == SP_OK) {
-			sp_set_baudrate(port, baudrate);
-            return port;
+	if (struct sp_port *port; sp_get_port_by_name(desired_port,&port) == SP_OK) {
+		if (sp_open(port,SP_MODE_READ) == SP_OK) {
+			if(sp_set_parity(port, SP_PARITY_EVEN) != SP_OK) {
+				Relativty::ServerDriver::Log("Could not set parity\n");
+				sp_close(port);
+				return nullptr;
+			}
+			if(sp_set_baudrate(port, baudrate) != SP_OK) {
+				Relativty::ServerDriver::Log("Could not set baud rate\n");
+				sp_close(port);
+				return nullptr;
+			}
+			return port;
 		} else {
 			Relativty::ServerDriver::Log("Error opening serial device\n");
 		}
 	} else {
 		Relativty::ServerDriver::Log("Error finding serial device\n");
 	}
-	return 0;
+	return nullptr;
 }
 
 inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
@@ -261,9 +267,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 	} payload;
 
 	while(this->retrieve_quaternion_isOn) {
-		int bytes_waiting = sp_input_waiting(this->serialPort);
-		if (bytes_waiting >= (int)sizeof(payload)) {
-			sp_nonblocking_read(this->serialPort, &payload, sizeof(payload));
+		if (sp_blocking_read(this->serialPort, &payload, sizeof(payload), 0)) {
 			this->quat[0] = payload.w;
 			this->quat[1] = payload.x;
 			this->quat[2] = payload.y;
@@ -272,6 +276,15 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 			this->calibrate_quaternion();
 
 			this->new_quaternion_avaiable = true;
+		} else {
+			sp_close(this->serialPort);
+			Relativty::ServerDriver::Log("Serial connection dropped, trying to reconnect");
+			this->serialPort = nullptr;
+			while(this->serialPort == nullptr) {
+				this->serialPort = open_serial(this->serialDevice.c_str(), this->baudrate);
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+			}
+			Relativty::ServerDriver::Log("Serial connection restored");
 		}
 	}
 }
