@@ -45,11 +45,20 @@ All the links are at <a href="https://relativty.com">relativty.com</a>.
 # Building The Hardware
 
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
-Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250 can be used as the hardware for Relativty. Both methods are explained below.
+Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250/MPU-6500 can be used as the hardware for Relativty. Both methods are explained below.
+
+The is 3 way to build the relativty motherboard
+
+1. Using a custom made pcb (**expensive**)
+2. Using an arduino due or an alternative that can support HID
+3. Using any Microcontroller which support serial to usb (**new need more testing**).
 
 ## Building The Relativty Motherboard
 
-### PCB Manufacturing
+You can use a custom made pcb specialy made for relativty or use an arduino compatible microcontroler(the arduino due is recommended).
+
+### Custom PCB
+#### PCB Manufacturing
 
 We first start with the naked PCB.
 
@@ -57,7 +66,7 @@ it can be manufactured and bought for around $4 on websites like <a href="https:
 
 You’ll need to provide the Gerber file folder `Relativty_Electronics_build/GerberFiles.zip` which describes the shape of the board.
 
-### Assembling
+#### Assembling
 
 Soldering the components onto the naked PCB.
 
@@ -70,7 +79,7 @@ Where to position those components on the PCB is described in the file `Relativt
 
 <p align="center"> <img src="ressources/img/motherboard.jpg"> </p>
 
-#### Using an Arduino
+### Using an Arduino
 
 An alternative to the Relativty Motherboard is to use an Arduino and to connect it to an MPU-6050.
 
@@ -96,6 +105,9 @@ Then push the `ERASE` and the `RESET` button on the Arduino Due and you’ll be 
 ## Installing The Relativty Firmware
 
 <p align="center"> <img src="ressources/img/cards.jpg"> </p>
+
+### HID
+
 You’ll now need to install the Relativty board in the Arduino IDE.
 
 To do that copy that JSON URL: <https://raw.githubusercontent.com/relativty/Relativty/master/Relativty_Firmware/package_Relativty_board_index.json> and open the Arduino IDE
@@ -113,9 +125,13 @@ If you are using a different board e.g. Arduino Due:
 * if you are using MPU-6050, use `Relativty_Firmware/hid/firmware/firmware.ino`
 * if you are using MPU-9250, use `Relativty_Firmware/hid/MP9250-HID/MP9250-HID/MP9250-HID.ino`
 
-If you want to use a board as a serial device (might be suited for weaker arduinos) and have a 6050
+### Serial
 
-* install `Relativty_Firmware/serial/MPU6050/MPU6050.ino`
+If you want to use a Microcontroller as a serial device
+
+For ArduinoCore using a MPU6050/6500/9250
+
+* install `Relativty_Firmware/serial/MPU6050-MPU6500-MPU9250/MPU.ino`
 
 # Building The Mechanical Parts
 
@@ -125,11 +141,11 @@ All the files needed for the 3D printing can be found in the `Relativty_Mechanic
 
 We've used parts from Aliexpress:
 
-* <a href="https://www.aliexpress.com/item/33058848848.html">The Strap</a>,
-* <a href="https://www.aliexpress.com/item/4000199486058.html">The Foam</a>,
+* The Strap(no longer on Aliexpress),
+* The Foam(no longer on Aliexpress),
 * <a href="https://www.aliexpress.com/item/33029909783.html">The Lenses</a> (40mm diameter/50mm focal length).
 
-### The screen for the HMD
+### The screens for the HMD
 
 <p align="center"> <img src="ressources/img/display.jpg"> </p>
 
@@ -139,40 +155,52 @@ Our model can be found on Aliexpress, but depending on the vendor similar screen
 
 This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
 
-### Setting Up the Software
+## Setting Up the Software
 
 <p align="center"> <img src="ressources/img/front.jpg"> </p>
 
-#### Installing dependencies (Linux only)
+### Installing dependencies (Linux only)
 
-you need both libserialport (dev) and python3 (dev) installed on your system to compile this project.
-to compile you will need cmake and make
-and then run build_linux.sh to compile relativity using cmake.
+If you are on windows just skip this section.
 
-#### Installing Relativty Driver for SteamVR
+you need python3 (dev), cmake, make and gcc installed on your system to compile this project.
+
+### Building the binary (Linux only)
+
+If you are on windows just skip this section.
+
+then open a terminal in Relativty_driver and run
+
+```bash
+mkdir build && cd build
+cmake ..
+make
+```
+
+### Installing Relativty Driver for SteamVR
+
+Download a copy of this repository (the release page is outdated)
 
 The Relativty Driver is contained within `Relativty_Driver/Relativty` folder.
 
 ⚠️ You’ll need to set it up by editing the JSON file `Relativty_Driver/Relativty/resources/settings/default.vrsettings`
 
+### Configuring the driver for HID boards
+
 If you are not using a Relativty PCB, you will need to change these:
 
+```
       "hmdPid" : 9,
       "hmdVid": 4617,
+```
 
 These are the USB HID device's unique Vendor and Producit Identifieres (pid/vid)
 
 If you are using and Arduino Due, the correct values will be:
 
+```
       "hmdPid" : 62,
       "hmdVid" : 9025,
-
-If you are using a serial HID system change theses values:
-
-```
-      "isSerial": true,
-      "serialDevice": "/dev/ttyUSB0", //name of the serial device untested on windows but should be comX
-      "baudrate": 1000000, //this baudrate need to match you device's
 ```
 
 In case you are using a different board, the process to get the right values is as below:
@@ -197,12 +225,21 @@ In case you are using a different board, the process to get the right values is 
  Such as: <https://www.rapidtables.com/convert/number/hex-to-decimal.html>
 
 4. Change your hmdPid and hmdVid values to the converted values.
+### Using a seral serial board
 
-Next, you need to set up the display coordinates and resolution.
+⚠️ The baud rate need to match the one used while flahing the firmware of the board. the higher the value the lower the latency will be. (on linux this value currently caps at 256000)
 
-At first, you should have the HMD's display set up as a secondary screen extending your desktop,
+You can find the COM device by opening device manager and looking at the device section.
 
-aligned onto the top right corner of your primary display.
+```
+      "isSerial": true,
+      "serialDevice": "COM3",
+      "baudrate": 256000,
+```
+
+### Setting up the display
+
+At first, you should have the HMD's display set up as a secondary screen extending your desktop, aligned onto the top right corner of your primary display.
 
 In the config file's "Relativty_extendedDisplay" segment, find and set these:
 
@@ -224,10 +261,8 @@ Make sure not to delete any "," symbols as that will break the config.
 
 Only the last item in the config should not have a "," symbol.
 
-If for whatever reason the above settings do not work out for you try:
-
+If for whatever reason the above settings do not work you can try the following:
 Set your HMD display as a mirrored display of your primary display.
-
 Change config as follows:
 
 ```
@@ -245,6 +280,8 @@ Change config as follows:
 
 ⚠️ Please note that this may result in keyboard/mouse input not being captured by the VR window, should your game require it, it might become unplayable.
 
+### Set the IPD and distortion
+
 You can also make IPD (Interpupillary Disance) adjustments within the configuration file:
 
 In the "Relativty_hmd" segment find and adjust:
@@ -260,7 +297,10 @@ You can also change the lens distortion correction by changing these:
       "DistortionK2" : 0.5,
 ```
 
+## Installing the driver
+
 You can now install Relativty Driver:
+### Windows
 
 * Locate your `vrpathreg.exe` program, usually located at `C:/Steam/steamapps/common/SteamVR/bin/win64/vrpathreg.exe`
 * Then open the Windows Command Prompt and run the following commands:
@@ -276,7 +316,18 @@ Relativty Driver is now installed. You can uninstall it any time by running:
 
 * `vrpathreg removedriver C:/code/Relativty_Driver/Relativty`
 
-#### Setting up the Experimental 3D Tracking
+### Linux
+
+Add the driver using vrpathreg using the following command
+
+```bash
+~/.steam/steam/steamapps/common/SteamVR/bin/vrpathreg.sh adddriver PATH_TO_PROJECT/Relativty_Driver/Relativty
+```
+
+to remove the driver replace `adddriver` by `removedriver`
+
+
+## Setting up the Experimental 3D Tracking
 
 The tracking is still very experimental and can only be run on NVIDIA GPU due to the usage of CUDA. The tracking makes uses of only a video input and an Artificial Neural Network AI trained to estimate a 3D body position.
 
