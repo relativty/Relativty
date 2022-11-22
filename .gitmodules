@@ -1,6 +1,3 @@
 [submodule "Relativty_Driver/hidapi"]
 	path = Relativty_Driver/hidapi
-	url = https://github.com/libsp/hidapi
-[submodule "Relativty_Driver/libsp/libserialport"]
-	path = Relativty_Driver/libsp/libserialport
-	url = https://github.com/sigrokproject/libserialport
+	url = https://github.com/libusb/hidapi

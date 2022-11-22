@@ -163,13 +163,15 @@ This is [the model we used](https://www.aliexpress.com/item/32975198897.html).
 
 If you are on windows just skip this section.
 
-you need python3 (dev), cmake, make and gcc installed on your system to compile this project.
+you need python3 (dev), cmake, make, git and gcc installed on your system to compile this project.
 
 ### Building the binary (Linux only)
 
 If you are on windows just skip this section.
 
-then open a terminal in Relativty_driver and run
+clone the repository using `git clone https://github.com/relativty/Relativty`
+the open the directory and run `git submodule init && git submodule update`
+then go to the Rleativty_Driver folder and build using the following commands:
 
 ```bash
 mkdir build && cd build
