@@ -1,0 +1,3 @@
+[submodule "Relativty_Driver/hidapi"]
+	path = Relativty_Driver/hidapi
+	url = https://github.com/libusb/hidapi

@@ -1,6 +1,6 @@
 //========= Copyright Valve Corporation ============//
 
-#include "driverlog.h"
+#include "../include/driverlog.hpp"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -56,4 +56,3 @@ void DebugDriverLog( const char *pMsgFormat, ... )
   va_end(args);
 #endif
 }
-

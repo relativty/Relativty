@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -16,11 +16,22 @@
 #pragma once
 #include <thread>
 #include <atomic>
-#include <WinSock2.h>
-#include "hidapi/hidapi.h"
-#include "openvr_driver.h"
-#include "Relativty_components.h"
-#include "Relativty_base_device.h"
+
+
+#include "openvr_driver.hpp"
+#include "Relativty_components.hpp"
+#include "Relativty_base_device.hpp"
+#include "Serial.hpp"
+
+#ifdef __unix__
+	#include <memory>
+	#include <sys/socket.h>
+	#include <hidapi/hidapi.h>
+	#define SOCKET int
+#else
+	#include <winsock2.h>
+	#include "../hidapi/hidapi/hidapi.h"
+#endif
 
 namespace Relativty {
 	class HMDDriver : public RelativtyDevice<false>
@@ -51,18 +62,18 @@ namespace Relativty {
 		hid_device* handle;
 
 		std::atomic<float> quat[4];
-		std::atomic<bool> retrieve_quaternion_isOn = false;
-		std::atomic<bool> new_quaternion_avaiable = false;
+		std::atomic<bool> retrieve_quaternion_isOn = { false };
+		std::atomic<bool> new_quaternion_avaiable = { false };
 
-		std::atomic<float> qconj[4] = {1, 0, 0, 0};
+		std::atomic<float> qconj[4] = { { 1 }, { 0 }, { 0 }, { 0 } };
 		void calibrate_quaternion();
 
 		std::thread retrieve_quaternion_thread_worker;
 		void retrieve_device_quaternion_packet_threaded();
 
 		std::atomic<float> vector_xyz[3];
-		std::atomic<bool> retrieve_vector_isOn = false;
-		std::atomic<bool> new_vector_avaiable = false;
+		std::atomic<bool> retrieve_vector_isOn = { false };
+		std::atomic<bool> new_vector_avaiable = { false };
 		bool start_tracking_server = false;
 		SOCKET sock, sock_receive;
 		float upperBound;
@@ -84,7 +95,12 @@ namespace Relativty {
 		float offsetCoordinateY;
 		float offsetCoordinateZ;
 
-		std::atomic<bool> serverNotReady = true;
+		bool isSerial;
+		std::string serialDevice;
+		Serial* serialPort = nullptr;
+		int baudrate;
+
+		std::atomic<bool> serverNotReady = { true };
 		std::thread retrieve_vector_thread_worker;
 		void retrieve_client_vector_packet_threaded();
 
@@ -93,5 +109,8 @@ namespace Relativty {
 
 		std::string PyPath;
 		std::thread startPythonTrackingClient_worker;
+
+		void retrieve_device_quaternion_packet_hid();
+		void retrieve_device_quaternion_packet_serial();
 	};
 }

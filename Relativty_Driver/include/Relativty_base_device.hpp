@@ -3,10 +3,14 @@
 #ifndef VR_DEVICE_BASE_H
 #define VR_DEVICE_BASE_H
 
-#include "driverlog.h"
+#include "driverlog.hpp"
+#include "Relativty_components.hpp"
+#include <memory>
+#include "./stricmp.hpp"
 
-
-#include "Relativty_components.h"
+#ifdef __unix__
+  #include <string.h>
+#endif
 
 namespace Relativty {
   inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y,
@@ -130,7 +134,7 @@ namespace Relativty {
 
     virtual void PowerOff() {}
 
-    // debug request from the client, TODO: uh... actually implement this? 
+    // debug request from the client, TODO: uh... actually implement this?
     virtual void DebugRequest(const char *pchRequest, char *pchResponseBuffer,
                               uint32_t unResponseBufferSize) {
       DriverLog("device serial \"%s\", got debug request: \"%s\"", m_sSerialNumber.c_str(), pchRequest);
@@ -143,7 +147,7 @@ namespace Relativty {
     void *GetComponent(const char *pchComponentNameAndVersion) {
       // don't touch this
       DriverLog("device serial \"%s\", got request for \"%s\" component\n", m_sSerialNumber.c_str(), pchComponentNameAndVersion);
-      if (!_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version) && m_spExtDisplayComp != nullptr){
+      if (!imp_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version) && m_spExtDisplayComp != nullptr){
         DriverLog("component found, responding...\n");
         return m_spExtDisplayComp.get();
       }
