@@ -4,7 +4,11 @@ if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
 endif()
 
-if(WIN32)
+if(MINGW)
+	set(CMAKE_CXX_FLAGS "-Wno-undef")
+	set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+	set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+elseif(MSVC)
 	set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 	set(CMAKE_CXX_FLAGS_DEBUG "/DEBUG")
 else()
@@ -44,6 +48,13 @@ if(WIN32)
 		source/WindowsSerial.cpp
 		${SOURCES}
 	)
+	if(MINGW)
+		#mingw doesn't support stricmp
+		set(SOURCES
+			source/stricmp.cpp
+			${SOURCES}
+		)
+	endif()
 else()
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}linux64/$<0:>)
 	#remove the lib from libdriver_relativty.so
@@ -63,17 +74,24 @@ add_library(driver_relativty SHARED ${SOURCES})
 add_subdirectory(hidapi)
 target_link_libraries(driver_relativty hidapi::hidapi hidapi::include)
 
-if(WIN32)
+if(MINGW)
+	target_link_libraries(driver_relativty ws2_32)
+	if( ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64" )
+		target_link_libraries(driver_relativty	"${CMAKE_SOURCE_DIR}/libraries/x64/python38.lib")
+	else()
+		target_link_libraries(driver_relativty	"${CMAKE_SOURCE_DIR}/libraries/Win32/python38.lib")
+	endif()
+elseif(WIN32)
 	if( ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "AMD64" )
 		target_link_libraries(driver_relativty	"${CMAKE_SOURCE_DIR}/libraries/x64/python38.lib")
 	else()
 		target_link_libraries(driver_relativty	"${CMAKE_SOURCE_DIR}/libraries/Win32/python38.lib")
 	endif()
-else(WIN32)
+else()
 	find_package (Python REQUIRED
-	        COMPONENTS Interpreter Development)
+		COMPONENTS Interpreter Development)
 	target_link_libraries(driver_relativty Python::Python)
-endif(WIN32)
+endif()
 
 set_property(TARGET driver_relativty PROPERTY C_STANDARD 17)
 set_property(TARGET driver_relativty PROPERTY CXX_STANDARD 17)

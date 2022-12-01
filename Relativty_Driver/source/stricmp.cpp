@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 //TODO: remake with c++
-int _stricmp(const char *string1const, const char *string2const) {
+int imp_stricmp(const char *string1const, const char *string2const) {
   char * string1 = strdup(string1const);
   char * string2 = strdup(string2const);
 

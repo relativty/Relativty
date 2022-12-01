@@ -5,11 +5,11 @@
 
 #include "driverlog.hpp"
 #include "Relativty_components.hpp"
+#include <memory>
+#include "./stricmp.hpp"
 
 #ifdef __unix__
-  #include <memory>
   #include <string.h>
-  #include "./stricmp.hpp"
 #endif
 
 namespace Relativty {
@@ -147,7 +147,7 @@ namespace Relativty {
     void *GetComponent(const char *pchComponentNameAndVersion) {
       // don't touch this
       DriverLog("device serial \"%s\", got request for \"%s\" component\n", m_sSerialNumber.c_str(), pchComponentNameAndVersion);
-      if (!_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version) && m_spExtDisplayComp != nullptr){
+      if (!imp_stricmp(pchComponentNameAndVersion, vr::IVRDisplayComponent_Version) && m_spExtDisplayComp != nullptr){
         DriverLog("component found, responding...\n");
         return m_spExtDisplayComp.get();
       }

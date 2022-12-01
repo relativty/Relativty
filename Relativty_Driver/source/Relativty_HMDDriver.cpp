@@ -33,8 +33,8 @@
 	#pragma comment(lib, "Ws2_32.lib")
 	#pragma comment (lib, "Setupapi.lib")
 	#pragma comment(lib, "User32.lib")
-	#include <WinSock2.h>
-	#include <Windows.h>
+	#include <winsock2.h>
+	#include <windows.h>
 	#include <ws2tcpip.h>
 #endif
 #include "../hidapi/hidapi/hidapi.h"
@@ -413,18 +413,18 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 		errorlog += strerror(errno);
 		Relativty::ServerDriver::Log(errorlog);
 	}
-	#ifdef __unix__
-
-	#else
-	if (this->sock_receive == INVALID_SOCKET)
-		Relativty::ServerDriver::Log("Thread3: accept failed with error code: " + WSAGetLastError());
-
+	#ifndef __unix__
+	if (this->sock_receive == INVALID_SOCKET) {
+		std::string error = "Thread3: accept failed with error code: ";
+		error += WSAGetLastError();
+		Relativty::ServerDriver::Log(error);
+	}
 	#endif
 	Relativty::ServerDriver::Log("Thread3: Connection accepted");
 
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
-		#ifdef __unix__
+		#ifndef MSVC
 		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, 0);
 		#else
 		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, NULL);
