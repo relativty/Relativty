@@ -12,7 +12,7 @@ elseif(MSVC)
 	set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 	set(CMAKE_CXX_FLAGS_DEBUG "/DEBUG")
 else()
-	set(CMAKE_CXX_FLAGS "-Wno-undef")
+	set(CMAKE_CXX_FLAGS "-Wno-undef -Wall -Wextra -Wconversion -Wpedantic -Wshadow")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 	set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 endif()
@@ -62,7 +62,6 @@ else()
 
 	#adding our own implementation of stricmp since gnu doesn't have one
 	set(SOURCES
-		source/stricmp.cpp
 		source/LinuxSerial.cpp
 		${SOURCES}
 	)
@@ -73,6 +72,10 @@ endif()
 add_library(driver_relativty SHARED ${SOURCES})
 add_subdirectory(hidapi)
 target_link_libraries(driver_relativty hidapi::hidapi hidapi::include)
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+    ${PROJECT_SOURCE_DIR}/include/Python
+)
 
 if(MINGW)
 	target_link_libraries(driver_relativty ws2_32)

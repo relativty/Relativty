@@ -37,8 +37,8 @@ namespace Relativty {
 	class HMDDriver : public RelativtyDevice<false>
 	{
 	public:
-		HMDDriver(std::string myserial);
-		~HMDDriver() = default;
+		HMDDriver(const std::string& myserial);
+		virtual ~HMDDriver() = default;
 
 		void frameUpdate();
 		inline void setProperties();
@@ -58,7 +58,6 @@ namespace Relativty {
 		float IPD;
 		float HeadToEyeDepth;
 
-		vr::DriverPose_t lastPose = {0};
 		hid_device* handle;
 
 		std::atomic<float> quat[4];

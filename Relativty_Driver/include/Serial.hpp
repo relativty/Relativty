@@ -19,8 +19,8 @@ class Serial {
 	int port_fd;
 #endif
 
-	const std::string m_port;
 	const int m_baudrate;
+	const std::string m_port;
 
 public:
 	Serial(const std::string port, int baudrate);
@@ -34,7 +34,7 @@ public:
 class serial_exception: std::exception {
 	const std::string m_message;
 public:
-	serial_exception(std::string message): m_message(message) {};
+	serial_exception(const std::string& message): m_message(message) {};
 	serial_exception(serial_exception &&) = default;
 	serial_exception(const serial_exception &) = default;
 	~serial_exception() = default;

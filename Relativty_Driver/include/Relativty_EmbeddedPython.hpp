@@ -14,7 +14,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
+#ifdef MSVC
 #pragma warning(disable:4996)
+#endif
 
 #include <string>
 

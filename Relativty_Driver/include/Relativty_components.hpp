@@ -84,46 +84,48 @@ namespace Relativty {
     }
 
     virtual void GetWindowBounds(int32_t *pnX, int32_t *pnY, uint32_t *pnWidth,
-                                 uint32_t *pnHeight) {
+                                 uint32_t *pnHeight) override {
       *pnX = m_nWindowX;
       *pnY = m_nWindowY;
       *pnWidth = m_nWindowWidth;
       *pnHeight = m_nWindowHeight;
     }
 
-    virtual bool IsDisplayOnDesktop() { return m_bIsDisplayOnDesktop; }
+    virtual bool IsDisplayOnDesktop() noexcept override { return m_bIsDisplayOnDesktop; }
 
-    virtual bool IsDisplayRealDisplay() { return m_bIsDisplayReal; }
+    virtual bool IsDisplayRealDisplay() noexcept override { return m_bIsDisplayReal; }
 
     virtual void GetRecommendedRenderTargetSize(uint32_t *pnWidth,
-                                                uint32_t *pnHeight) {
+                                                uint32_t *pnHeight) override {
       *pnWidth = m_nRenderWidth;
       *pnHeight = m_nRenderHeight;
     }
 
     virtual void GetEyeOutputViewport(vr::EVREye eEye, uint32_t *pnX, uint32_t *pnY,
-                                      uint32_t *pnWidth, uint32_t *pnHeight) {
+                                      uint32_t *pnWidth, uint32_t *pnHeight) override {
       *pnY = 0;
       *pnWidth = m_nWindowWidth / 2;
       *pnHeight = m_nWindowHeight;
 
-      if (eEye == vr::Eye_Left) {
+      switch(eEye){
+      case vr::Eye_Left:
         *pnX = 0;
-      } else {
+        break;
+      default:
         *pnX = m_nWindowWidth / 2 + m_iEyeGapOff;
       }
     }
 
-    virtual void GetProjectionRaw(vr::EVREye eEye, float *pfLeft, float *pfRight,
-                                  float *pfTop, float *pfBottom) {
+    virtual void GetProjectionRaw([[maybe_unused]] vr::EVREye eEye, float *pfLeft, float *pfRight,
+                                  float *pfTop, float *pfBottom) override {
       *pfLeft = -1.0;
       *pfRight = 1.0;
       *pfTop = -1.0;
       *pfBottom = 1.0;
     }
 
-    virtual vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU,
-                                                      float fV) {
+    virtual vr::DistortionCoordinates_t ComputeDistortion([[maybe_unused]] vr::EVREye eEye, float fU,
+                                                      float fV) override{
       vr::DistortionCoordinates_t coordinates;
 
       if constexpr(g_bRelativtyExtDisplayComp_doLensStuff) {
@@ -160,7 +162,7 @@ namespace Relativty {
       return coordinates;
     }
 
-    const char* GetComponentNameAndVersion() {return vr::IVRDisplayComponent_Version;}
+    const char* GetComponentNameAndVersion() noexcept {return vr::IVRDisplayComponent_Version;}
 
   private:
     int32_t m_nWindowX;

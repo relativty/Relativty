@@ -35,8 +35,7 @@ void startPythonTrackingClient_threaded(std::string PyPath) {
 	FILE* fp;
 	fp = fopen(fileName.c_str(), "rb");
 
-	std::string singleQuote = "\'";
-	PyPath = "PyPATH = " + singleQuote + PyPath + singleQuote;
+	PyPath = "PyPATH = '" + PyPath + "'";
 	Py_Initialize();
 	PyRun_SimpleString(PyPath.c_str());
 	Relativty::ServerDriver::Log("Thread4: starting Client.py \n");
