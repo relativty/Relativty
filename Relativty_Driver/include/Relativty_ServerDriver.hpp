@@ -18,7 +18,7 @@
 #define RELATIVTY_SERVERDRIVER_H
 
 #include "openvr_driver.hpp"
-#include "./Relativty_HMDDriver.hpp"
+#include "Relativty_HMDDriver.hpp"
 
 namespace Relativty {
 	class ServerDriver : public vr::IServerTrackedDeviceProvider
@@ -32,7 +32,7 @@ namespace Relativty {
 		virtual void EnterStandby() override;
 		virtual void LeaveStandby() override;
 
-		static void Log(std::string log);
+		static void Log(const std::string& log);
 	private:
 		HMDDriver* HMD_Driver = nullptr;
 	};

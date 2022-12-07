@@ -5,30 +5,21 @@
 
 #include "driverlog.hpp"
 #include "Relativty_components.hpp"
+#include "stricmp.hpp"
 #include <memory>
-#include "./stricmp.hpp"
 
 #ifdef __unix__
 	#include <string.h>
 #endif
 
 namespace Relativty {
-	inline vr::HmdQuaternion_t HmdQuaternion_Init(double w, double x, double y, double z) {
-		vr::HmdQuaternion_t quat;
-		quat.w = w;
-		quat.x = x;
-		quat.y = y;
-		quat.z = z;
-		return quat;
-	}
-
 	static const char *const k_pch_Driver_Section = "driver_Relativty";
 	static const char *const k_pch_Driver_PoseTimeOffset_Float = "PoseTimeOffset";
 	static const char *const k_pch_Driver_UpdateUrl_String = "ManualUpdateURL";
 
-	 // for now this will never signal for updates, this same function will be executed for all derived device classes on Activate
+	// for now this will never signal for updates, this same function will be executed for all derived device classes on Activate
 	// you can implement your own version/update check here
-	inline bool _checkForDeviceUpdates(std::string deviceSerial) {
+	inline bool _checkForDeviceUpdates([[maybe_unused]] const std::string& deviceSerial) {
 		return false; // true steamvr will signal an update, false not
 	}
 
@@ -36,8 +27,8 @@ namespace Relativty {
 	template<bool UseHaptics>
 	class RelativtyDevice: public vr::ITrackedDeviceServerDriver {
 	public:
-		RelativtyDevice(std::string myserial, std::string deviceBreed): m_sSerialNumber(myserial) {
-			// boilerplate
+		RelativtyDevice(const std::string& myserial, const std::string& deviceBreed): m_sSerialNumber(myserial) {
+		// boilerplate
 
 			m_unObjectId = vr::k_unTrackedDeviceIndexInvalid;
 			m_ulPropertyContainer = vr::k_ulInvalidPropertyContainer;
@@ -58,9 +49,9 @@ namespace Relativty {
 			m_Pose.poseTimeOffset = (double)m_fPoseTimeOffset;
 			m_Pose.poseIsValid = true;
 			m_Pose.deviceIsConnected = true;
-			m_Pose.qWorldFromDriverRotation = HmdQuaternion_Init(1, 0, 0, 0);
-			m_Pose.qDriverFromHeadRotation = HmdQuaternion_Init(1, 0, 0, 0);
-			m_Pose.qRotation = HmdQuaternion_Init(1, 0, 0, 0);
+			m_Pose.qWorldFromDriverRotation = vr::HmdQuaternion_t{1, 0, 0, 0};
+			m_Pose.qDriverFromHeadRotation = vr::HmdQuaternion_t{1, 0, 0, 0};
+			m_Pose.qRotation = vr::HmdQuaternion_t{1, 0, 0, 0};
 			m_Pose.vecPosition[0] = 0.;
 			m_Pose.vecPosition[1] = 0.;
 			m_Pose.vecPosition[2] = 0.;

@@ -1,11 +1,7 @@
-//on linux & mingw stricmp doesn't exists so i re-implemented it
-
 #ifndef MSVC
 
-int imp_stricmp(
-   const char *string1,
-   const char *string2
-);
+#include <strings.h>
+#define imp_stricmp strcasecmp
 
 #else
 

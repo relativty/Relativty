@@ -72,6 +72,6 @@ void Relativty::ServerDriver::LeaveStandby() {
 
 }
 
-void Relativty::ServerDriver::Log(std::string log) {
+void Relativty::ServerDriver::Log(const std::string& log) {
 	vr::VRDriverLog()->Log(log.c_str());
 }

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-static vr::IVRDriverLog * s_pLogFile = NULL;
+static vr::IVRDriverLog * s_pLogFile = nullptr;
 
 #if !defined( WIN32)
 #define vsnprintf_s vsnprintf
@@ -16,12 +16,12 @@ bool InitDriverLog( vr::IVRDriverLog *pDriverLog )
   if( s_pLogFile )
     return false;
   s_pLogFile = pDriverLog;
-  return s_pLogFile != NULL;
+  return s_pLogFile != nullptr;
 }
 
 void CleanupDriverLog()
 {
-  s_pLogFile = NULL;
+  s_pLogFile = nullptr;
 }
 
 static void DriverLogVarArgs( const char *pMsgFormat, va_list args )
@@ -45,7 +45,7 @@ void DriverLog( const char *pMsgFormat, ... )
 }
 
 
-void DebugDriverLog( const char *pMsgFormat, ... )
+void DebugDriverLog( [[maybe_unused]] const char *pMsgFormat, ... )
 {
 #ifdef _DEBUG
   va_list args;
