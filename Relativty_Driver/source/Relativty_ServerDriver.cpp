@@ -23,7 +23,7 @@
 vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
 
 	vr::EVRInitError eError = vr::InitServerDriverContext(DriverContext);
-		if (eError != vr::VRInitError_None) {
+	if (eError != vr::VRInitError_None) {
 			return eError;
 	}
 	#ifdef DRIVERLOG_H
@@ -45,7 +45,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 
 void Relativty::ServerDriver::Cleanup() {
 	delete this->HMD_Driver;
-	this->HMD_Driver = NULL;
+	this->HMD_Driver = nullptr;
 
 	#ifdef DRIVERLOG_H
 	CleanupDriverLog();

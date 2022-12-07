@@ -172,38 +172,24 @@ void Relativty::HMDDriver::Deactivate() {
 void Relativty::HMDDriver::update_pose_threaded() {
 	Relativty::ServerDriver::Log("Thread2: successfully started\n");
 	while (m_unObjectId != vr::k_unTrackedDeviceIndexInvalid) {
-		if (this->new_quaternion_avaiable && this->new_vector_avaiable) {
-			m_Pose.qRotation.w = this->quat[0];
-			m_Pose.qRotation.x = this->quat[1];
-			m_Pose.qRotation.y = this->quat[2];
-			m_Pose.qRotation.z = this->quat[3];
+		if (this->new_quaternion_avaiable) {
+			const Quaternion& q = this->quat.load();
+			m_Pose.qRotation.w = q.w;
+			m_Pose.qRotation.x = q.x;
+			m_Pose.qRotation.y = q.y;
+			m_Pose.qRotation.z = q.z;
+		}
+
+		if (this->new_vector_avaiable) {
 
 			m_Pose.vecPosition[0] = this->vector_xyz[0];
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
+		}
 
-			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
-			this->new_quaternion_avaiable = false;
-			this->new_vector_avaiable = false;
-
-		} else if (this->new_quaternion_avaiable) {
-			m_Pose.qRotation.w = this->quat[0];
-			m_Pose.qRotation.x = this->quat[1];
-			m_Pose.qRotation.y = this->quat[2];
-			m_Pose.qRotation.z = this->quat[3];
-
-			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
-			this->new_quaternion_avaiable = false;
-
-		} else if (this->new_vector_avaiable) {
-
-			m_Pose.vecPosition[0] = this->vector_xyz[0];
-			m_Pose.vecPosition[1] = this->vector_xyz[1];
-			m_Pose.vecPosition[2] = this->vector_xyz[2];
-
+		if(this->new_quaternion_avaiable || this->new_vector_avaiable) {
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
-
 		}
 	}
 	Relativty::ServerDriver::Log("Thread2: successfully stopped\n");
@@ -211,28 +197,18 @@ void Relativty::HMDDriver::update_pose_threaded() {
 
 void Relativty::HMDDriver::calibrate_quaternion() {
 	#ifdef __unix__
-
+	//TODO: wayland support and proper linking against X11 (currently we rely on steamVr for that)
 	if(GetKeyState(XK_R))
 	#else
 	if ((0x01 & GetAsyncKeyState(0x52)) != 0)
 	#endif
 	{
-		qconj[0].store(quat[0]);
-		qconj[1].store(-1 * quat[1]);
-		qconj[2].store(-1 * quat[2]);
-		qconj[3].store(-1 * quat[3]);
+		Quaternion conj(this->quat);
+		conj.invert();
+		this->qconj = conj;
 	}
-	float qres[4];
 
-	qres[0] = qconj[0] * quat[0] - qconj[1] * quat[1] - qconj[2] * quat[2] - qconj[3] * quat[3];
-	qres[1] = qconj[0] * quat[1] + qconj[1] * quat[0] + qconj[2] * quat[3] - qconj[3] * quat[2];
-	qres[2] = qconj[0] * quat[2] - qconj[1] * quat[3] + qconj[2] * quat[0] + qconj[3] * quat[1];
-	qres[3] = qconj[0] * quat[3] + qconj[1] * quat[2] - qconj[2] * quat[1] + qconj[3] * quat[0];
-
-	this->quat[0] = qres[0];
-	this->quat[1] = qres[1];
-	this->quat[2] = qres[2];
-	this->quat[3] = qres[3];
+	this->quat.store(this->quat.load() * this->qconj);
 }
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
@@ -244,12 +220,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 }
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
-	struct RelativtySerial {
-		float w;
-		float x;
-		float y;
-		float z;
-	} payload;
+	Quaternion payload;
 
 	while(this->retrieve_quaternion_isOn) {
 		try {
@@ -264,10 +235,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 				continue;
 			}
 
-			this->quat[0] = payload.w;
-			this->quat[1] = payload.x;
-			this->quat[2] = payload.y;
-			this->quat[3] = payload.z;
+			this->quat = payload;
 
 			this->calibrate_quaternion();
 
@@ -283,7 +251,6 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 	uint8_t packet_buffer[64];
-	int16_t quaternion_packet[4];
 	//this struct is for mpu9250 support
 	#pragma pack(push, 1)
 	struct pak {
@@ -298,49 +265,23 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 		result = hid_read(this->handle, packet_buffer, 64); //Result should be greater than 0.
 		if (result > 0) {
 
-
 			if (m_bIMUpktIsDMP) {
-
-				quaternion_packet[0] = ((packet_buffer[1] << 8) | packet_buffer[2]);
-				quaternion_packet[1] = ((packet_buffer[5] << 8) | packet_buffer[6]);
-				quaternion_packet[2] = ((packet_buffer[9] << 8) | packet_buffer[10]);
-				quaternion_packet[3] = ((packet_buffer[13] << 8) | packet_buffer[14]);
-				this->quat[0] = static_cast<float>(quaternion_packet[0]) / 16384.0f;
-				this->quat[1] = static_cast<float>(quaternion_packet[1]) / 16384.0f;
-				this->quat[2] = static_cast<float>(quaternion_packet[2]) / 16384.0f;
-				this->quat[3] = static_cast<float>(quaternion_packet[3]) / 16384.0f;
-
-				float qres[4];
-				qres[0] = quat[0];
-				qres[1] = quat[1];
-				qres[2] = -1 * quat[2];
-				qres[3] = -1 * quat[3];
-
-				this->quat[0] = qres[0];
-				this->quat[1] = qres[1];
-				this->quat[2] = qres[2];
-				this->quat[3] = qres[3];
-
-				this->calibrate_quaternion();
-
-				this->new_quaternion_avaiable = true;
-
+				this->quat.store(Quaternion(
+					((packet_buffer[1] << 8) | packet_buffer[2]) / 16384.0f,
+					((packet_buffer[5] << 8) | packet_buffer[6]) / 16384.0f,
+					((packet_buffer[9] << 8) | packet_buffer[10]) / -16384.0f,
+					((packet_buffer[13] << 8) | packet_buffer[14]) / -16384.0f
+				));
 			}
 			else {
 
-				pak* recv = (pak*)packet_buffer;
-				this->quat[0] = recv->quat[0];
-				this->quat[1] = recv->quat[1];
-				this->quat[2] = recv->quat[2];
-				this->quat[3] = recv->quat[3];
-
-				this->calibrate_quaternion();
-
-				this->new_quaternion_avaiable = true;
+				auto recv = (pak*)packet_buffer;
+				this->quat.store(Quaternion(recv->quat[0], recv->quat[1], recv->quat[2], recv->quat[3]));
 
 			}
 
-
+			this->calibrate_quaternion();
+			this->new_quaternion_avaiable = true;
 		}
 		else {
 			Relativty::ServerDriver::Log("Thread1: Issue while trying to read USB\n");

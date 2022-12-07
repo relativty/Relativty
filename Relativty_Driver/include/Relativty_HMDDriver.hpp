@@ -22,6 +22,7 @@
 #include "Relativty_components.hpp"
 #include "Relativty_base_device.hpp"
 #include "Serial.hpp"
+#include "../source/Quaternion.hpp"
 
 #ifdef __unix__
 	#include <memory>
@@ -61,11 +62,11 @@ namespace Relativty {
 		vr::DriverPose_t lastPose = {0};
 		hid_device* handle;
 
-		std::atomic<float> quat[4];
+		std::atomic<Quaternion> quat;
 		std::atomic<bool> retrieve_quaternion_isOn = { false };
 		std::atomic<bool> new_quaternion_avaiable = { false };
 
-		std::atomic<float> qconj[4] = { { 1 }, { 0 }, { 0 }, { 0 } };
+		std::atomic<Quaternion> qconj = {Quaternion(1, 0, 0, 0)};
 		void calibrate_quaternion();
 
 		std::thread retrieve_quaternion_thread_worker;
