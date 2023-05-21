@@ -128,9 +128,30 @@ Once you have it connected and verified your Arduino IDE can work with your MCU,
 
 <p align="center"> <img src="ressources/img/FastIMU-lib.jpg"> </p>
 
-
 Wire up your IMU as recommended in Section 1.2.1.
 
+Find the Examples/Fastimu/Calibrated_relativty sketch in your Arduino IDE:
+<p align="center"> <img src="ressources/img/FastIMU-sketch.jpg"> </p>
+
+And finally, Upload it to your MCU.
+
+FastIMU also includes a built-in calibration tool that can store the calibration data on the IMUs EEPROM.
+
+Calibrating the IMU may help with sensor drift that you can experience over time while using Relativty.
+
+After uploading Calibrated_relativty sketch to the IMU, you can open the Arduino Serial Monitor to initiate a calibration sequence:
+
+<p align="center"> <img src="ressources/img/FastIMU-calib.jpg"> </p>
+
+      NOTE: you only have to do this once, but make sure to follow the instructions given to you in the serial monitor.
+
+
+### 1.4.3 Installing The SteamVR Driver
+
+To install the Relativty SteamVR driver:
+- download the <a href="https://github.com/relativty/Relativty/archive/refs/heads/master.zip">master repository</a>
+- inside Relativty-master find the Relativty_Driver\Relativty folder and copy it to your SteamVR installation's drivers directory.
+<p align="center"> <img src="ressources/img/driver-copy.jpg"> </p>
 
 
 # 2. LEGACY BUILD
