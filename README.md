@@ -1,4 +1,3 @@
-
 <h1 align="center">
 	<img
 		width="400"
@@ -32,17 +31,67 @@ I’m <a href="https://twitter.com/maxim_xyz?lang=en">Maxim xyz</a> and when my 
 
 Made for Hackers
 -
-Relativty is **not a consumer product**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
+Relativty is **NOT A CONSUMER PRODUCT**. We made Relativty in my bedroom with a soldering iron and a 3D printer and we expect you to do the same: **build it yourself**.
 
-To learn more about the features of the Firmware, Software and Hardware visit the website.
-We also have a friendly Discord server, a place for our community to learn, share their knowledge, and ask for help. 
-All the links are at <a href="https://relativty.com">relativty.com</a>.
+Relativty at its basics is a 3 Degrees of Freedom (3-DoF) VR headset with no built-in controller support, designed to work with SteamVR.
+This may limit its practical usability for games that demand knuckle-style VR controllers.
+If you are looking for a more full-featured DIY VR project 6-Dof tracking and controller support, we recommend you check out <a href="https://github.com/HadesVR/HadesVR">HadesVR</a>.
+
+Whether or not you are building either Relativty or HadesVR, or if you just want to join our community and hang out, we invite you to <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>.
+
+It is a place for the DIY/Open-Source VR community to learn, grow, share knowledge, and ask for help. 
 
 # Start Building Relativty
 
 <p align="center"> <img src="ressources/img/open.jpg"> </p>
 
 # Building The Hardware
+## 1. CURRENT RECOMMENDED BUILD - As of May 2023
+### 1.1 Introduction
+This is an updated build guide to help people who recently discovered Relativty. It aims to explain how to build the minimum functional product, which can be further improved upon and modified to the individual's liking. The original build guide can still be found further below.
+
+
+### 1.2 ELECTRONICS
+
+The following electronic components are required:
+
+- ATmega32U4 Microcontroller (MCU) with USB HID support, such as an <a href="https://www.amazon.co.uk/diymore-Atmega32U4-Development-Microcontroller-Header/dp/B0BKGSVX2X">Arduino Pro Micro</a>
+- Inertial Measurement Unit (IMU) that is supported by the <a href="https://github.com/LiquidCGS/FastIMU">FastIMU Library</a>
+- A small, high resolution and high refresh rate PC display + driver board, such as <a href="https://www.aliexpress.com/item/32975198897.html">this model</a>
+
+            NOTES on VR DISPLAYS:
+            - The display does not connect to the Microcontroller, it only connects to the Computer running your VR Apps.
+            - Technically, any PC display/monitor can be configured as the display used by Relativty. Therefore, you can simply test your build on your PC monitor
+            first to make sure it works, before you decide to spend a significant amount of money on lenses, display(s) and other parts.
+            - High performance, small form factor displays are expensive, and often very delicate. Handle them with care! :)
+
+### 1.2.1 Wiring the IMU and MCU
+The IMU needs to be connected to the MCU for power and communication.
+The MCU connects to your computer via USB to send the IMU readings to SteamVR.
+
+In case of an Arduino Pro Micro, you need to connect the following pins:
+```
+Pro Micro   IMU
+VCC     ->  VCC  
+GND     ->  GND  
+SDA(2)  ->  SDA  
+SCL(3)  ->  SCL  
+```  
+If you use a different MCU, the SDA and SCL pins might be mapped to different pin numbers.
+
+Also, make sure that the VCC of your MCU is compatible with the rated operating voltage of your IMU.
+
+Supplying incorrect voltage to electronic components may cause damage to them.
+
+The MCU itself simply connets to your computer via the USB port.
+
+### 1.2.2 Connecting the display
+As mentioned previously, any display that is compatible with a personal computer should be able to function as your VR display.
+
+In case you are using the recommended one or a similar component that is powered via micro-USB or other USB standard, it is possible that you will encounter situations where the board does not power up. This could be either because the micro-USB cable you are using is too long (so the board cannot power up because the voltage dropped too much), or the board is unable to turn on because the USB port it connects to on the computer side is simplay unable to supply enough power. In this case, you might need to try different ports on your computer or a powered USB hub.
+
+
+# 2. LEGACY BUILD
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
 Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250 can be used as the hardware for Relativty. Both methods are explained below.
 
