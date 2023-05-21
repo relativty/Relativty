@@ -154,6 +154,125 @@ To install the Relativty SteamVR driver:
 <p align="center"> <img src="ressources/img/driver-copy.jpg"> </p>
 
 
+### 1.4.4 Configuring The SteamVR Driver
+
+Once you copied the driver files, it is time to configure the driver to work with your setup and computer.
+
+Inside drivers\Relativty\resources\settings, there should be a file called default.vrsettings.
+
+This is the configuration file for the driver.
+
+There are a few things that you need to change.
+
+ASSUMING you use an Arduino Pro Micro and the FastIMU library:
+
+In the Relativty_hmd segment find these values:
+- hmdPid
+- hmdVid
+- hmdIMUdmpPackets
+
+and change the values like so:
+
+```
+      "hmdPid" : 32823,
+      "hmdVid": 9025,
+      "hmdIMUdmpPackets":  false,
+```
+
+Now let's look at configuring the driver to work with your Display.
+
+The config variables for the display are in the Relativty_extendedDisplay segment:
+
+
+For the VR Viewport window's point of origin:
+```
+      "windowX" : 3440,
+      "windowY" : 0,
+```
+
+For the VR Viewport's actual size
+```
+      "windowWidth" : 1920,
+      "windowHeight" : 1080,
+```
+
+For the VR Viewport's rendering resolution - this should be normally the same as the size
+```
+      "renderWidth" : 1920,
+      "renderHeight" : 1080,
+```
+
+And some miscellaneous settings:
+```
+      "DistortionK1" : 0.4,
+      "DistortionK2" : 0.5,
+      "ZoomWidth" : 1,
+      "ZoomHeight" : 1,
+      "EyeGapOffsetPx" : 0,
+      "IsDisplayRealDisplay" : true,
+      "IsDisplayOnDesktop" : true
+```
+If the point of origin and size is not configured correctly, the driver will crash and SteamVR will not display anything!
+
+Therefore we need to have a look at and understand the coordinate system SteamVR uses for displays.
+
+Windows always assumes one of the connected displays as your Primary Display.
+
+You can verify which one is your Primary in Display Settings.
+
+You can select each of your displays with the mouse. The one that has "Make this my main display" checkbox greyed out is your Primary Display.
+
+THIS GUIDE ASSUMES THAT THE TOP EDGE OF ALL OF YOUR DISPLAYS ARE ALIGNED IN WINDOWS DISPLAY SETTINGS (as seen on the screenshots)
+
+<p align="center"> <img src="ressources/img/display-settings.jpg"> </p>
+
+Consequently, checking the same on another, non-primary display will make that one your Primary.
+
+The TOP LEFT corner of your Primary Display is the ORIGIN POINT of SteamVR's display coordinate system.
+
+To be able to tell SteamVR where to draw the VR Viewport on your displays, you need to make sure you understand this fact and as a result can identify the correct point of origin for the Viewport.
+
+For example, in a setup like this:
+
+<p align="center"> <img src="ressources/img/display-coordinates.jpg"> </p>
+
+Because the "1" screen is the primary, and the "3" screen is the VR Display, the origin point (the 0,0 coordinate) is on the top left of the "1" screen.
+
+This screen has 3440x1440 resolution.
+
+This means it occupies the X axis from 0 to 3439, and the next screen on its right starts at point 3440.
+
+Therefore, in this case the correct windowX and windowY values are:
+
+```
+      "windowX" : 3440,
+      "windowY" : 0,
+```
+
+If "2" screen was the VR display (and "1" is still the Primary), the correct values would be:
+
+```
+      "windowX" : -1920,
+      "windowY" : 0,
+```
+Because the "2" screen's coordinates occupy space over the other side of the origin point.
+
+For windowWidth,windowHeight,renderWidth,renderHeight, simply set the Native Resolution of your VR display.
+
+Once this is all set, save the settings file.
+
+Now you should be ready to start SteamVR.
+
+If everything is set up right, you should get straight into the vr holodeck area:
+
+<p align="center"> <img src="ressources/img/electronics-assembled.jpg"> </p>
+
+If you are encountering any issues with your build:
+- open the SteamVR Web Console and copy the entire log file
+- Join <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>, tell us about the issues you are facing, and upload the log file in the chat. 
+<p align="center"> <img src="ressources/img/steamvr-logs.jpg"> </p>
+
+
 # 2. LEGACY BUILD
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
 Alternatively, any processor that supports the ArduinoCore and is connected to an MPU-6050/MPU-9250 can be used as the hardware for Relativty. Both methods are explained below.
