@@ -50,6 +50,9 @@ It is a place for the DIY/Open-Source VR community to learn, grow, share knowled
 ### 1.1 Introduction
 This is an updated build guide to help people who recently discovered Relativty. It aims to explain how to build the minimum functional product, which can be further improved upon and modified to the individual's liking. The original build guide can still be found further below.
 
+            Following this guide to build a Relativty headset assumes basic understanding of electronics and programming Arduino boards.
+            A VR headset is a complex system and can be difficult to figure out what is not working if you get stuck with the build.
+            If you encounter any issues, join our Discord and ask for help, we are happy to assist.
 
 ### 1.2 ELECTRONICS
 
@@ -59,11 +62,13 @@ The following electronic components are required:
 - Inertial Measurement Unit (IMU) that is supported by the <a href="https://github.com/LiquidCGS/FastIMU">FastIMU Library</a>
 - A small, high resolution and high refresh rate PC display + driver board, such as <a href="https://www.aliexpress.com/item/32975198897.html">this model</a>
 
-            NOTES on VR DISPLAYS:
-            - The display does not connect to the Microcontroller, it only connects to the Computer running your VR Apps.
-            - Technically, any PC display/monitor can be configured as the display used by Relativty. Therefore, you can simply test your build on your PC monitor
-            first to make sure it works, before you decide to spend a significant amount of money on lenses, display(s) and other parts.
-            - High performance, small form factor displays are expensive, and often very delicate. Handle them with care! :)
+```
+NOTES on VR DISPLAYS:
+- The display does not connect to the Microcontroller, it only connects to the Computer running your VR Apps.
+- Technically, any PC display/monitor can be configured as the display used by Relativty. Therefore, you can simply test your build on your PC monitor
+first to make sure it works, before you decide to spend a significant amount of money on lenses, display(s) and other parts.
+- High performance, small form factor displays are expensive, and often very delicate. Handle them with care! :)
+```
 
 ### 1.2.1 Wiring the IMU and MCU
 The IMU needs to be connected to the MCU for power and communication.
@@ -89,6 +94,43 @@ The MCU itself simply connets to your computer via the USB port.
 As mentioned previously, any display that is compatible with a personal computer should be able to function as your VR display.
 
 In case you are using the recommended one or a similar component that is powered via micro-USB or other USB standard, it is possible that you will encounter situations where the board does not power up. This could be either because the micro-USB cable you are using is too long (so the board cannot power up because the voltage dropped too much), or the board is unable to turn on because the USB port it connects to on the computer side is simplay unable to supply enough power. In this case, you might need to try different ports on your computer or a powered USB hub.
+
+### 1.3 MECHANICAL BUILD
+
+The following parts are required for the Mechanical Build:
+
+- Housing - .STL files for 3D-printable model provided in Relativty_Mechanical_build folder.
+- Lenses -  for building the 3D-printable headset, Lenses with 40mm diameter/50mm focal length required. You can often find these on Aliexpress or similar.
+- Strap and Facial Interface - e.g. replacement strap + foam for HTC Vive. You can often find these on Aliexpress or similar.
+
+If you do not have access to 3D-printing, it is also possible (and MUCH simpler) to just use an Android VR Phone case, and modify it to fit your screen and so that you can attach your IMU and MCU to it.
+
+The advantage of this approach is that you get everything in one package, often including IPD adjustment.
+
+### 1.4 SOFTWARE SETUP
+
+### 1.4.1 Introduction
+
+Relativty depends on 2 main software components:
+- the Arduino firmware
+- the SteamVR driver
+
+As the system is designed to work with SteamVR, you need to have Steam installed and SteamVR downloaded on your computer.
+
+### 1.4.2 Programming your MCU
+
+As previously mentioned, we recommend you use an Arduino Pro Micro and an IMU supported by the FastIMU Library.
+FastIMU is an awesome package that supports many commonly used IMUs and comes with a pre-written Arduino sketch that works with Relativty.
+
+First, you will need to install the Arduino IDE and connect your MCU to your computer via the USB connector.
+
+Once you have it connected and verified your Arduino IDE can work with your MCU, download FastIMU from the library manager.
+
+<p align="center"> <img src="ressources/img/FastIMU-lib.jpg"> </p>
+
+
+Wire up your IMU as recommended in Section 1.2.1.
+
 
 
 # 2. LEGACY BUILD
