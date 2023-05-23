@@ -103,9 +103,13 @@ The following parts are required for the Mechanical Build:
 - Lenses -  for building the 3D-printable headset, Lenses with 40mm diameter/50mm focal length required. You can often find these on Aliexpress or similar.
 - Strap and Facial Interface - e.g. replacement strap + foam for HTC Vive. You can often find these on Aliexpress or similar.
 
+<p align="center"> <img src="ressources/img/front.jpg"> </p>
+
 If you do not have access to 3D-printing, it is also possible (and MUCH simpler) to just use an Android VR Phone case, and modify it to fit your screen and so that you can attach your IMU and MCU to it.
 
 The advantage of this approach is that you get everything in one package, often including IPD adjustment.
+
+<p align="center"> <img src="ressources/img/android-vr.jpg"> </p>
 
 ### 1.4 SOFTWARE SETUP
 
@@ -164,6 +168,8 @@ This is the configuration file for the driver.
 
 There are a few things that you need to change.
 
+
+### Configuring the driver to talk to the MCU
 ASSUMING you use an Arduino Pro Micro and the FastIMU library:
 
 In the Relativty_hmd segment find these values:
@@ -179,6 +185,18 @@ and change the values like so:
       "hmdIMUdmpPackets":  false,
 ```
 
+If you are using a different MCU, you need to figure out the USB PID and VID values.
+
+Easiest way is to connect it to your computer via USB and check in Arduino IDE.
+
+In the menu bar, select Tools/Get Board Info:
+<p align="center"> <img src="ressources/img/board-info.jpg"> </p>
+
+Take the PID and VID values and convert them to decimal with a <a href="https://www.rapidtables.com/convert/number/hex-to-decimal.html">hex converter</a>.
+
+The converted values then go into the hmdPid and hmdVid values in default.vrsettings.
+
+### Configuring the Display Settings
 Now let's look at configuring the driver to work with your Display.
 
 The config variables for the display are in the Relativty_extendedDisplay segment:
