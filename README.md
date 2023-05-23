@@ -60,7 +60,7 @@ The following electronic components are required:
 
 - ATmega32U4 Microcontroller (MCU) with USB HID support, such as an <a href="https://www.amazon.co.uk/diymore-Atmega32U4-Development-Microcontroller-Header/dp/B0BKGSVX2X">Arduino Pro Micro</a>
 - Inertial Measurement Unit (IMU) that is supported by the <a href="https://github.com/LiquidCGS/FastIMU">FastIMU Library</a>
-- A small, high resolution and high refresh rate PC display + driver board, such as <a href="https://www.aliexpress.com/item/32975198897.html">this model</a>
+- A small, high resolution and high refresh rate PC display + driver board, such as <a href="https://www.aliexpress.com/item/32975198897.html">this model</a>. It is important to note that these displays connect to a DRIVER BOARD, which then connects to your computer. ALWAYS purchase the driver board and display(s) in the same bundle if you can to ensure they are compatible with each other. If you have further questions about displays, join us at <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>.
 
 ```
 NOTES on VR DISPLAYS:
@@ -76,11 +76,11 @@ The MCU connects to your computer via USB to send the IMU readings to SteamVR.
 
 In case of an Arduino Pro Micro, you need to connect the following pins:
 ```
-Pro Micro   IMU
-VCC     ->  VCC  
-GND     ->  GND  
-SDA(2)  ->  SDA  
-SCL(3)  ->  SCL  
+Pro Micro       IMU
+VCC         ->  VCC  
+GND         ->  GND  
+SDA(pin 2)  ->  SDA  
+SCL(pin 3)  ->  SCL  
 ```  
 If you use a different MCU, the SDA and SCL pins might be mapped to different pin numbers.
 
@@ -93,7 +93,7 @@ The MCU itself simply connets to your computer via the USB port.
 ### 1.2.2 Connecting the display
 As mentioned previously, any display that is compatible with a personal computer should be able to function as your VR display.
 
-In case you are using the recommended one or a similar component that is powered via micro-USB or other USB standard, it is possible that you will encounter situations where the board does not power up. This could be either because the micro-USB cable you are using is too long (so the board cannot power up because the voltage dropped too much), or the board is unable to turn on because the USB port it connects to on the computer side is simplay unable to supply enough power. In this case, you might need to try different ports on your computer or a powered USB hub.
+In case you are using the recommended one or a similar component that is powered via micro-USB or other USB standard, it is possible that you will encounter situations where the board does not power up. This could be either because the micro-USB cable you are using is too long (so the board cannot power up because the voltage dropped too much), or the board is unable to turn on because the USB port it connects to on the computer side is simply unable to supply enough power. In this case, you might need to try different ports on your computer or a powered USB hub.
 
 ### 1.3 MECHANICAL BUILD
 
