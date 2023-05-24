@@ -60,8 +60,7 @@ The following electronic components are required:
 
 - ATmega32U4 Microcontroller (MCU) with USB HID support, such as an <a href="https://www.amazon.co.uk/diymore-Atmega32U4-Development-Microcontroller-Header/dp/B0BKGSVX2X">Arduino Pro Micro</a>
 - Inertial Measurement Unit (IMU) that is supported by the <a href="https://github.com/LiquidCGS/FastIMU">FastIMU Library</a>
-- A small, high resolution and high refresh rate PC display + driver board, such as <a href="https://www.aliexpress.com/item/32975198897.html">this model</a>. It is important to note that these displays connect to a DRIVER BOARD, which then connects to your computer. ALWAYS purchase the driver board and display(s) in the same bundle if you can to ensure they are compatible with each other. If you have further questions about displays, join us at <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>.
-
+- A small, high resolution and high refresh rate PC display + driver board. <a href="https://github.com/HadesVR/HadesVR/blob/main/docs/Headset.md#displays">This segment of the HadesVR documentation presents possible good options you can choose from</a>. It is important to note that these displays connect to a DRIVER BOARD, which then connects to your computer. ALWAYS purchase the driver board and display(s) in the same bundle if you can to ensure they are compatible with each other. If you have further questions about displays, join us at <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>.
 ```
 NOTES on VR DISPLAYS:
 - The display does not connect to the Microcontroller, it only connects to the Computer running your VR Apps.
