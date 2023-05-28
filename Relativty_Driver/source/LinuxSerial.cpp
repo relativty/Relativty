@@ -7,7 +7,7 @@
 #include <termios.h>
 #include <errno.h>
 #include "../include/openvr_driver.hpp"
-#include "../include/Serial.hpp"
+#include "Serial.hpp"
 
 int open_serial(const char* port, int baudrate);
 

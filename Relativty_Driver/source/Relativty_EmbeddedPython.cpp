@@ -27,18 +27,23 @@
 #include "../include/Python/Python.h"
 #endif
 
-#include "../include/Relativty_EmbeddedPython.hpp"
-#include "../include/Relativty_ServerDriver.hpp"
+#include "Relativty_EmbeddedPython.hpp"
+#include "Relativty_ServerDriver.hpp"
 
 void startPythonTrackingClient_threaded(std::string PyPath) {
 	std::string fileName = PyPath + "/Client.py";
-	FILE* fp;
-	fp = fopen(fileName.c_str(), "rb");
+	FILE* fp = fopen(fileName.c_str(), "rb");
+
+	if(fp == nullptr) {
+		vr::VRDriverLog()->Log("Could not find the python binary");
+		return;
+	}
 
 	PyPath = "PyPATH = '" + PyPath + "'";
 	Py_Initialize();
 	PyRun_SimpleString(PyPath.c_str());
 	Relativty::ServerDriver::Log("Thread4: starting Client.py \n");
-	PyRun_AnyFileExFlags(fp, "Client.py", 0, NULL);
+	PyRun_AnyFileExFlags(fp, "Client.py", 0, nullptr);
 	Py_Finalize();
+	fclose(fp);
 }

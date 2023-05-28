@@ -18,7 +18,7 @@
 #include <atomic>
 
 
-#include "openvr_driver.hpp"
+#include "../include/openvr_driver.hpp"
 #include "Relativty_components.hpp"
 #include "Relativty_base_device.hpp"
 #include "Serial.hpp"
@@ -28,25 +28,35 @@
 	#include <memory>
 	#include <sys/socket.h>
 	#include <hidapi/hidapi.h>
-	#define SOCKET int
+	using SOCKET = int;
 #else
 	#include <winsock2.h>
 	#include "../hidapi/hidapi/hidapi.h"
 #endif
 
+
 namespace Relativty {
-	class HMDDriver : public RelativtyDevice<false>
+	struct xyz {
+		float x;
+		float y;
+		float z;
+	};
+
+
+class HMDDriver : public RelativtyDevice<false>
 	{
 	public:
 		HMDDriver(const std::string& myserial);
 		virtual ~HMDDriver() = default;
 
 		void frameUpdate();
-		inline void setProperties();
+		inline void setProperties() const;
 
 		// Inherited from RelativtyDevice, to be overridden
 		virtual vr::EVRInitError Activate(uint32_t unObjectId);
 		virtual void Deactivate();
+
+		xyz getCoordinates() const;
 
 	private:
 		int32_t m_iPid;
@@ -71,7 +81,7 @@ namespace Relativty {
 		std::thread retrieve_quaternion_thread_worker;
 		void retrieve_device_quaternion_packet_threaded();
 
-		std::atomic<float> vector_xyz[3];
+		std::atomic<xyz> vector_xyz;
 		std::atomic<bool> retrieve_vector_isOn = { false };
 		std::atomic<bool> new_vector_avaiable = { false };
 		bool start_tracking_server = false;

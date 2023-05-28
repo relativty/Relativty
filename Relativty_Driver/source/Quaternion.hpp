@@ -4,7 +4,7 @@ class Quaternion
 {
 public:
 	Quaternion() = default;
-	inline Quaternion(float w, float x, float y, float z): w(w), x(x), y(y), z(z) {};
+	inline Quaternion(float qw, float qx, float qy, float qz): w(qw), x(qx), y(qy), z(qz) {};
 	Quaternion(Quaternion &&) = default;
 	Quaternion(const Quaternion &) = default;
 	Quaternion &operator=(Quaternion &&) = default;

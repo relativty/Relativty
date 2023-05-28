@@ -5,7 +5,7 @@
 #ifdef WIN32
 #ifndef _WINDOWS_
 //reduce the scope of the import to avoid conflicts
-//it seems that windows headers are not the best or u don't know what im doing
+//it seems that windows headers are not the best or i don't know what im doing
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #undef WIN32_LEAN_AND_MEAN

@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include <cstddef>
 #include <cstring>
 
 #include <atomic>
@@ -38,17 +39,15 @@
 	#include <ws2tcpip.h>
 #endif
 #include "../hidapi/hidapi/hidapi.h"
-
 #include "../include/openvr_driver.hpp"
-
 #include "../include/driverlog.hpp"
 
-#include "../include/Relativty_HMDDriver.hpp"
-#include "../include/Relativty_ServerDriver.hpp"
-#include "../include/Relativty_EmbeddedPython.hpp"
-#include "../include/Relativty_components.hpp"
-#include "../include/Relativty_base_device.hpp"
-#include "../include/Serial.hpp"
+#include "Relativty_HMDDriver.hpp"
+#include "Relativty_ServerDriver.hpp"
+#include "Relativty_EmbeddedPython.hpp"
+#include "Relativty_components.hpp"
+#include "Relativty_base_device.hpp"
+#include "Serial.hpp"
 
 #include <string>
 
@@ -73,7 +72,7 @@
 
 #endif
 
-inline void Normalize(float norma[3], const float v[3], const float max[3], const float min[3], const float up, const float down, const float scale[3], const float offset[3]) {
+inline void normalize(float norma[3], const float v[3], const float max[3], const float min[3], const float up, const float down, const float scale[3], const float offset[3]) {
 	for (int i = 0; i < 3; i++) {
 		norma[i] = (((up - down) * ((v[i] - min[i]) / (max[i] - min[i])) + down) / scale[i])+ offset[i];
 	}
@@ -170,10 +169,11 @@ void Relativty::HMDDriver::update_pose_threaded() {
 		}
 
 		if (this->new_vector_avaiable) {
+			const xyz vector = this->vector_xyz.load();
 
-			m_Pose.vecPosition[0] = this->vector_xyz[0];
-			m_Pose.vecPosition[1] = this->vector_xyz[1];
-			m_Pose.vecPosition[2] = this->vector_xyz[2];
+			m_Pose.vecPosition[0] = vector.x;
+			m_Pose.vecPosition[1] = vector.y;
+			m_Pose.vecPosition[2] = vector.z;
 		}
 
 		if(this->new_quaternion_avaiable || this->new_vector_avaiable) {
@@ -278,6 +278,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 	Relativty::ServerDriver::Log("Thread1: successfully stopped\n");
 }
 
+//retrieve the position of the headset from the python script
 void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	socklen_t addressLen;
 	struct sockaddr_in server, client;
@@ -289,9 +290,6 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	const float normalize_max[3]{ this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ};
 	const float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
 	const float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
-
-	float coordinate[3]{ 0.f, 0.f, 0.f };
-	float coordinate_normalized[3];
 
 	#ifndef __unix__
 	WSADATA wsaData;
@@ -353,20 +351,26 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
 		#ifndef MSVC
-		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, 0);
+		resultReceiveLen = (size_t)recv(this->sock_receive, receiveBuffer, receiveBufferLen, 0);
 		#else
-		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, NULL);
+		resultReceiveLen = (size_t)recv(this->sock_receive, receiveBuffer, receiveBufferLen, NULL);
 		#endif
 		if (resultReceiveLen > 0) {
-			coordinate[0] = *(float*)(receiveBuffer);
-			coordinate[1] = *(float*)(receiveBuffer + 4);
-			coordinate[2] = *(float*)(receiveBuffer + 8);
+			const float coordinate[3] = {
+				*(float*)(receiveBuffer),
+				*(float*)(receiveBuffer + 4),
+				*(float*)(receiveBuffer + 8)
+			};
 
-			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+			float coordinate_normalized[3];
 
-			this->vector_xyz[0] = coordinate_normalized[1];
-			this->vector_xyz[1] = coordinate_normalized[2];
-			this->vector_xyz[2] = coordinate_normalized[0];
+			normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+
+			this->vector_xyz.store({
+				coordinate_normalized[0],
+				coordinate_normalized[1],
+				coordinate_normalized[2]
+			});
 			this->new_vector_avaiable = true;
 		}
 	}
@@ -425,7 +429,7 @@ Relativty::HMDDriver::HMDDriver(const std::string& myserial) : RelativtyDevice(m
 	m_Pose.result = vr::TrackingResult_Running_OK;
 }
 
-inline void Relativty::HMDDriver::setProperties() {
+inline void Relativty::HMDDriver::setProperties() const{
 	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_UserIpdMeters_Float, this->IPD);
 	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_UserHeadToEyeDepthMeters_Float, 0.16f);
 	vr::VRProperties()->SetFloatProperty(m_ulPropertyContainer, vr::Prop_DisplayFrequency_Float, this->DisplayFrequency);

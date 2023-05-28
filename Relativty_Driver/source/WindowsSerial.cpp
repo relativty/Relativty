@@ -1,5 +1,5 @@
-#include "../include/openvr_driver.hpp"
-#include "../include/Serial.hpp"
+#include "openvr_driver.hpp"
+#include "Serial.hpp"
 
 HANDLE open_handle(const char* port, int baudrate);
 void Serial::read(void* buffer, unsigned int size) const {

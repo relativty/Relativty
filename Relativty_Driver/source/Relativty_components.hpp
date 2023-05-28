@@ -1,11 +1,7 @@
 #pragma once
 
 #include <math.h>
-#include "./openvr_driver.hpp"
-
-#ifndef RELATIVTY_COMPONENTS_H
-#define RELATIVTY_COMPONENTS_H
-
+#include "../include/openvr_driver.hpp"
 
 namespace Relativty {
   static const char *const k_pch_ExtDisplay_Section = "Relativty_extendedDisplay";
@@ -184,5 +180,3 @@ namespace Relativty {
   };
 
 }
-
-#endif // RELATIVTY_COMPONENTS_H

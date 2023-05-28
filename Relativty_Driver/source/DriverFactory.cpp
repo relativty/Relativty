@@ -14,7 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "../include/openvr_driver.hpp"
-#include "../include/Relativty_ServerDriver.hpp"
+#include "Relativty_ServerDriver.hpp"
 #include <memory>
 
 static std::shared_ptr<Relativty::ServerDriver> Relativty_Driver;

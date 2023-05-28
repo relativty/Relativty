@@ -17,20 +17,20 @@
 #ifndef RELATIVTY_SERVERDRIVER_H
 #define RELATIVTY_SERVERDRIVER_H
 
-#include "openvr_driver.hpp"
+#include "../include/openvr_driver.hpp"
 #include "Relativty_HMDDriver.hpp"
 
 namespace Relativty {
 	class ServerDriver : public vr::IServerTrackedDeviceProvider
 	{
 	public:
-		virtual vr::EVRInitError Init(vr::IVRDriverContext* DriverContext) override;
-		virtual void Cleanup() override;
-		virtual const char* const* GetInterfaceVersions() override;
-		virtual void RunFrame() override;
-		virtual bool ShouldBlockStandbyMode() override;
-		virtual void EnterStandby() override;
-		virtual void LeaveStandby() override;
+		vr::EVRInitError Init(vr::IVRDriverContext* DriverContext) override;
+		void Cleanup() override;
+		const char* const* GetInterfaceVersions() override;
+		void RunFrame() override;
+		bool ShouldBlockStandbyMode() override;
+		void EnterStandby() override;
+		void LeaveStandby() override;
 
 		static void Log(const std::string& log);
 	private:

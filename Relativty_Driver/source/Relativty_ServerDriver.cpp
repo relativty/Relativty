@@ -17,8 +17,8 @@
 
 #include "../include/driverlog.hpp"
 
-#include "../include/Relativty_ServerDriver.hpp"
-#include "../include/Relativty_HMDDriver.hpp"
+#include "Relativty_ServerDriver.hpp"
+#include "Relativty_HMDDriver.hpp"
 
 vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
 
