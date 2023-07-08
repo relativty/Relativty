@@ -23,16 +23,19 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
+      "isSerial": true,
+      "serialDevice": "/dev/ttyUSB0",
+      "baudrate": 230400,
       "hmdPid" : 9,
       "hmdVid": 4617,
       "hmdIMUdmpPackets":  true,
-      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"      
+      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    },
-   "Relativty_extendedDisplay": {
-      "windowX" : 10,
-      "windowY" : 10,
-      "windowWidth" : 3840,
-      "windowHeight" : 2160,
+  "Relativty_extendedDisplay": {
+      "windowX" : 0,
+      "windowY" : 0,
+      "windowWidth" : 1920,
+      "windowHeight" : 1080,
       "renderWidth" : 1920,
       "renderHeight" : 1080,
       "DistortionK1" : 0.4,
@@ -42,5 +45,5 @@
       "EyeGapOffsetPx" : 0,
       "IsDisplayRealDisplay" : true,
       "IsDisplayOnDesktop" : true
-   }
+  }
 }

@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,9 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "openvr_driver.h"
+#include "../include/openvr_driver.hpp"
 
-#include "driverlog.h"
+#include "../include/driverlog.hpp"
 
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_HMDDriver.hpp"
@@ -23,7 +23,7 @@
 vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
 
 	vr::EVRInitError eError = vr::InitServerDriverContext(DriverContext);
-		if (eError != vr::VRInitError_None) {
+	if (eError != vr::VRInitError_None) {
 			return eError;
 	}
 	#ifdef DRIVERLOG_H
@@ -34,18 +34,18 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	DriverLog("Thread3: receive positional data from python loop");
 	#endif
 
-	this->Log("Relativty Init successful.\n");
-	
-	this->HMDDriver = new Relativty::HMDDriver("zero");
-	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
+	Relativty::ServerDriver::Log("Relativty Init successful.\n");
+
+	this->HMD_Driver = new Relativty::HMDDriver("zero");
+	vr::VRServerDriverHost()->TrackedDeviceAdded(this->HMD_Driver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMD_Driver);
 	// GetSerialNumber() is there for a reason!
 
 	return vr::VRInitError_None;
 }
 
 void Relativty::ServerDriver::Cleanup() {
-	delete this->HMDDriver;
-	this->HMDDriver = NULL;
+	delete this->HMD_Driver;
+	this->HMD_Driver = nullptr;
 
 	#ifdef DRIVERLOG_H
 	CleanupDriverLog();
@@ -72,6 +72,6 @@ void Relativty::ServerDriver::LeaveStandby() {
 
 }
 
-void Relativty::ServerDriver::Log(std::string log) {
+void Relativty::ServerDriver::Log(const std::string& log) {
 	vr::VRDriverLog()->Log(log.c_str());
 }

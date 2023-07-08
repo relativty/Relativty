@@ -111,8 +111,8 @@ struct HmdRect2_t
 	HmdVector2_t vBottomRight;
 };
 
-/** Used to return the post-distortion UVs for each color channel. 
-* UVs range from 0 to 1 with 0,0 in the upper left corner of the 
+/** Used to return the post-distortion UVs for each color channel.
+* UVs range from 0 to 1 with 0,0 in the upper left corner of the
 * source render target. The 0,0 to 1,1 range covers a single eye. */
 struct DistortionCoordinates_t
 {
@@ -135,7 +135,7 @@ enum ETextureType
 	TextureType_Vulkan = 2, // Handle is a pointer to a VRVulkanTextureData_t structure
 	TextureType_IOSurface = 3, // Handle is a macOS cross-process-sharable IOSurfaceRef, deprecated in favor of TextureType_Metal on supported platforms
 	TextureType_DirectX12 = 4, // Handle is a pointer to a D3D12TextureData_t structure
-	TextureType_DXGISharedHandle = 5, // Handle is a HANDLE DXGI share handle, only supported for Overlay render targets. 
+	TextureType_DXGISharedHandle = 5, // Handle is a HANDLE DXGI share handle, only supported for Overlay render targets.
 									  // this texture is used directly by our renderer, so only perform atomic (copyresource or resolve) on it
 	TextureType_Metal = 6, // Handle is a MTLTexture conforming to the MTLSharedTexture protocol. Textures submitted to IVRCompositor::Submit which
 						   // are of type MTLTextureType2DArray assume layer 0 is the left eye texture (vr::EVREye::Eye_left), layer 1 is the right
@@ -368,8 +368,8 @@ enum ETrackedDeviceProperty
 	Prop_SecondsFromVsyncToPhotons_Float		= 2001,
 	Prop_DisplayFrequency_Float					= 2002,
 	Prop_UserIpdMeters_Float					= 2003,
-	Prop_CurrentUniverseId_Uint64				= 2004, 
-	Prop_PreviousUniverseId_Uint64				= 2005, 
+	Prop_CurrentUniverseId_Uint64				= 2004,
+	Prop_PreviousUniverseId_Uint64				= 2005,
 	Prop_DisplayFirmwareVersion_Uint64			= 2006,
 	Prop_IsOnDesktop_Bool						= 2007,
 	Prop_DisplayMCType_Int32					= 2008,
@@ -529,7 +529,7 @@ enum ETrackedDeviceProperty
 	// Vendors are free to expose private debug data in this reserved region
 	Prop_VendorSpecific_Reserved_Start			= 10000,
 	Prop_VendorSpecific_Reserved_End			= 10999,
-	
+
 	Prop_TrackedDeviceProperty_Max				= 1000000,
 };
 
@@ -641,7 +641,7 @@ enum EVRSubmitFlags
 };
 
 /** Data required for passing Vulkan textures to IVRCompositor::Submit.
-* Be sure to call OpenVR_Shutdown before destroying these resources. 
+* Be sure to call OpenVR_Shutdown before destroying these resources.
 * Please see https://github.com/ValveSoftware/openvr/wiki/Vulkan for Vulkan-specific documentation */
 struct VRVulkanTextureData_t
 {
@@ -655,7 +655,7 @@ struct VRVulkanTextureData_t
 };
 
 /** Data required for passing Vulkan texture arrays to IVRCompositor::Submit.
-* Be sure to call OpenVR_Shutdown before destroying these resources. 
+* Be sure to call OpenVR_Shutdown before destroying these resources.
 * Please see https://github.com/ValveSoftware/openvr/wiki/Vulkan for Vulkan-specific documentation */
 struct VRVulkanTextureArrayData_t : public VRVulkanTextureData_t
 {
@@ -718,7 +718,7 @@ enum EVREventType
 	// VREvent_DualAnalog_Move			= 254, // No longer sent
 	// VREvent_DualAnalog_ModeSwitch1	= 255, // No longer sent
 	// VREvent_DualAnalog_ModeSwitch2	= 256, // No longer sent
-	VREvent_Modal_Cancel				= 257, // Sent to overlays with the 
+	VREvent_Modal_Cancel				= 257, // Sent to overlays with the
 
 	VREvent_MouseMove					= 300, // data is mouse
 	VREvent_MouseButtonDown				= 301, // data is mouse
@@ -728,7 +728,7 @@ enum EVREventType
 	VREvent_ScrollDiscrete				= 305, // data is scroll
 	VREvent_TouchPadMove				= 306, // data is mouse
 	VREvent_OverlayFocusChanged			= 307, // data is overlay, global event
-	VREvent_ReloadOverlays				= 308, 
+	VREvent_ReloadOverlays				= 308,
 	VREvent_ScrollSmooth				= 309, // data is scroll
 	VREvent_LockMousePosition			= 310,
 	VREvent_UnlockMousePosition			= 311,
@@ -882,7 +882,7 @@ enum EVREventType
 
 	VREvent_MessageOverlay_Closed			= 1650,
 	VREvent_MessageOverlayCloseRequested	= 1651,
-	
+
 	VREvent_Input_HapticVibration			= 1700, // data is hapticVibration
 	VREvent_Input_BindingLoadFailed			= 1701, // data is inputBinding
 	VREvent_Input_BindingLoadSuccessful		= 1702, // data is inputBinding
@@ -915,10 +915,10 @@ enum EVREventType
 // VREvent_TrackedDeviceUserInteractionStarted fires when the devices transitions from Standby -> UserInteraction or Idle -> UserInteraction.
 // VREvent_TrackedDeviceUserInteractionEnded fires when the devices transitions from UserInteraction_Timeout -> Idle
 enum EDeviceActivityLevel
-{	
-	k_EDeviceActivityLevel_Unknown = -1,									
+{
+	k_EDeviceActivityLevel_Unknown = -1,
 	k_EDeviceActivityLevel_Idle = 0,						// No activity for the last 10 seconds
-	k_EDeviceActivityLevel_UserInteraction = 1,				// Activity (movement or prox sensor) is happening now	
+	k_EDeviceActivityLevel_UserInteraction = 1,				// Activity (movement or prox sensor) is happening now
 	k_EDeviceActivityLevel_UserInteraction_Timeout = 2,		// No activity for the last 0.5 seconds
 	k_EDeviceActivityLevel_Standby = 3,						// Idle for at least 5 seconds (configurable in Settings -> Power Management)
 	k_EDeviceActivityLevel_Idle_Timeout = 4,
@@ -936,7 +936,7 @@ enum EVRButtonId
 	k_EButton_DPad_Right		= 5,
 	k_EButton_DPad_Down			= 6,
 	k_EButton_A					= 7,
-	
+
 	k_EButton_ProximitySensor   = 31,
 
 	k_EButton_Axis0				= 32,
@@ -1233,9 +1233,9 @@ typedef union
 } VREvent_Data_t;
 
 
-#if defined(__linux__) || defined(__APPLE__) 
-// This structure was originally defined mis-packed on Linux, preserved for 
-// compatibility. 
+#if defined(__linux__) || defined(__APPLE__)
+// This structure was originally defined mis-packed on Linux, preserved for
+// compatibility.
 #pragma pack( push, 4 )
 #endif
 
@@ -1249,7 +1249,7 @@ struct VREvent_t
 	VREvent_Data_t data;
 };
 
-#if defined(__linux__) || defined(__APPLE__) 
+#if defined(__linux__) || defined(__APPLE__)
 #pragma pack( pop )
 #endif
 
@@ -1318,9 +1318,9 @@ enum EVRSpatialAnchorError
 	VRSpatialAnchorError_UnknownDriver = 13,
 };
 
-/** The mesh to draw into the stencil (or depth) buffer to perform 
+/** The mesh to draw into the stencil (or depth) buffer to perform
 * early stencil (or depth) kills of pixels that will never appear on the HMD.
-* This mesh draws on all the pixels that will be hidden after distortion. 
+* This mesh draws on all the pixels that will be hidden after distortion.
 *
 * If the HMD does not provide a visible area mesh pVertexData will be
 * NULL and unTriangleCount will be 0. */
@@ -1341,7 +1341,7 @@ enum EHiddenAreaMeshType
 };
 
 
-/** Identifies what kind of axis is on the controller at index n. Read this type 
+/** Identifies what kind of axis is on the controller at index n. Read this type
 * with pVRSystem->Get( nControllerDeviceIndex, Prop_Axis0Type_Int32 + n );
 */
 enum EVRControllerAxisType
@@ -1365,16 +1365,16 @@ struct VRControllerAxis_t
 static const uint32_t k_unControllerStateAxisCount = 5;
 
 
-#if defined(__linux__) || defined(__APPLE__) 
-// This structure was originally defined mis-packed on Linux, preserved for 
-// compatibility. 
+#if defined(__linux__) || defined(__APPLE__)
+// This structure was originally defined mis-packed on Linux, preserved for
+// compatibility.
 #pragma pack( push, 4 )
 #endif
 
 /** Holds all the state of a controller at one moment in time. */
 struct VRControllerState001_t
 {
-	// If packet num matches that on your prior call, then the controller state hasn't been changed since 
+	// If packet num matches that on your prior call, then the controller state hasn't been changed since
 	// your last call and there is no need to process it
 	uint32_t unPacketNum;
 
@@ -1385,7 +1385,7 @@ struct VRControllerState001_t
 	// Axis data for the controller's analog inputs
 	VRControllerAxis_t rAxis[ k_unControllerStateAxisCount ];
 };
-#if defined(__linux__) || defined(__APPLE__) 
+#if defined(__linux__) || defined(__APPLE__)
 #pragma pack( pop )
 #endif
 
@@ -1449,12 +1449,12 @@ enum EVROverlayError
 	VROverlayError_TextureNotLocked			= 33,
 };
 
-/** enum values to pass in to VR_Init to identify whether the application will 
+/** enum values to pass in to VR_Init to identify whether the application will
 * draw a 3D scene. */
 enum EVRApplicationType
 {
-	VRApplication_Other = 0,		// Some other kind of application that isn't covered by the other entries 
-	VRApplication_Scene	= 1,		// Application will submit 3D frames 
+	VRApplication_Other = 0,		// Some other kind of application that isn't covered by the other entries
+	VRApplication_Scene	= 1,		// Application will submit 3D frames
 	VRApplication_Overlay = 2,		// Application only interacts with overlays
 	VRApplication_Background = 3,	// Application should not start SteamVR if it's not already running, and should not
 									// keep it running if everything else quits.
@@ -1505,17 +1505,17 @@ enum EVRSkeletalMotionRange
 enum EVRSkeletalTrackingLevel
 {
 	// body part location can't be directly determined by the device. Any skeletal pose provided by
-	// the device is estimated by assuming the position required to active buttons, triggers, joysticks, 
-	// or other input sensors. 
+	// the device is estimated by assuming the position required to active buttons, triggers, joysticks,
+	// or other input sensors.
 	// E.g. Vive Controller, Gamepad
 	VRSkeletalTracking_Estimated = 0,
 
-	// body part location can be measured directly but with fewer degrees of freedom than the actual body 
-	// part. Certain body part positions may be unmeasured by the device and estimated from other input data. 
+	// body part location can be measured directly but with fewer degrees of freedom than the actual body
+	// part. Certain body part positions may be unmeasured by the device and estimated from other input data.
 	// E.g. Index Controllers, gloves that only measure finger curl
 	VRSkeletalTracking_Partial = 1,
 
-	// Body part location can be measured directly throughout the entire range of motion of the body part. 
+	// Body part location can be measured directly throughout the entire range of motion of the body part.
 	// E.g. Mocap suit for the full body, gloves that measure rotation of each finger segment
 	VRSkeletalTracking_Full = 2,
 
@@ -1562,8 +1562,8 @@ enum EVRInitError
 	VRInitError_Init_AppInfoInitFailed				= 114,
 	VRInitError_Init_Retry							= 115, // Used internally to cause retries to vrserver
 	VRInitError_Init_InitCanceledByUser				= 116, // The calling application should silently exit. The user canceled app startup
-	VRInitError_Init_AnotherAppLaunching			= 117, 
-	VRInitError_Init_SettingsInitFailed				= 118, 
+	VRInitError_Init_AnotherAppLaunching			= 117,
+	VRInitError_Init_SettingsInitFailed				= 118,
 	VRInitError_Init_ShuttingDown					= 119,
 	VRInitError_Init_TooManyObjects					= 120,
 	VRInitError_Init_NoServerForBackgroundApp		= 121,
@@ -1574,7 +1574,7 @@ enum EVRInitError
 	VRInitError_Init_HmdNotFoundPresenceFailed 		= 126,
 	VRInitError_Init_VRMonitorNotFound				= 127,
 	VRInitError_Init_VRMonitorStartupFailed			= 128,
-	VRInitError_Init_LowPowerWatchdogNotSupported	= 129, 
+	VRInitError_Init_LowPowerWatchdogNotSupported	= 129,
 	VRInitError_Init_InvalidApplicationType			= 130,
 	VRInitError_Init_NotAvailableToWatchdogApps		= 131,
 	VRInitError_Init_WatchdogDisabledInSettings		= 132,
@@ -1712,7 +1712,7 @@ enum EVRInitError
 	VRInitError_Compositor_CreateOverlayInvalidCall								= 488,
 	VRInitError_Compositor_CreateOverlayAlreadyInitialized						= 489,
 	VRInitError_Compositor_FailedToCreateMailbox								= 490,
-	
+
 	VRInitError_VendorSpecific_UnableToConnectToOculusRuntime		= 1000,
 	VRInitError_VendorSpecific_WindowsNotInDevMode					= 1001,
 
@@ -1757,7 +1757,7 @@ enum EVRTrackedCameraError
 {
 	VRTrackedCameraError_None                       = 0,
 	VRTrackedCameraError_OperationFailed            = 100,
-	VRTrackedCameraError_InvalidHandle              = 101,	
+	VRTrackedCameraError_InvalidHandle              = 101,
 	VRTrackedCameraError_InvalidFrameHeaderVersion  = 102,
 	VRTrackedCameraError_OutOfHandles               = 103,
 	VRTrackedCameraError_IPCFailure                 = 104,
@@ -1781,7 +1781,7 @@ enum EVRTrackedCameraFrameLayout
 	EVRTrackedCameraFrameLayout_VerticalLayout		= 0x0010,	// Stereo frames are Top/Bottom (left/right)
 	EVRTrackedCameraFrameLayout_HorizontalLayout	= 0x0020,	// Stereo frames are Left/Right
 };
-	
+
 enum EVRTrackedCameraFrameType
 {
 	VRTrackedCameraFrameType_Distorted = 0,			// This is the camera video frame size in pixels, still distorted.
@@ -1814,7 +1814,7 @@ struct CameraVideoStreamFrameHeader_t
 	uint32_t nFrameSequence;
 
 	TrackedDevicePose_t trackedDevicePose;
-	
+
 	uint64_t ulFrameExposureTime;						// mid-point of the exposure of the image in host system ticks
 };
 
@@ -1938,7 +1938,7 @@ enum Imu_OffScaleFlags
 	OffScale_GyroY	= 0x10,
 	OffScale_GyroZ	= 0x20,
 };
-	
+
 struct ImuSample_t
 {
 	double fSampleTime;
@@ -1967,7 +1967,7 @@ struct ImuSample_t
 #ifdef VR_API_EXPORT
   #define VR_INTERFACE extern "C" __attribute__((visibility("default")))
 #else
-  #define VR_INTERFACE extern "C" 
+  #define VR_INTERFACE extern "C"
 #endif
 
 #else
@@ -1978,7 +1978,7 @@ struct ImuSample_t
 #if defined( _WIN32 )
   #define VR_CALLTYPE __cdecl
 #else
-  #define VR_CALLTYPE 
+  #define VR_CALLTYPE
 #endif
 
 } // namespace vr
@@ -2007,7 +2007,7 @@ struct ImuSample_t
 
 // vrtrackedcameratypes.h
 #ifndef _VRTRACKEDCAMERATYPES_H
-#define _VRTRACKEDCAMERATYPES_H 
+#define _VRTRACKEDCAMERATYPES_H
 
 namespace vr
 {
@@ -2156,14 +2156,14 @@ namespace vr
 	{
 		IVRSettings *m_pSettings;
 	public:
-		CVRSettingHelper( IVRSettings *pSettings ) 
-		{ 
-			m_pSettings = pSettings; 
+		CVRSettingHelper( IVRSettings *pSettings )
+		{
+			m_pSettings = pSettings;
 		}
 
-		const char *GetSettingsErrorNameFromEnum( EVRSettingsError eError ) 
-		{ 
-			return m_pSettings->GetSettingsErrorNameFromEnum( eError ); 
+		const char *GetSettingsErrorNameFromEnum( EVRSettingsError eError )
+		{
+			return m_pSettings->GetSettingsErrorNameFromEnum( eError );
 		}
 
 		void SetBool( const char *pchSection, const char *pchSettingsKey, bool bValue, EVRSettingsError *peError = nullptr )
@@ -2537,7 +2537,7 @@ struct DriverPose_t
 	 * but instead an internal IMU or another reference point in the HMD.
 	 * The following two transforms transform positions and orientations
 	 * to app world space from driver world space,
-	 * and to HMD head space from driver local body space. 
+	 * and to HMD head space from driver local body space.
 	 *
 	 * We maintain the driver pose state in its internal coordinate system,
 	 * so we can do the pose prediction math without having to
@@ -2569,13 +2569,13 @@ struct DriverPose_t
 	/* Orientation of the tracker, represented as a quaternion */
 	vr::HmdQuaternion_t qRotation;
 
-	/* Angular velocity of the pose in axis-angle 
+	/* Angular velocity of the pose in axis-angle
 	* representation. The direction is the angle of
 	* rotation and the magnitude is the angle around
 	* that axis in radians/second. */
 	double vecAngularVelocity[ 3 ];
 
-	/* Angular acceleration of the pose in axis-angle 
+	/* Angular acceleration of the pose in axis-angle
 	* representation. The direction is the angle of
 	* rotation and the magnitude is the angle around
 	* that axis in radians/second^2. */
@@ -2716,16 +2716,16 @@ namespace vr
 		};
 
 		/** Called to allocate textures for applications to render into.  One of these per eye will be passed back to SubmitLayer each frame. */
-		virtual void CreateSwapTextureSet( uint32_t unPid, const SwapTextureSetDesc_t *pSwapTextureSetDesc, SwapTextureSet_t *pOutSwapTextureSet ) {}
+		virtual void CreateSwapTextureSet( [[maybe_unused]] uint32_t unPid, [[maybe_unused]] const SwapTextureSetDesc_t *pSwapTextureSetDesc, [[maybe_unused]] SwapTextureSet_t *pOutSwapTextureSet ) {}
 
 		/** Used to textures created using CreateSwapTextureSet.  Only one of the set's handles needs to be used to destroy the entire set. */
-		virtual void DestroySwapTextureSet( vr::SharedTextureHandle_t sharedTextureHandle ) {}
+		virtual void DestroySwapTextureSet( [[maybe_unused]] vr::SharedTextureHandle_t sharedTextureHandle ) {}
 
 		/** Used to purge all texture sets for a given process. */
-		virtual void DestroyAllSwapTextureSets( uint32_t unPid ) {}
+		virtual void DestroyAllSwapTextureSets( [[maybe_unused]] uint32_t unPid ) {}
 
 		/** After Present returns, calls this to get the next index to use for rendering. */
-		virtual void GetNextSwapTextureSetIndex( vr::SharedTextureHandle_t sharedTextureHandles[ 2 ], uint32_t( *pIndices )[ 2 ] ) {}
+		virtual void GetNextSwapTextureSetIndex( [[maybe_unused]] vr::SharedTextureHandle_t sharedTextureHandles[ 2 ], [[maybe_unused]] uint32_t( *pIndices )[ 2 ] ) {}
 
 		/** Call once per layer to draw for this frame.  One shared texture handle per eye.  Textures must be created
 		* using CreateSwapTextureSet and should be alternated per frame.  Call Present once all layers have been submitted. */
@@ -2743,16 +2743,16 @@ namespace vr
 			// Hmd pose used to render this layer.
 			vr::HmdMatrix34_t mHmdPose;
 		};
-		virtual void SubmitLayer( const SubmitLayerPerEye_t( &perEye )[ 2 ] ) {}
+		virtual void SubmitLayer( [[maybe_unused]] const SubmitLayerPerEye_t( &perEye )[ 2 ] ) {}
 
 		/** Submits queued layers for display. */
-		virtual void Present( vr::SharedTextureHandle_t syncTexture ) {}
+		virtual void Present( [[maybe_unused]] vr::SharedTextureHandle_t syncTexture ) {}
 
 		/** Called after Present to allow driver to take more time until vsync after they've successfully acquired the sync texture in Present.*/
 		virtual void PostPresent() {}
 
 		/** Called to get additional frame timing stats from driver.  Check m_nSize for versioning (new members will be added to end only). */
-		virtual void GetFrameTiming( DriverDirectMode_FrameTiming *pFrameTiming ) {}
+		virtual void GetFrameTiming( [[maybe_unused]] DriverDirectMode_FrameTiming *pFrameTiming ) {}
 	};
 
 	static const char *IVRDriverDirectModeComponent_Version = "IVRDriverDirectModeComponent_007";
@@ -2812,7 +2812,7 @@ class ITrackedDeviceServerDriver;
 struct TrackedDeviceDriverInfo_t;
 struct DriverPose_t;
 
-/** This interface is provided by vrserver to allow the driver to notify 
+/** This interface is provided by vrserver to allow the driver to notify
 * the system when something changes about a device. These changes must
 * not change the serial number or class of the device because those values
 * are permanently associated with the device's index. */
@@ -3132,7 +3132,7 @@ inline std::string CVRPropertyHelpers::GetStringProperty( vr::PropertyContainerH
 	else if ( err == TrackedProp_BufferTooSmall )
 	{
 		char *pchBuffer = new char[unRequiredBufferLen];
-		unRequiredBufferLen = GetStringProperty( ulContainer, prop, pchBuffer, unRequiredBufferLen, &err );
+		GetStringProperty( ulContainer, prop, pchBuffer, unRequiredBufferLen, &err ); // we voluntarily throw away the result of this function
 		sResult = pchBuffer;
 		delete[] pchBuffer;
 	}
@@ -3431,7 +3431,7 @@ class ITrackedDeviceServerDriver;
 struct TrackedDeviceDriverInfo_t;
 struct DriverPose_t;
 
-/** This interface is provided by vrserver to allow the driver to notify 
+/** This interface is provided by vrserver to allow the driver to notify
 * the system when something changes about a device. These changes must
 * not change the serial number or class of the device because those values
 * are permanently associated with the device's index. */
@@ -3629,7 +3629,7 @@ public:
 	virtual uint32_t LoadSharedResource( const char *pchResourceName, char *pchBuffer, uint32_t unBufferLen ) = 0;
 
 	/** Provides the full path to the specified resource. Resource names can include named directories for
-	* drivers and other things, and this resolves all of those and returns the actual physical path. 
+	* drivers and other things, and this resolves all of those and returns the actual physical path.
 	* pchResourceTypeDirectory is the subdirectory of resources to look in. */
 	virtual uint32_t GetResourceFullPath( const char *pchResourceName, const char *pchResourceTypeDirectory, VR_OUT_STRING() char *pchPathBuffer, uint32_t unBufferLen ) = 0;
 };
@@ -3644,7 +3644,7 @@ namespace vr
 
 typedef uint64_t IOBufferHandle_t;
 static const uint64_t k_ulInvalidIOBufferHandle = 0;
-	
+
 	enum EIOBufferError
 	{
 		IOBuffer_Success                  = 0,
@@ -3671,16 +3671,16 @@ static const uint64_t k_ulInvalidIOBufferHandle = 0;
 	public:
 		/** opens an existing or creates a new IOBuffer of unSize bytes */
 		virtual vr::EIOBufferError Open( const char *pchPath, vr::EIOBufferMode mode, uint32_t unElementSize, uint32_t unElements, vr::IOBufferHandle_t *pulBuffer ) = 0;
-		
+
 		/** closes a previously opened or created buffer */
 		virtual vr::EIOBufferError Close( vr::IOBufferHandle_t ulBuffer ) = 0;
-		
+
 		/** reads up to unBytes from buffer into *pDst, returning number of bytes read in *punRead */
 		virtual vr::EIOBufferError Read( vr::IOBufferHandle_t ulBuffer, void *pDst, uint32_t unBytes, uint32_t *punRead ) = 0;
-		
+
 		/** writes unBytes of data from *pSrc into a buffer. */
 		virtual vr::EIOBufferError Write( vr::IOBufferHandle_t ulBuffer, void *pSrc, uint32_t unBytes ) = 0;
-		
+
 		/** retrieves the property container of an buffer. */
 		virtual vr::PropertyContainerHandle_t PropertyContainer( vr::IOBufferHandle_t ulBuffer ) = 0;
 
@@ -3961,7 +3961,7 @@ namespace vr
 			}
 			return m_pVRIOBuffer;
 		}
-		
+
 		IVRDriverSpatialAnchors *VRDriverSpatialAnchors()
 		{
 			if ( !m_pVRDriverSpatialAnchors )
@@ -4031,7 +4031,7 @@ namespace vr
 		if ( !VRServerDriverHost()
 			|| !VRSettings()
 			|| !VRProperties()
-			|| !VRDriverLog() 
+			|| !VRDriverLog()
 			|| !VRDriverManager()
 			|| !VRResources() )
 			return VRInitError_Init_InterfaceNotFound;

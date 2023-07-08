@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,14 +13,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "openvr_driver.h"
+#include "../include/openvr_driver.hpp"
 #include "Relativty_ServerDriver.hpp"
-
+#include <memory>
 
 static std::shared_ptr<Relativty::ServerDriver> Relativty_Driver;
 
-extern "C" __declspec(dllexport) void* HmdDriverFactory(const char* InterfaceName, int* ReturnCode) {
-	if (std::strcmp(InterfaceName, vr::IServerTrackedDeviceProvider_Version) == 0) {
+#ifdef __unix__
+extern "C" void* HmdDriverFactory(const char* InterfaceName, int* ReturnCode)
+#else
+extern "C" __declspec(dllexport) void* HmdDriverFactory(const char* InterfaceName, int* ReturnCode)
+#endif
+{
+	if (strcmp(InterfaceName, vr::IServerTrackedDeviceProvider_Version) == 0) {
 		if (!Relativty_Driver) {
 			Relativty_Driver = std::make_shared<Relativty::ServerDriver>();
 		}
