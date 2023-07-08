@@ -371,20 +371,7 @@ void Relativty::HMDDriver::threaded_pose_server()
 
 	while (this->retrieve_vector_isOn)
 	{
-		/*
-		if ((0x01 & GetAsyncKeyState(0x52)) != 0) {
-			this->quat[0] = 0;
-			this->quat[1] = 0;
-			this->quat[2] = 0;
-			this->quat[3] = 0;
-			this->vector_xyz[0] = 0;
-			this->vector_xyz[1] = 0;
-			this->vector_xyz[2] = 0;
-			this->new_vector_avaiable = true;
 
-		}
-		*/
-		//Relativty::ServerDriver::Log("POSE SERVER:Waiting for data...");
 		fflush(stdout);
 		char message[BUFLEN] = {};
 
@@ -397,12 +384,10 @@ void Relativty::HMDDriver::threaded_pose_server()
 			exit(0);
 		}
 
-		// print details of the client/peer and the data received
-		//printf("Received packet from %s:%d\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
+
 		std::string messageString = message;
 		if (isspace(messageString[0])) { messageString.erase(0, 1); }
-		//printf("Data: %s\n", messageString);
-		//std::cout << "DATA: " << messageString << "\n";
+
 		std::string space_delimiter = " ";
 		std::vector<std::string> words{};
 
