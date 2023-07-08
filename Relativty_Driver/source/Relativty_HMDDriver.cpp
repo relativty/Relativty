@@ -50,6 +50,12 @@
 #include "Serial.hpp"
 
 #include <string>
+#include <vector>
+#define BUFLEN 512
+#define PORT 50000
+
+#define SIO_UDP_CONNRESET _WSAIOW(IOC_VENDOR, 12)
+
 
 #ifdef __unix__
 	Display * g_pDisplay = nullptr;
@@ -129,8 +135,8 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 			break;
 		case _pose_server:
 			Relativty::ServerDriver::Log("Pose Server not yet implemented. Tracker will fall back to a default static pose.");
-			this->retrieve_quaternion_isOn = true;
-			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+			this->retrieve_vector_isOn = true;
+			this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::threaded_pose_server, this);
 			break;
 		default:
 			const std::string error = "Invalid Tracker Specified. Tracker will fall back to a default static pose.";
@@ -205,6 +211,7 @@ void Relativty::HMDDriver::update_pose_threaded() {
 		if(this->new_quaternion_avaiable || this->new_vector_avaiable) {
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
+			this->new_quaternion_avaiable = false;
 		}
 
 		vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
@@ -266,7 +273,7 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback() {
 
-	this->quat.store(Quaternion(0.0, 0.0, 0.0, 0.0));
+	this->quat.store(Quaternion(1.0, 0.0, 0.0, 0.0));
 	this->calibrate_quaternion();
 	std::this_thread::sleep_for(std::chrono::microseconds(16));
 	this->new_quaternion_avaiable = true;
@@ -311,6 +318,127 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 		this->new_quaternion_avaiable = true;
 	}
 	Relativty::ServerDriver::Log("Thread1: successfully stopped\n");
+}
+
+
+void Relativty::HMDDriver::threaded_pose_server()
+{
+	BOOL bNewBehavior = FALSE;
+	DWORD dwBytesReturned = 0;
+	sockaddr_in server, client;
+	WSADATA wsa;
+
+	float normalize_min[3]{ this->normalizeMinX, this->normalizeMinY, this->normalizeMinZ };
+	float normalize_max[3]{ this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ };
+	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ };
+	float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ };
+
+	float coordinate[3];
+	float rotation[4];
+
+
+
+	Relativty::ServerDriver::Log("POSE SERVER:Initialising UDP...\n");
+	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+	{
+		Relativty::ServerDriver::Log("POSE SERVER:Failed to Init UDP\n");
+		return;
+	}
+	Relativty::ServerDriver::Log("POSE SERVER: Initialised.\n");
+
+	// create a socket
+	SOCKET server_socket;
+	if ((server_socket = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET)
+	{
+		Relativty::ServerDriver::Log("POSE SERVER:Could not create socket.\n");
+		return;
+	}
+	Relativty::ServerDriver::Log("POSE SERVER:Socket created.\n");
+	WSAIoctl(server_socket, SIO_UDP_CONNRESET, &bNewBehavior, sizeof bNewBehavior, NULL, 0, &dwBytesReturned, NULL, NULL);
+	server.sin_family = AF_INET;
+	server.sin_addr.s_addr = INADDR_ANY;
+	server.sin_port = htons(PORT);
+
+	// bind
+	if (bind(server_socket, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
+	{
+		Relativty::ServerDriver::Log("POSE SERVER:Bind failed\n");
+		return;
+	}
+	puts("POSE SERVER:Bind done.");
+	this->serverNotReady = false;
+	Relativty::ServerDriver::Log("POSE SERVER:Waiting for incoming connections...\n");
+
+	while (this->retrieve_vector_isOn)
+	{
+		/*
+		if ((0x01 & GetAsyncKeyState(0x52)) != 0) {
+			this->quat[0] = 0;
+			this->quat[1] = 0;
+			this->quat[2] = 0;
+			this->quat[3] = 0;
+			this->vector_xyz[0] = 0;
+			this->vector_xyz[1] = 0;
+			this->vector_xyz[2] = 0;
+			this->new_vector_avaiable = true;
+
+		}
+		*/
+		//Relativty::ServerDriver::Log("POSE SERVER:Waiting for data...");
+		fflush(stdout);
+		char message[BUFLEN] = {};
+
+		// try to receive some data, this is a blocking call
+		int message_len;
+		int slen = sizeof(sockaddr_in);
+		if (message_len = recvfrom(server_socket, message, BUFLEN, 0, (sockaddr*)&client, &slen) == SOCKET_ERROR)
+		{
+			Relativty::ServerDriver::Log("POSE SERVER:recvfrom() failed");
+			exit(0);
+		}
+
+		// print details of the client/peer and the data received
+		//printf("Received packet from %s:%d\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
+		std::string messageString = message;
+		if (isspace(messageString[0])) { messageString.erase(0, 1); }
+		//printf("Data: %s\n", messageString);
+		//std::cout << "DATA: " << messageString << "\n";
+		std::string space_delimiter = " ";
+		std::vector<std::string> words{};
+
+		size_t pos = 0;
+
+		while ((pos = messageString.find(space_delimiter)) != std::string::npos) {
+			words.push_back(messageString.substr(0, pos));
+			messageString.erase(0, pos + space_delimiter.length());
+		}
+
+		coordinate[0] = std::stof(words[0]);
+		coordinate[1] = std::stof(words[1]);
+		coordinate[2] = std::stof(words[2]);
+		rotation[0] = std::stof(words[3]);
+		rotation[1] = std::stof(words[4]);
+		rotation[2] = std::stof(words[5]);
+		rotation[3] = std::stof(words[6]);
+
+		this->vector_xyz.store({
+			coordinate[0],
+			coordinate[1],
+			coordinate[2] }
+		);
+
+		this->quat.store(Quaternion(rotation[0], rotation[1], rotation[2], rotation[3]));
+
+		this->calibrate_quaternion();
+		this->new_quaternion_avaiable = true;
+		this->new_vector_avaiable = true;
+
+		if (sendto(server_socket, message, strlen(message), 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR)
+		{
+			Relativty::ServerDriver::Log("sendto() failed");
+			return;
+		}
+	}
 }
 
 //retrieve the position of the headset from the python script

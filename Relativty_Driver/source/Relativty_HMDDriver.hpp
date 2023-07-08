@@ -118,6 +118,8 @@ class HMDDriver : public RelativtyDevice<false>
 		std::thread update_pose_thread_worker;
 		void update_pose_threaded();
 
+		void Relativty::HMDDriver::threaded_pose_server();
+
 		std::string PyPath;
 		std::thread startPythonTrackingClient_worker;
 
