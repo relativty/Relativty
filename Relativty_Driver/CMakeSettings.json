@@ -24,14 +24,15 @@
     },
     {
       "name": "x64-Release",
-      "generator": "Ninja",
+      "generator": "Visual Studio 16 2019 Win64",
       "configurationType": "MinSizeRel",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64" ]
+      "inheritEnvironments": [ "msvc_x64" ],
+      "intelliSenseMode": "windows-msvc-x64"
     },
     {
       "name": "x86-Release",
