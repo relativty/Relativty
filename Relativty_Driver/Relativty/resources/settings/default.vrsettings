@@ -27,8 +27,8 @@
       "isSerial": true,
       "serialDevice": "/dev/ttyUSB0",
       "baudrate": 230400,
-      "hmdPid" : 9,
-      "hmdVid": 4617,
+      "hmdPid" : 32823,
+      "hmdVid": 9025,
       "hmdIMUdmpPackets":  true,
       "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"
    },

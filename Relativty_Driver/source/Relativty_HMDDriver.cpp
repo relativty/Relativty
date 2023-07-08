@@ -79,6 +79,8 @@ inline void normalize(float norma[3], const float v[3], const float max[3], cons
 }
 
 vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
+	RelativtyDevice::Activate(unObjectId);
+	this->setProperties();
 	int result = 1; // result should be 0 so it will set to 0 if hid_init succeeds later.
 	//this->SelectedTracker = "hid";
 	DriverLog("SELECTED TRACKER: %d\n", SelectedTracker);
@@ -106,7 +108,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 				break;
 			}
 			this->retrieve_quaternion_isOn = true;
-			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_hid, this);
 			Relativty::ServerDriver::Log("Successfully started hid rotation tracker");
 			break;
 		case _serial:
@@ -138,6 +140,8 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
 			break;
 	}
+	//if (SelectedTracker == _hid) { this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_hid, this); }
+
 	if (this->start_tracking_server) {
 		this->retrieve_vector_isOn = true;
 		this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_client_vector_packet_threaded, this);
