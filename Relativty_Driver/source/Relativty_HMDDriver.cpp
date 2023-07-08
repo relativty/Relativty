@@ -82,7 +82,6 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	RelativtyDevice::Activate(unObjectId);
 	this->setProperties();
 	int result = 1; // result should be 0 so it will set to 0 if hid_init succeeds later.
-	//this->SelectedTracker = "hid";
 	DriverLog("SELECTED TRACKER: %d\n", SelectedTracker);
 	switch (this->SelectedTracker) {
 		case _hid:
