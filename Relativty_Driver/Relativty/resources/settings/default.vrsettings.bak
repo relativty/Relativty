@@ -23,7 +23,7 @@
       "offsetCoordinateY" : 0,
       "offsetCoordinateZ" : 0,
       "startTrackingServer" : false,
-	  "selectedTracker" : 0,
+	  "SelectedTracker" : "hid",
       "isSerial": true,
       "serialDevice": "/dev/ttyUSB0",
       "baudrate": 230400,

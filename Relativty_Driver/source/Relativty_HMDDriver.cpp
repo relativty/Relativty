@@ -79,6 +79,80 @@ inline void normalize(float norma[3], const float v[3], const float max[3], cons
 }
 
 vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
+	int result = 1; // result should be 0 so it will set to 0 if hid_init succeeds later.
+	//this->SelectedTracker = "hid";
+	DriverLog("SELECTED TRACKER: %d\n", SelectedTracker);
+	switch (this->SelectedTracker) {
+		case _hid:
+			Relativty::ServerDriver::Log("Starting hid \n");
+			result = hid_init(); //Result should be 0.
+			if (result) {
+				Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
+				Relativty::ServerDriver::Log("Tracker will fall back to a default static pose.");
+				this->retrieve_quaternion_isOn = true;
+				this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+				break;
+			}
+			this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, nullptr);
+			if (!this->handle) {
+				#ifdef DRIVERLOG_H
+					DriverLog("USB: Unable to open HMD device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
+				#else
+					Relativty::ServerDriver::Log("USB: Unable to open HMD device with pid=" + std::to_string(m_iPid) + " and vid=" + std::to_string(m_iVid) + ".\n");
+				#endif
+				Relativty::ServerDriver::Log("Tracker will fall back to a default static pose.");
+				this->retrieve_quaternion_isOn = true;
+				this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+				break;
+			}
+			this->retrieve_quaternion_isOn = true;
+			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+			Relativty::ServerDriver::Log("Successfully started hid rotation tracker");
+			break;
+		case _serial:
+			Relativty::ServerDriver::Log("Starting serial\n");
+			try {
+				this->serialPort = new Serial(this->serialDevice, this->baudrate);
+			}
+			catch (const std::exception& e) {
+				const std::string error = "Error while starting serial : " + std::string(e.what());
+				Relativty::ServerDriver::Log(error);
+				Relativty::ServerDriver::Log("Tracker will fall back to a default static pose.");
+				this->retrieve_quaternion_isOn = true;
+				this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+				break;
+			}
+			this->retrieve_quaternion_isOn = true;
+			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_serial, this);
+			Relativty::ServerDriver::Log("Successfully started serial rotation tracker");
+			break;
+		case _pose_server:
+			Relativty::ServerDriver::Log("Pose Server not yet implemented. Tracker will fall back to a default static pose.");
+			this->retrieve_quaternion_isOn = true;
+			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+			break;
+		default:
+			const std::string error = "Invalid Tracker Specified. Tracker will fall back to a default static pose.";
+			Relativty::ServerDriver::Log(error);
+			this->retrieve_quaternion_isOn = true;
+			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
+			break;
+	}
+	if (this->start_tracking_server) {
+		this->retrieve_vector_isOn = true;
+		this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_client_vector_packet_threaded, this);
+		while (this->serverNotReady) {
+			// do nothing
+		}
+		Relativty::ServerDriver::Log("Starting Python Server for legacy experimental position tracking.");
+		this->startPythonTrackingClient_worker = std::thread(startPythonTrackingClient_threaded, this->PyPath);
+	}
+	this->update_pose_thread_worker = std::thread(&Relativty::HMDDriver::update_pose_threaded, this);
+	Relativty::ServerDriver::Log("Initializing HMD Tracker.");
+	return vr::VRInitError_None;
+}
+/*
+vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	RelativtyDevice::Activate(unObjectId);
 	this->setProperties();
 
@@ -127,7 +201,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 
 	return vr::VRInitError_None;
 }
-
+*/
 void Relativty::HMDDriver::Deactivate() {
 	this->retrieve_quaternion_isOn = false;
 	this->retrieve_quaternion_thread_worker.join();
@@ -237,6 +311,15 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_serial() {
 		}
 	}
 }
+
+void Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback() {
+
+	this->quat.store(Quaternion(0.0, 0.0, 0.0, 0.0));
+	this->calibrate_quaternion();
+	std::this_thread::sleep_for(std::chrono::microseconds(16));
+	this->new_quaternion_avaiable = true;
+}
+
 
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_hid() {
 	uint8_t packet_buffer[64];
@@ -416,14 +499,21 @@ Relativty::HMDDriver::HMDDriver(const std::string& myserial) : RelativtyDevice(m
 	char buffer[1024];
 	vr::VRSettings()->GetString(Relativty_hmd_section, "serialDevice", buffer, sizeof(buffer));
 	this->serialDevice = std::string(buffer);
+	//memset(buffer, 0, sizeof buffer);
+
+	this->SelectedTracker = vr::VRSettings()->GetInt32(Relativty_hmd_section, "selectedTracker");
+	
 
 	this->m_iPid = vr::VRSettings()->GetInt32(Relativty_hmd_section, "hmdPid");
 	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_hmd_section, "hmdVid");
 
 	this->m_bIMUpktIsDMP = vr::VRSettings()->GetBool(Relativty_hmd_section, "hmdIMUdmpPackets");
 
+	
+
 	vr::VRSettings()->GetString(Relativty_hmd_section, "PyPath", buffer, sizeof(buffer));
 	this->PyPath = buffer;
+	//memset(buffer, 0, sizeof buffer);
 
 	// this is a bad idea, this should be set by the tracking loop
 	m_Pose.result = vr::TrackingResult_Running_OK;

@@ -54,6 +54,7 @@ class HMDDriver : public RelativtyDevice<false>
 
 		// Inherited from RelativtyDevice, to be overridden
 		virtual vr::EVRInitError Activate(uint32_t unObjectId);
+		//virtual vr::EVRInitError Activate2(uint32_t unObjectId);
 		virtual void Deactivate();
 
 		xyz getCoordinates() const;
@@ -122,5 +123,9 @@ class HMDDriver : public RelativtyDevice<false>
 
 		void retrieve_device_quaternion_packet_hid();
 		void retrieve_device_quaternion_packet_serial();
+		void retrieve_device_quaternion_packet_fallback();
+
+		int SelectedTracker;
+		enum TrackingMode { _hid, _serial, _pose_server};
 	};
 }
