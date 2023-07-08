@@ -140,7 +140,6 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 			this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_fallback, this);
 			break;
 	}
-	//if (SelectedTracker == _hid) { this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_hid, this); }
 
 	if (this->start_tracking_server) {
 		this->retrieve_vector_isOn = true;
@@ -155,57 +154,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 	Relativty::ServerDriver::Log("Initializing HMD Tracker.");
 	return vr::VRInitError_None;
 }
-/*
-vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
-	RelativtyDevice::Activate(unObjectId);
-	this->setProperties();
 
-	if(this->isSerial) {
-		Relativty::ServerDriver::Log("Starting serial\n");
-		try {
-			this->serialPort = new Serial(this->serialDevice, this->baudrate);
-		}
-		catch (const std::exception& e) {
-			const std::string error = "Error while starting serial : " + std::string(e.what());
-			Relativty::ServerDriver::Log(error);
-			return vr::VRInitError_Init_InterfaceNotFound;
-		}
-	} else {
-		Relativty::ServerDriver::Log("Starting hid \n");
-		int result = hid_init(); //Result should be 0.
-		if (result) {
-			Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
-			return vr::VRInitError_Driver_TrackedDeviceInterfaceUnknown;
-		}
-		this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, nullptr);
-		if (!this->handle) {
-			#ifdef DRIVERLOG_H
-			DriverLog("USB: Unable to open HMD device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
-			#else
-			Relativty::ServerDriver::Log("USB: Unable to open HMD device with pid="+ std::to_string(m_iPid) +" and vid="+ std::to_string(m_iVid) +".\n");
-			#endif
-			return vr::VRInitError_Init_InterfaceNotFound;
-		}
-	}
-
-
-	this->retrieve_quaternion_isOn = true;
-	this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded, this);
-
-	if (this->start_tracking_server) {
-		this->retrieve_vector_isOn = true;
-		this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_client_vector_packet_threaded, this);
-		while (this->serverNotReady) {
-			// do nothing
-		}
-		this->startPythonTrackingClient_worker = std::thread(startPythonTrackingClient_threaded, this->PyPath);
-	}
-
-	this->update_pose_thread_worker = std::thread(&Relativty::HMDDriver::update_pose_threaded, this);
-
-	return vr::VRInitError_None;
-}
-*/
 void Relativty::HMDDriver::Deactivate() {
 	this->retrieve_quaternion_isOn = false;
 	this->retrieve_quaternion_thread_worker.join();
