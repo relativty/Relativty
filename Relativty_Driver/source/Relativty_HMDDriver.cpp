@@ -134,7 +134,7 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 			Relativty::ServerDriver::Log("Successfully started serial rotation tracker");
 			break;
 		case _pose_server:
-			Relativty::ServerDriver::Log("Pose Server not yet implemented. Tracker will fall back to a default static pose.");
+			Relativty::ServerDriver::Log("Starting Pose Server.");
 			this->retrieve_vector_isOn = true;
 			this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::threaded_pose_server, this);
 			break;
