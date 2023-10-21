@@ -16,6 +16,8 @@ namespace Relativty {
   static const char *const k_pch_ExtDisplay_ZoomWidth_Float = "ZoomWidth";
   static const char *const k_pch_ExtDisplay_ZoomHeight_Float = "ZoomHeight";
   static const char *const k_pch_ExtDisplay_EyeGapOffset_Int = "EyeGapOffsetPx";
+  static const char* const k_pch_ExtDisplay_FovX_Float = "FovX";
+  static const char* const k_pch_ExtDisplay_FovY_Float = "FovY";
   static const char *const k_pch_ExtDisplay_IsDisplayReal_Bool = "IsDisplayRealDisplay";
   static const char *const k_pch_ExtDisplay_IsDisplayOnDesktop_bool = "IsDisplayOnDesktop";
 
@@ -64,6 +66,8 @@ namespace Relativty {
       m_bIsDisplayOnDesktop = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,
                                                  k_pch_ExtDisplay_IsDisplayOnDesktop_bool);
 
+      m_fov_x = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section, k_pch_ExtDisplay_FovX_Float);
+      m_fov_y = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section, k_pch_ExtDisplay_FovY_Float);
 
       #ifdef DRIVERLOG_H
       DriverLog("Extended display component created\n");
@@ -112,10 +116,12 @@ namespace Relativty {
 
     virtual void GetProjectionRaw(vr::EVREye eEye, float *pfLeft, float *pfRight,
                                   float *pfTop, float *pfBottom) {
-      *pfLeft = -1.0;
-      *pfRight = 1.0;
-      *pfTop = -1.0;
-      *pfBottom = 1.0;
+      float tan_x = tanf(m_fov_x / 2 / 180 * 3.14159f);
+      float tan_y = tanf(m_fov_y / 2 / 180 * 3.14159f);
+      *pfLeft = -tan_x;
+      *pfRight = tan_x;
+      *pfTop = -tan_y;
+      *pfBottom = tan_y;
     }
 
     virtual vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU,
@@ -175,6 +181,8 @@ namespace Relativty {
     float m_fDistortionK2;
     float m_fZoomWidth;
     float m_fZoomHeight;
+    float m_fov_x;
+    float m_fov_y;
   };
 
 }
