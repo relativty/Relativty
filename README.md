@@ -289,6 +289,14 @@ If you are encountering any issues with your build:
 - Join <a href="https://discord.gg/F8GNKjy6RF">Relativty's Guild on Discord</a>, tell us about the issues you are facing, and upload the log file in the chat. 
 <p align="center"> <img src="ressources/img/steamvr-logs.jpg"> </p>
 
+### IF YOUR VR WINDOW DISAPPEARS AFTER CLICKING ON IT:
+
+Open Windows PowerShell and paste these commands into the command line, then hit enter:
+
+```
+get-process vrcompositor | stop-process -Force;cd "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win64";.\vrcompositor.exe
+```
+
 
 # 2. LEGACY BUILD
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
