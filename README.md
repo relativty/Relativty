@@ -297,6 +297,8 @@ Open Windows PowerShell and paste these commands into the command line, then hit
 get-process vrcompositor | stop-process -Force;cd "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win64";.\vrcompositor.exe
 ```
 
+Afterwards the VRCompositor should remain stable, so you only have to do this once per session.
+
 
 # 2. LEGACY BUILD
 The hardware is based on the Relativty Motherboard which includes an Atmel SAM3X8E ARM Cortex-M3 processor and uses an MPU-6050 as it’s IMU.
