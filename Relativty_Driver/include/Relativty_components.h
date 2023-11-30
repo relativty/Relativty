@@ -1,4 +1,17 @@
-#pragma once
+// Copyright (C) 2020  Max Coutte, Gabriel Combe
+// Copyright (C) 2020  Relativty.com
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef RELATIVTY_COMPONENTS_H
 #define RELATIVTY_COMPONENTS_H
@@ -19,11 +32,10 @@ namespace Relativty {
   static const char *const k_pch_ExtDisplay_IsDisplayReal_Bool = "IsDisplayRealDisplay";
   static const char *const k_pch_ExtDisplay_IsDisplayOnDesktop_bool = "IsDisplayOnDesktop";
 
-
   static const bool g_bRelativtyExtDisplayComp_doLensStuff = true;
-  class RelativtyExtendedDisplayComponent: public vr::IVRDisplayComponent {
+  class RelativtyExtendedDisplayComponent : public vr::IVRDisplayComponent {
   public:
-    RelativtyExtendedDisplayComponent(){
+    RelativtyExtendedDisplayComponent() {
 
       m_nWindowX = vr::VRSettings()->GetInt32(k_pch_ExtDisplay_Section,
                                               k_pch_ExtDisplay_WindowX_Int32);
@@ -55,17 +67,16 @@ namespace Relativty {
       m_fZoomHeight = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
                                                  k_pch_ExtDisplay_ZoomHeight_Float);
 
-      m_iEyeGapOff = vr::VRSettings()->GetFloat(k_pch_ExtDisplay_Section,
-                                                 k_pch_ExtDisplay_EyeGapOffset_Int);
+      m_iEyeGapOff = vr::VRSettings()->GetInt32(k_pch_ExtDisplay_Section,
+                                                k_pch_ExtDisplay_EyeGapOffset_Int);
 
       m_bIsDisplayReal = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,
-                                                 k_pch_ExtDisplay_IsDisplayReal_Bool);
+                                                   k_pch_ExtDisplay_IsDisplayReal_Bool);
 
       m_bIsDisplayOnDesktop = vr::VRSettings()->GetBool(k_pch_ExtDisplay_Section,
-                                                 k_pch_ExtDisplay_IsDisplayOnDesktop_bool);
+                                                        k_pch_ExtDisplay_IsDisplayOnDesktop_bool);
 
-
-      #ifdef DRIVERLOG_H
+#ifdef DRIVERLOG_H
       DriverLog("Extended display component created\n");
       DriverLog("distortion koeffs: k1=%f, k2=%f\n", m_fDistortionK1, m_fDistortionK2);
       DriverLog("render target: %dx%d\n", m_nRenderWidth, m_nRenderHeight);
@@ -73,10 +84,9 @@ namespace Relativty {
       DriverLog("eye gap offset: %d", m_iEyeGapOff);
       DriverLog("is display real: %d", (int)m_bIsDisplayReal);
       DriverLog("is display on desktop: %d", (int)m_bIsDisplayOnDesktop);
-      #else
+#else
       vr::VRDriverLog()->Log("Extended display component created\n");
-      #endif
-
+#endif
     }
 
     virtual void GetWindowBounds(int32_t *pnX, int32_t *pnY, uint32_t *pnWidth,
@@ -119,10 +129,10 @@ namespace Relativty {
     }
 
     virtual vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye eEye, float fU,
-                                                      float fV) {
+                                                          float fV) {
       vr::DistortionCoordinates_t coordinates;
 
-      if constexpr(g_bRelativtyExtDisplayComp_doLensStuff) {
+      if constexpr (g_bRelativtyExtDisplayComp_doLensStuff) {
         // Distortion for lens implementation from
         // https://github.com/HelenXR/openvr_survivor/blob/master/src/head_mount_display_device.cc
         float hX;
@@ -156,7 +166,7 @@ namespace Relativty {
       return coordinates;
     }
 
-    const char* GetComponentNameAndVersion() {return vr::IVRDisplayComponent_Version;}
+    const char *GetComponentNameAndVersion() { return vr::IVRDisplayComponent_Version; }
 
   private:
     int32_t m_nWindowX;
@@ -170,13 +180,12 @@ namespace Relativty {
     bool m_bIsDisplayReal;
     bool m_bIsDisplayOnDesktop;
 
-
     float m_fDistortionK1;
     float m_fDistortionK2;
     float m_fZoomWidth;
     float m_fZoomHeight;
   };
 
-}
+} // namespace Relativty
 
 #endif // RELATIVTY_COMPONENTS_H

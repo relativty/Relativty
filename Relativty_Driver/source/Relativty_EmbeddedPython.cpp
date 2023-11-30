@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,21 +15,17 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 #pragma comment(lib, "User32.lib")
-#pragma comment (lib, "Setupapi.lib")
-#pragma comment (lib, "python38.lib")
+#pragma comment(lib, "Setupapi.lib")
+#pragma comment(lib, "python38.lib")
 
-#include <iostream>
-#include <filesystem>
 #include <string>
 #include "Python.h"
 #include "Relativty_EmbeddedPython.h"
 #include "Relativty_ServerDriver.hpp"
 
-namespace fs = std::filesystem;
-
 void startPythonTrackingClient_threaded(std::string PyPath) {
 	std::string fileName = PyPath + "/Client.py";
-	FILE* fp;
+	FILE *fp;
 	fp = fopen(fileName.c_str(), "rb");
 
 	std::string singleQuote = "\'";
@@ -37,6 +33,6 @@ void startPythonTrackingClient_threaded(std::string PyPath) {
 	Py_Initialize();
 	PyRun_SimpleString(PyPath.c_str());
 	Relativty::ServerDriver::Log("Thread4: starting Client.py \n");
-	PyRun_AnyFileExFlags(fp, "Client.py", 0, NULL);
+	PyRun_AnyFileExFlags(fp, "Client.py", 0, nullptr);
 	Py_Finalize();
 }

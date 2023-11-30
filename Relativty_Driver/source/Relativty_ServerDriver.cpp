@@ -5,7 +5,7 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -20,41 +20,39 @@
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_HMDDriver.hpp"
 
-vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
-
-	vr::EVRInitError eError = vr::InitServerDriverContext(DriverContext);
-		if (eError != vr::VRInitError_None) {
-			return eError;
+vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext *DriverContext) {
+	if (vr::EVRInitError eError = vr::InitServerDriverContext(DriverContext); eError != vr::VRInitError_None) {
+		return eError;
 	}
-	#ifdef DRIVERLOG_H
+#ifdef DRIVERLOG_H
 	InitDriverLog(vr::VRDriverLog());
 	DriverLog("Relativty driver version 0.1.1"); // report driver version
 	DriverLog("Thread1: hid quaternion packet listener loop");
 	DriverLog("Thread2: update driver pose loop");
 	DriverLog("Thread3: receive positional data from python loop");
-	#endif
+#endif
 
-	this->Log("Relativty Init successful.\n");
-	
-	this->HMDDriver = new Relativty::HMDDriver("zero");
-	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
+	Relativty::ServerDriver::Log("Relativty Init successful.\n");
+
+	this->m_HMDDriver = new Relativty::HMDDriver("zero");
+	vr::VRServerDriverHost()->TrackedDeviceAdded(this->m_HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->m_HMDDriver);
 	// GetSerialNumber() is there for a reason!
 
 	return vr::VRInitError_None;
 }
 
 void Relativty::ServerDriver::Cleanup() {
-	delete this->HMDDriver;
-	this->HMDDriver = NULL;
+	delete this->m_HMDDriver;
+	this->m_HMDDriver = nullptr;
 
-	#ifdef DRIVERLOG_H
+#ifdef DRIVERLOG_H
 	CleanupDriverLog();
-	#endif
+#endif
 
-	VR_CLEANUP_SERVER_DRIVER_CONTEXT();
+	vr::CleanupDriverContext();
 }
 
-const char* const* Relativty::ServerDriver::GetInterfaceVersions() {
+const char *const *Relativty::ServerDriver::GetInterfaceVersions() {
 	return vr::k_InterfaceVersions;
 }
 
@@ -65,13 +63,11 @@ bool Relativty::ServerDriver::ShouldBlockStandbyMode() {
 }
 
 void Relativty::ServerDriver::EnterStandby() {
-
 }
 
 void Relativty::ServerDriver::LeaveStandby() {
-
 }
 
-void Relativty::ServerDriver::Log(std::string log) {
+void Relativty::ServerDriver::Log(const std::string &log) {
 	vr::VRDriverLog()->Log(log.c_str());
 }
