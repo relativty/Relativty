@@ -87,7 +87,7 @@ Also, make sure that the VCC of your MCU is compatible with the rated operating 
 
 Supplying incorrect voltage to electronic components may cause damage to them.
 
-The MCU itself simply connets to your computer via the USB port.
+The MCU itself simply connects to your computer via the USB port.
 
 ### 1.2.2 Connecting the display
 As mentioned previously, any display that is compatible with a personal computer should be able to function as your VR display.
