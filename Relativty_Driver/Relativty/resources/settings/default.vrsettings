@@ -40,6 +40,8 @@
       "ZoomWidth" : 1,
       "ZoomHeight" : 1,
       "EyeGapOffsetPx" : 0,
+      "FovX": 90.0,
+      "FovY": 90.0,
       "IsDisplayRealDisplay" : true,
       "IsDisplayOnDesktop" : true
    }
