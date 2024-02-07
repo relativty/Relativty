@@ -6,7 +6,7 @@
 </h1>
 
 <h3 align="center">
-	Open-source VR headset with SteamVR support.
+	Free and Open-source VR headset with SteamVR support.
 </h3>
 <p align="center">
 	<strong>
@@ -20,7 +20,7 @@ I’m <a href="https://twitter.com/maxim_xyz?lang=en">Maxim xyz</a> and when my 
 
 5 years later : this headset became Relativty.
 
-* Fully Open-source - **hardware**, **software**, **firmware**.
+* GPLv3-compatible - **Free hardware Design**, **Free Software**, **Free Firmware**.
 * **Steam VR** support.
 * Natively displays **2K** resolution at **120FPS**.
 * Compatible with **Arduino**.
