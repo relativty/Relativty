@@ -1,3 +1,4 @@
+Take a look to this guide in [English](README.md)
 <h1 align="center">
 	<img
 		width="400"
@@ -100,7 +101,7 @@ En caso de que esté utilizando el componente recomendado o similar que se alime
 Se requieren las siguientes piezas para la construcción mecánica:
 
 - Carcasa: archivos .STL para el modelo imprimible en 3D proporcionados en la carpeta Relativty_Mechanical_build.
-- Lentes: para construir los auriculares imprimibles en 3D. Se requieren lentes con un diámetro de 40 mm y una distancia focal de 50 mm. A menudo puedes encontrarlos en Aliexpress o similares.
+- Lentes: para construir los cascos imprimibles en 3D. Se requieren lentes con un diámetro de 40 mm y una distancia focal de 50 mm. A menudo puedes encontrarlos en Aliexpress o similares.
 - Correa e interfaz facial - p.e. Correa de repuesto + espuma para HTC Vive. A menudo puedes encontrarlos en Aliexpress o similares.
 
 <p align="center"> <img src="ressources/img/front.jpg"> </p>
@@ -376,7 +377,7 @@ Si está utilizando una placa diferente, p. Arduino debido:
 
 ## Montaje del HMD
 
-Todos los archivos necesarios para la impresión 3D se pueden encontrar en la carpeta `Relativty_Mechanical_build` y los tornillos necesarios para ensamblar los auriculares se enumeran en `screws_BOM.xlsx`.
+Todos los archivos necesarios para la impresión 3D se pueden encontrar en la carpeta `Relativty_Mechanical_build` y los tornillos necesarios para ensamblar los cascos se enumeran en `screws_BOM.xlsx`.
 
 Hemos utilizado las siguientes piezas desde Aliexpress:
 
