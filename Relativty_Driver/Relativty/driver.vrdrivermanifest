@@ -1,0 +1,11 @@
+{
+	"alwaysActivate": false,
+	"name" : "relativty",
+	"directory" : "",
+	"resourceOnly" : false,
+
+	"hmd_presence" :
+	[
+		"*.*"
+	]
+}

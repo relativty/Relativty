@@ -1,0 +1,27 @@
+{
+    "jsonid" : "input_profile",
+  "controller_type": "Relativty_hmd",
+  "input_bindingui_mode" : "hmd",
+  "input_bindingui_right" :
+  {
+    "image": "{Relativty}/icons/Relativty_hmd.svg"
+  },
+  "input_source" :
+  {
+    "/input/system" : {
+        "type" : "button",
+        "order" :  1,
+        "binding_image_point" : [ 180, 110 ]
+    },
+    "/pose/raw" : {
+        "type" : "pose",
+        "binding_image_point" : [ 63, 148 ]
+    }
+  },
+  "default_bindings" :[
+   {
+        "app_key" : "openvr.component.vrcompositor",
+        "binding_url" : "vrcompositor_bindings_hmd.json"
+   }
+  ]
+}

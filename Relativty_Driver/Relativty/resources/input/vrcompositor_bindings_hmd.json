@@ -1,0 +1,51 @@
+{
+   "action_manifest_version" : 0,
+   "alias_info" : {},
+   "app_key" : "openvr.component.vrcompositor",
+   "bindings" : {
+      "/actions/lasermouse" : {
+         "poses" : [
+            {
+               "output" : "/actions/lasermouse/in/pointer",
+               "path" : "/user/head/pose/raw"
+            }
+         ],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/lasermouse/in/leftclick"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/head/input/system"
+            }
+         ]
+      },
+      "/actions/system" : {
+         "sources" : [
+            {
+               "inputs" : {
+                  "double" : {
+                     "output" : "/actions/system/in/toggleroomview"
+                  },
+                  "long" : {
+                     "output" : "/actions/system/in/showpowermenu"
+                  },
+                  "single" : {
+                     "output" : "/actions/system/in/opendashboard"
+                  }
+               },
+               "mode" : "complex_button",
+               "path" : "/user/head/input/system"
+            }
+         ]
+      }
+   },
+   "category" : "steamvr_input",
+   "controller_type" : "Relativty_hmd",
+   "description" : "",
+   "name" : "Default SteamVR Dashboard bindings for Relativty_hmd",
+   "options" : {},
+   "simulated_actions" : []
+}

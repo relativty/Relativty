@@ -1,1 +1,4 @@
 *.h linguist-language=C++
+*.html linguist-detectable=false
+*.htm inguist-detectable=false
+Relativty_Firmware/* linguist-generated

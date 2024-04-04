@@ -1,0 +1,48 @@
+{
+   "driver_Relativty" : {
+      "enable" : true,
+      "PoseTimeOffset" : 0.0,
+      "ManualUpdateURL" : "https://gist.github.com/okawo80085/dd327eda3b87c8df353cf783b17e1c82"
+   },
+   "Relativty_hmd" : {
+      "secondsFromVsyncToPhotons" : 0.011,
+      "displayFrequency" : 60,
+      "IPDmeters" : 0.063,
+      "upperBound" : 1.0,
+      "lowerBound" : -1.0,
+      "normalizeMinX" : -200.0,
+      "normalizeMinY" : -45.0,
+      "normalizeMinZ" : -40.0,
+      "normalizeMaxX" : 0.5,
+      "normalizeMaxY" : 55.0,
+      "normalizeMaxZ" : 70.0,
+      "scalesCoordinateMeterX" : 0.5,
+      "scalesCoordinateMeterY" : 0.8,
+      "scalesCoordinateMeterZ" : 0.8,
+      "offsetCoordinateX" : -5.0,
+      "offsetCoordinateY" : 0,
+      "offsetCoordinateZ" : 0,
+      "startTrackingServer" : false,
+      "hmdPid" : 9,
+      "hmdVid": 4617,
+      "hmdIMUdmpPackets":  true,
+      "PyPath" : "E:/Relativty/Relativty_Driver/Relativty/resources/PYTHONPATH"      
+   },
+   "Relativty_extendedDisplay": {
+      "windowX" : 10,
+      "windowY" : 10,
+      "windowWidth" : 3840,
+      "windowHeight" : 2160,
+      "renderWidth" : 1920,
+      "renderHeight" : 1080,
+      "DistortionK1" : 0.4,
+      "DistortionK2" : 0.5,
+      "ZoomWidth" : 1,
+      "ZoomHeight" : 1,
+      "EyeGapOffsetPx" : 0,
+      "FovX": 90.0,
+      "FovY": 90.0,
+      "IsDisplayRealDisplay" : true,
+      "IsDisplayOnDesktop" : true
+   }
+}

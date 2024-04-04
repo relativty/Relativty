@@ -1,0 +1,133 @@
+################################################################################
+#         Syntax Coloring Map for SparkFun MPU-9250 Arduino Library            #
+################################################################################
+
+################################################################################
+# Datatypes (KEYWORD1)
+################################################################################
+SparkFunMPU9250-DMP	KEYWORD1
+MPU9250_DMP	KEYWORD1
+ax	KEYWORD1
+ay	KEYWORD1
+az	KEYWORD1
+gx	KEYWORD1
+gy	KEYWORD1
+gz	KEYWORD1
+mx	KEYWORD1
+my	KEYWORD1
+mz	KEYWORD1
+qw	KEYWORD1
+qx	KEYWORD1
+qy	KEYWORD1
+qz	KEYWORD1
+temperature	KEYWORD1
+time	KEYWORD1
+pitch	KEYWORD1
+roll	KEYWORD1
+yaw	KEYWORD1
+heading	KEYWORD1
+
+################################################################################
+# Methods and Functions (KEYWORD2)
+################################################################################
+begin	KEYWORD2
+setSensors	KEYWORD2
+setGyroFSR	KEYWORD2
+getGyroFSR	KEYWORD2
+getGyroSens	KEYWORD2
+setAccelFSR	KEYWORD2
+getAccelFSR	KEYWORD2
+getAccelSens	KEYWORD2
+getMagFSR	KEYWORD2
+getMagSens	KEYWORD2
+setLPF	KEYWORD2
+getLPF	KEYWORD2
+setSampleRate	KEYWORD2
+getSampleRate	KEYWORD2
+setCompassSampleRate	KEYWORD2
+getCompassSampleRate	KEYWORD2
+lowPowerAccel	KEYWORD2
+dataReady	KEYWORD2
+update	KEYWORD2
+updateAccel	KEYWORD2
+updateGyro	KEYWORD2
+updateCompass	KEYWORD2
+updateTemperature	KEYWORD2
+getFifoConfig	KEYWORD2
+configureFifo	KEYWORD2
+resetFifo	KEYWORD2
+fifoAvailable	KEYWORD2
+updateFifo	KEYWORD2
+selfTest	KEYWORD2
+enableInterrupt	KEYWORD2
+setIntLevel	KEYWORD2
+setIntLatched	KEYWORD2
+getIntStatus	KEYWORD2
+dmpBegin	KEYWORD2
+dmpLoad	KEYWORD2
+dmpGetFifoRate	KEYWORD2
+dmpSetFifoRate	KEYWORD2
+dmpUpdateFifo	KEYWORD2
+dmpEnableFeatures	KEYWORD2
+dmpGetEnabledFeatures	KEYWORD2
+dmpSetInterruptMode	KEYWORD2
+dmpSetGyroBias	KEYWORD2
+dmpSetAccelBias	KEYWORD2
+dmpSetTap	KEYWORD2
+tapAvailable	KEYWORD2
+getTapDir	KEYWORD2
+getTapCount	KEYWORD2
+dmpSetOrientation	KEYWORD2
+dmpGetOrientation	KEYWORD2
+dmpEnable3Quat	KEYWORD2
+dmpEnable6Quat	KEYWORD2
+dmpGetPedometerSteps	KEYWORD2
+dmpSetPedometerSteps	KEYWORD2
+dmpGetPedometerTime	KEYWORD2
+dmpSetPedometerTime	KEYWORD2
+calcAccel	KEYWORD2
+calcGyro	KEYWORD2
+calcMag	KEYWORD2
+calcQuat	KEYWORD2
+qToFloat	KEYWORD2
+computeEulerAngles	KEYWORD2
+computeCompassHeading	KEYWORD2
+
+################################################################################
+# Constants (LITERAL1)
+################################################################################
+INV_SUCCESS	LITERAL1
+INV_XYZ_GYRO	LITERAL1
+INV_XYZ_ACCEL	LITERAL1
+INV_XYZ_COMPASS	LITERAL1
+INV_X_GYRO	LITERAL1
+INV_Y_GYRO	LITERAL1
+INV_Z_GYRO	LITERAL1
+UPDATE_ACCEL	LITERAL1
+UPDATE_GYRO	LITERAL1
+UPDATE_COMPASS	LITERAL1
+UPDATE_TEMP	LITERAL1
+FIFO_BUFFER_SIZE	LITERAL1
+INT_ACTIVE_LOW	LITERAL1
+INT_ACTIVE_HIGH	LITERAL1
+INT_LATCHED	LITERAL1
+INT_50US_PULSE	LITERAL1
+DMP_FEATURE_TAP	LITERAL1
+DMP_FEATURE_ANDROID_ORIENT	LITERAL1
+DMP_FEATURE_LP_QUAT	LITERAL1
+DMP_FEATURE_6X_LP_QUAT	LITERAL1
+DMP_FEATURE_GYRO_CAL	LITERAL1
+DMP_FEATURE_SEND_RAW_ACCEL	LITERAL1
+DMP_FEATURE_SEND_RAW_GYRO	LITERAL1
+DMP_FEATURE_SEND_CAL_GYRO	LITERAL1
+DMP_FEATURE_PEDOMETER	LITERAL1
+ORIENT_PORTRAIT	LITERAL1
+ORIENT_LANDSCAPE	LITERAL1
+ORIENT_REVERSE_PORTRAIT	LITERAL1
+ORIENT_REVERSE_LANDSCAPE	LITERAL1
+TAP_X_UP	LITERAL1
+TAP_X_DOWN	LITERAL1
+TAP_Y_UP	LITERAL1
+TAP_Y_DOWN	LITERAL1
+TAP_Z_UP	LITERAL1
+TAP_Z_DOWN	LITERAL1
