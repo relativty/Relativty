@@ -1,5 +1,7 @@
 Fork of SparkFun MPU-9250 Digital Motion Processor (DMP) Arduino Library
 ========================================
+Dale una mirada a esta guía en [Español](README.es.md)
+
 Modified to  account for magnetic declination
 ========================================
 * Compatible with Arduino Due

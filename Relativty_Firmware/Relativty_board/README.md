@@ -1,4 +1,5 @@
 # Arduino Core for SAM3X CPU
+Dale una mirada a esta guía en [Español](README.es.md)
 
 This repository contains the source code and configuration files of the Arduino Core for Atmel's SAM3X processor (used on the [Arduino Due](https://www.arduino.cc/en/Main/ArduinoBoardDue) board).
 
